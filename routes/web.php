@@ -16,8 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
-});
+})->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/* web setting route */
+Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');
+Route::post('/account-update', [App\Http\Controllers\SettingController::class, 'account_update'])->name('account-update');
+Route::get('/profile', [App\Http\Controllers\SettingController::class, 'profile'])->name('profile');
+Route::get('/logouts', [App\Http\Controllers\SettingController::class, 'logouts'])->name('logouts');
+
