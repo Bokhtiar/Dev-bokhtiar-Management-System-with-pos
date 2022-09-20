@@ -15,7 +15,7 @@
             </a>
             <ul id="Bed-manager-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="@route('category')">
+                    <a href="@route('category.index')">
                         <i class="bi bi-circle"></i><span>Category</span>
                     </a>
                 </li>
