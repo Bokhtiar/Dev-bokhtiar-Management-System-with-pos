@@ -11,8 +11,12 @@ class CategoryController extends Controller
     /**category create and category list show same page */
     public function index()
     {
-        $categories = Category::all();
-        return view('modules.category.index', compact('categories'));
+        try {
+            $categories = Category::all();
+            return view('modules.category.index', compact('categories'));
+        } catch (\Throwable $th) {
+            return redirect()->route('category.index')->with('error', 'Something went wrong.');
+        }
     }
 
     /**category store */
@@ -47,11 +51,58 @@ class CategoryController extends Controller
             $show = Category::find($category_id);
             return view('modules.category.show', compact('show'));
         } catch (\Throwable $th) {
-            //throw $th;
             return redirect()->route('category.index')->with('error', 'Something went wrong.');
         }
     }
 
+    /**cateogry edit */
+    public function edit($category_id)
+    {
+        try {
+            $categories = Category::all();
+            $edit = Category::find($category_id);
+            return view('modules.category.index', compact('categories', 'edit'));
+        } catch (\Throwable $th) {
+            return redirect()->route('category.index')->with('Something went wrong');
+        }
+    }
+
+    /**category update */
+    public function update(Request $request, $category_id)
+    {
+        $validated = Category::query()->Validation($request->all());
+        if ($validated) {
+            try {
+                $category = Category::find($category_id);
+                DB::beginTransaction();
+                $category = $category->update([
+                    'category_name' => $request->category_name,
+                    'category_body' => $request->category_body,
+                ]);
+
+                if (!empty($category)) {
+                    DB::commit();
+                    return redirect()->route('category.index')->with('success', 'Category Updated successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            } catch (\Exception $ex) {
+                DB::rollBack();
+                return back()->with('error', "Something went wrong");
+            }
+        }
+    }
+
+
+    /**category delete */
+    public function destroy($category_id)
+    {
+        try {
+            Category::find($category_id)->delete();
+            return redirect()->route('category.index')->with('success', 'Category Deleted successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('category.index')->with('error', 'Something went wrong!');
+        }
+    }
 
     /**status active or inactive */
     public function status($category_id)
@@ -59,7 +110,7 @@ class CategoryController extends Controller
         try {
             $category = Category::find($category_id);
             Category::query()->Status($category); // crud trait
-            return redirect()->route('category.index')->with('warning','Category Status Change successfully!');
+            return redirect()->route('category.index')->with('warning', 'Category Status Change successfully!');
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -17,7 +17,8 @@
                             <x-notification></x-notification>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Category Table  <a class="btn btn-sm btn-success" href="@route('category.create')"> <i class="ri-add-box-line"></i> </a>  </h5>
+                            <h5 class="card-title">Category Table <a class="btn btn-sm btn-success"
+                                    href="@route('category.create')"> <i class="ri-add-box-line"></i> </a> </h5>
 
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
@@ -48,11 +49,11 @@
                                                         class="ri-eye-fill"></i></a>
                                                 <a class="btn btn-sm btn-primary" href="@route('category.edit', $item->category_id)"> <i
                                                         class="ri-edit-box-fill"></i></a>
-                                                <form method="POST" action="@route('category.destroy',$item->category_id)" class="mt-1">
+                                                <form method="POST" action="@route('category.destroy', $item->category_id)" class="mt-1">
                                                     @csrf
                                                     @method('Delete')
                                                     <button class="btn btn-sm btn-danger" type="submit"> <i
-                                                        class="ri-delete-bin-6-fill"></i></button>
+                                                            class="ri-delete-bin-6-fill"></i></button>
                                                 </form>
 
 
@@ -77,25 +78,31 @@
             <div class="card-body">
                 <h5 class="card-title">Category Create</h5>
                 <x-notification />
-                <!-- Vertical Form -->
-                <form class="row g-3" method="POST" action="@route('category.store')">
-                    @csrf
-                    <div class="col-12">
-                        <label for="inputNanme4" class="form-label">Category Name</label>
-                        <input required type="text" name="category_name" value="" class="form-control"
-                            id="inputNanme4">
-                    </div>
+                <!-- category Form -->
+                @if (@$edit)
+                    <form class="row g-3" method="POST" action="@route('category.update', $edit->category_id)">
+                        @method('put')
+                    @else
+                        <form class="row g-3" method="POST" action="@route('category.store')">
+                @endif
+                @csrf
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Category Name</label>
+                    <input required type="text" placeholder="category name" name="category_name"
+                        value="{{ @$edit->category_name }}" class="form-control" id="inputNanme4">
+                </div>
 
-                    <div class="col-12">
-                        <label for="">Category Description</label>
-                        <textarea name="category_body" class="form-control" id="" cols="10" rows="4"></textarea>
-                    </div>
+                <div class="col-12">
+                    <label for="">Category Description</label>
+                    <textarea placeholder="category description" name="category_body" class="form-control" id="" cols="10"
+                        rows="4">{{ @$edit->category_body }}</textarea>
+                </div>
 
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
-                    </div>
-                </form><!-- Vertical Form -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+                </form><!-- category Form -->
 
             </div>
         </div>
