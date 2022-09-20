@@ -25,7 +25,6 @@
                                     <tr>
                                         <th scope="col">Index</th>
                                         <th scope="col">Category Name</th>
-                                        <th scope="col">Category Description</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -35,10 +34,9 @@
                                         <tr>
                                             <th scope="row">{{ $loop->index + 1 }}</th>
                                             <td>{{ $item->category_name }}</td>
-                                            <td>{!! $item->category_body !!}</td>
                                             <td>
                                                 @if ($item->status == 1)
-                                                    <a class="btn btn-sm btn-success" href="@route('category.status', $item->banner_id)"><i
+                                                    <a class="btn btn-sm btn-success" href="@route('category.status', $item->category_id)"><i
                                                             class="bi bi-check-circle"></i></a>
                                                 @else
                                                     <a class="btn btn-warning btn-sm" href="@route('category.status', $item->category_id)"><i

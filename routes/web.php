@@ -27,7 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(["middleware" => ['auth']], function () {
     /**category */
     Route::resource('category',CategoryController::class);
-    Route::get('about/status/{category_id}', [AboutController::class, 'status'])->name('category.status');
+    Route::get('category/status/{category_id}', [CategoryController::class, 'status'])->name('category.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');
