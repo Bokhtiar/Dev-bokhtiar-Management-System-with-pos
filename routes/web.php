@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Whoops\Run;
@@ -28,6 +29,10 @@ Route::group(["middleware" => ['auth']], function () {
     /**category */
     Route::resource('category', CategoryController::class);
     Route::get('category/status/{category_id}', [CategoryController::class, 'status'])->name('category.status');
+
+    /**room */
+    Route::resource('room', RoomController::class);
+    Route::get('room/status/{room_id}', [RoomController::class, 'status'])->name('room.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

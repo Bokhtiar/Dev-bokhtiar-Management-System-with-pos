@@ -20,8 +20,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Bed-manager-alerts.html">
-                        <i class="bi bi-circle"></i><span>Alerts</span>
+                    <a href="@route('room.index')">
+                        <i class="bi bi-circle"></i><span>Room</span>
                     </a>
                 </li>
                 <li>

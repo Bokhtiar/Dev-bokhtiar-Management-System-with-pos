@@ -13,10 +13,9 @@
                 <div class="col-lg-12">
 
                     <div class="card">
-                        <div class="card-header">
-                            <x-notification></x-notification>
-                        </div>
+
                         <div class="card-body">
+                            <x-notification></x-notification>
                             <h5 class="card-title">Category Table <a class="btn btn-sm btn-success"
                                     href="@route('category.create')"> <i class="ri-add-box-line"></i> </a> </h5>
 
