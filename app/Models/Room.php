@@ -28,7 +28,14 @@ class Room extends Model
     {
         return Validator::make($request, [
             'room_name' => 'string | required | min:3',
-            'room_charge' => 'integer | required'
+            'room_charge' => 'required',
+            'category_id' => 'required',
         ])->validate();
+    }
+
+    /**category reletion */
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
 }
