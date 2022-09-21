@@ -94,7 +94,7 @@
                     <select name="category_id" class="form-control" id="">
                         <option value="">--select category--</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                            <option value="{{ $category->category_id }}" {{ $category->category_id == @$edit->category_id ? 'selected' : "" }}  >{{ $category->category_name }}</option>
                         @endforeach
                     </select>
                 </div>
