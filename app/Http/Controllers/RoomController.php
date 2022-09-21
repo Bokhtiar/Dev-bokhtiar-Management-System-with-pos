@@ -14,7 +14,7 @@ class RoomController extends Controller
     {
         try {
             $categories = Category::get(['category_id', 'category_name']);
-            $rooms = Room::get(['room_id', 'room_name', 'room_charge', 'category_id']);
+            $rooms = Room::get(['room_id', 'room_name', 'room_charge', 'category_id', 'status']);
             return view('modules.room.index', compact('categories', 'rooms'));
         } catch (\Throwable $th) {
             throw $th;
@@ -44,6 +44,29 @@ class RoomController extends Controller
                 DB::rollBack();
                 return back()->with('error', "Something went wrong");
             }
+        }
+    }
+
+    /**room details information */
+    public function show($room_id)
+    {
+        try {
+            $show = Room::find($room_id);
+            return view('modules.room.show', compact('show'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
+    /**room status */
+    public function status($room_id)
+    {
+        try {
+            $room = Room::find($room_id);
+            Room::query()->Status($room); // crud trait
+            return redirect()->route('room.index')->with('warning', 'Room Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 }
