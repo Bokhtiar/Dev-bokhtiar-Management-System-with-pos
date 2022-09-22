@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BedController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,10 @@ Route::group(["middleware" => ['auth']], function () {
     /**room */
     Route::resource('room', RoomController::class);
     Route::get('room/status/{room_id}', [RoomController::class, 'status'])->name('room.status');
+
+    /**bed */
+    Route::resource('bed', BedController::class);
+    Route::get('bed/status/{bed_id}', [BedController::class, 'status'])->name('bed.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

@@ -11,14 +11,11 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
-
                         <div class="card-body">
                             <x-notification></x-notification>
-                            <h5 class="card-title">Room Table <a class="btn btn-sm btn-success"
-                                    href="@route('room.create')"> <i class="ri-add-box-line"></i> </a> </h5>
-
+                            <h5 class="card-title">Room Table <a class="btn btn-sm btn-success" href="@route('room.create')">
+                                    <i class="ri-add-box-line"></i> </a> </h5>
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>
@@ -37,7 +34,7 @@
                                             <th scope="row">{{ $loop->index + 1 }}</th>
                                             <td>{{ $item->room_name }}</td>
                                             <td>{{ $item->room_charge }}</td>
-                                            <td>{{ $item->category ? $item->category->category_name : "" }}</td>
+                                            <td>{{ $item->category ? $item->category->category_name : '' }}</td>
                                             <td>
                                                 @if ($item->status == 1)
                                                     <a class="btn btn-sm btn-success" href="@route('room.status', $item->room_id)"><i
@@ -58,8 +55,6 @@
                                                     <button class="btn btn-sm btn-danger" type="submit"> <i
                                                             class="ri-delete-bin-6-fill"></i></button>
                                                 </form>
-
-
                                             </td>
                                         </tr>
                                     @empty
@@ -68,10 +63,8 @@
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -94,7 +87,9 @@
                     <select name="category_id" class="form-control" id="">
                         <option value="">--select category--</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->category_id }}" {{ $category->category_id == @$edit->category_id ? 'selected' : "" }}  >{{ $category->category_name }}</option>
+                            <option value="{{ $category->category_id }}"
+                                {{ $category->category_id == @$edit->category_id ? 'selected' : '' }}>
+                                {{ $category->category_name }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -25,8 +25,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Bed-manager-alerts.html">
-                        <i class="bi bi-circle"></i><span>Alerts</span>
+                    <a href="@route('bed.index')">
+                        <i class="bi bi-circle"></i><span>Bed</span>
                     </a>
                 </li>
                 <li>

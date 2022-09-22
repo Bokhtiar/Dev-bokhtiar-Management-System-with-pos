@@ -26,8 +26,8 @@ class Bed extends Model
     public function scopeValidation($value, $request)
     {
         return Validator::make($request, [
-            'bed_name' => 'string | required | min:3',
-            'room_id' => 'required'
+            'bed_name' => 'string | required',
+            'room_id' => 'required',
         ])->validate();
     }
 
