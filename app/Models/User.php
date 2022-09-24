@@ -29,6 +29,7 @@ class User extends Authenticatable
         'profile_image',
         'guardian_name',
         'guardian_phone',
+        'status',
 
     ];
 

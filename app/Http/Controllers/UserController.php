@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::get(['name', 'email', 'phone', 'id']);
+            $users = User::get(['id', 'name', 'email', 'phone', 'status']);
             return view('modules.user.index', compact('users'));
         } catch (\Throwable $th) {
             throw $th;
@@ -24,8 +24,7 @@ class UserController extends Controller
     public function create()
     {
         try {
-            $users = User::get(['name', 'email', 'phone', 'id']);
-            return view('modules.user.index', compact('users'));
+            return view('modules.user.createOrUpdate');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -59,6 +58,30 @@ class UserController extends Controller
                 DB::rollBack();
                 return back()->with('error', "Something went wrong");
             }
+        }
+    }
+
+
+    /**user delete */
+    public function destroy($user_id)
+    {
+        try {
+            User::find($user_id)->delete();
+            return redirect()->route('user.index')->with('success', 'User deleted successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('user.index')->with('error', 'Something went wrong!');
+        }
+    }
+
+    /**status active or inactive */
+    public function status($user_id)
+    {
+        try {
+            $user = User::find($user_id);
+            User::query()->Status($user); // crud trait
+            return redirect()->route('user.index')->with('warning', 'User Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 }

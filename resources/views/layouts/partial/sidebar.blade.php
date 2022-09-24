@@ -16,7 +16,7 @@
             </a>
             <ul id="member-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
+                    <a href="@route('user.index')">
                         <i class="bi bi-circle"></i><span>List of members</span>
                     </a>
                 </li>

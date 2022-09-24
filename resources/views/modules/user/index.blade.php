@@ -38,7 +38,7 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>
                                         @if ($item->status == 1)
-                                            <a class="btn btn-sm btn-success" href="@route('user.status', $item->cid)"><i
+                                            <a class="btn btn-sm btn-success" href="@route('user.status', $item->id)"><i
                                                     class="bi bi-check-circle"></i></a>
                                         @else
                                             <a class="btn btn-warning btn-sm" href="@route('user.status', $item->id)"><i
