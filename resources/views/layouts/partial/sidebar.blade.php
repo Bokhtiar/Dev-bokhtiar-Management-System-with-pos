@@ -26,7 +26,7 @@
                     </a>
                 </li>
             </ul>
-        </li><!-- End Forms Nav -->
+        </li><!-- End user Nav -->
 
 
         <li class="nav-item">
@@ -50,8 +50,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Bed-manager-cards.html">
-                        <i class="bi bi-circle"></i><span>Cards</span>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Bed Assign</span>
                     </a>
                 </li>
 

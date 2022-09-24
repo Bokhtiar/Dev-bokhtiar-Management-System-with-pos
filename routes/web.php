@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BedAssignController;
 use App\Http\Controllers\BedController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemberController;
@@ -44,6 +45,10 @@ Route::group(["middleware" => ['auth']], function () {
     /**bed */
     Route::resource('bed', BedController::class);
     Route::get('bed/status/{bed_id}', [BedController::class, 'status'])->name('bed.status');
+
+    /**bed */
+    Route::resource('bed-assign', BedAssignController::class);
+    Route::get('bed-assign/status/{bed_id}', [BedController::class, 'status'])->name('bed.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

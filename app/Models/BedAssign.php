@@ -7,17 +7,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class Bed extends Model
+class BedAssign extends Model
 {
     use HasFactory, CrudTrait;
 
     /**database table with field */
-    protected $table = 'beds';
-    protected $primaryKey = 'bed_id';
+    protected $table = 'bed_assigns';
+    protected $primaryKey = 'bed_assign_id';
 
     protected $fillable = [
-        'bed_name',
+        'bed_id',
         'room_id',
+        'user_id',
+        'category_id',
         'bed_body',
     ];
 
@@ -25,8 +27,10 @@ class Bed extends Model
     public function scopeValidation($value, $request)
     {
         return Validator::make($request, [
-            'bed_name' => 'string | required',
+            'bed_id' => 'required',
             'room_id' => 'required',
+            'user_id' => 'required',
+            'category_id' => 'required',
         ])->validate();
     }
 
