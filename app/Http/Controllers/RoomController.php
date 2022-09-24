@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bed;
 use App\Models\Category;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -120,5 +121,15 @@ class RoomController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    /**ajax auto suggest room_ways_bed */
+    public function room_ways_bed(Request $request)
+    {
+        $beds = Bed::query()->Active()->where('room_id', $request->room_id)->get();
+        return response()->json([
+            "status" => true,
+            "data" => $beds
+        ],200);
     }
 }

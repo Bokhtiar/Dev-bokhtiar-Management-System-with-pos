@@ -33,10 +33,11 @@
 
         <div class="col-12">
             <label for="inputNanme4" class="form-label">Category Select</label>
-            <select name="category_id" class="form-control" id="">
+            <select id="category" name="category_id" class="form-control" id="">
                 <option value="">--select category--</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->category_id }}" {{ $category->category_id == @$edit->category_id ? 'selected' : '' }}>
+                    <option value="{{ $category->category_id }}"
+                        {{ $category->category_id == @$edit->category_id ? 'selected' : '' }}>
                         {{ $category->category_name }}
                     </option>
                 @endforeach
@@ -45,7 +46,8 @@
 
         <div class="col-12">
             <label for="inputNanme4" class="form-label">Room Select</label>
-            <select name="room_id" class="form-control" id="">
+            @if (@$edit)
+            <select id="room" name="room_id" class="form-control" id="">
                 <option value="">--select room--</option>
                 @foreach ($rooms as $room)
                     <option value="{{ $room->room_id }}" {{ $room->room_id == @$edit->room_id ? 'selected' : '' }}>
@@ -53,12 +55,17 @@
                     </option>
                 @endforeach
             </select>
+            @else
+            <select id="room" name="room_id" class="form-control" id="">
+            </select>
+            @endif
         </div>
 
 
         <div class="col-12">
             <label for="inputNanme4" class="form-label">Bed Select</label>
-            <select name="bed_id" class="form-control" id="">
+            @if(@$edit)
+            <select id="bed" name="bed_id" class="form-control" id="">
                 <option value="">--select bed--</option>
                 @foreach ($beds as $bed)
                     <option value="{{ $bed->bed_id }}" {{ $bed->bed_id == @$edit->bed_id ? 'selected' : '' }}>
@@ -66,6 +73,12 @@
                     </option>
                 @endforeach
             </select>
+            @else
+            <select id="bed" name="bed_id" class="form-control" id="">
+
+            </select>
+            @endif
+
         </div>
 
         <div class="col-12">
@@ -85,5 +98,53 @@
 
 
 @section('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#category').on('change', function() {
+                var category_id = this.value;
+                $("#room").html('');
+                $.ajax({
+                    url: "{{ url('/api/category-ways-room') }}",
+                    type: "post",
+                    data: {
+                        category_id: category_id,
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        console.log(result)
+                        $('#room').html('<option value=""> Select Room </option>');
+                        $.each(result.data, function(key, value) {
+                            $("#room").append('<option value="' + value
+                                .room_id + '">' + value.room_name + '</option>');
+                        });
+                        $('#bed').html('<option value="">Select City</option>');
+                    }
+                });
+            });
+
+            // bed
+            $('#room').on('change', function () {
+                var room_id = this.value;
+                $("#bed").html('');
+                $.ajax({
+                    url: "{{url('/api/room-ways-bed')}}",
+                    type: "POST",
+                    data: {
+                        room_id: room_id,
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        console.log(res)
+                        $('#bed').html('<option value="">Select City</option>');
+                        $.each(res.data, function (key, value) {
+                            $("#bed").append('<option value="' + value
+                                .bed_id + '">' + value.bed_name + '</option>');
+                        });
+                    }
+                });
+            });
+        })
+    </script>
 @endsection
 @endsection

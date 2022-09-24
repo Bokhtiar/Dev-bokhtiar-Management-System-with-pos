@@ -48,7 +48,7 @@ Route::group(["middleware" => ['auth']], function () {
 
     /**bed */
     Route::resource('bed-assign', BedAssignController::class);
-    Route::get('bed-assign/status/{bed_id}', [BedController::class, 'status'])->name('bed.status');
+    Route::get('bed-assign/status/{bed_assign_id}', [BedAssignController::class, 'status'])->name('bed-assign.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -114,5 +115,15 @@ class CategoryController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    /**ajax auto suggest category ways room */
+    public function category_weays_room(Request $request)
+    {
+        $rooms = Room::query()->Active()->where('category_id', $request->category_id)->get();
+        return response()->json([
+            "status" => true,
+            "data" => $rooms
+        ],200);
     }
 }
