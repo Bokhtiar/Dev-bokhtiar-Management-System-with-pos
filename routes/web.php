@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BedController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Whoops\Run;
@@ -27,6 +29,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(["middleware" => ['auth']], function () {
+    /**create user */
+    Route::resource('user', UserController::class);
+    Route::get('user/status/{user_id}', [UserController::class, 'status'])->name('user.status');
+
     /**category */
     Route::resource('category', CategoryController::class);
     Route::get('category/status/{category_id}', [CategoryController::class, 'status'])->name('category.status');

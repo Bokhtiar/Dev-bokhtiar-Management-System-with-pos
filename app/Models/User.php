@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\CrudTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CrudTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -22,9 +24,23 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'address1',
-        'address2'
+        'address',
+        'role_id',
+        'profile_image',
+        'guardian_name',
+        'guardian_phone',
+
     ];
+
+    /**validation */
+    public function scopeValidation($value, $request)
+    {
+        return Validator::make($request, [
+            'name' => 'required', 'string', 'max:255',
+            'email' => 'required', 'string', 'email', 'max:255', 'unique:users',
+            'password' => 'required', 'string', 'min:8', 'confirmed',
+        ])->validate();
+    }
 
     /**
      * The attributes that should be hidden for serialization.
