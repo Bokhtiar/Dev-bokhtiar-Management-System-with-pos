@@ -61,6 +61,17 @@ class UserController extends Controller
         }
     }
 
+    /**user show */
+    public function show($user_id)
+    {
+        try {
+            $show = User::find($user_id);
+            return view('modules.user.profile', compact('show'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
 
     /**user delete */
     public function destroy($user_id)
