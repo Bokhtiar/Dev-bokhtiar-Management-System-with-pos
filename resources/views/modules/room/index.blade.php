@@ -14,8 +14,7 @@
                     <div class="card">
                         <div class="card-body">
                             <x-notification></x-notification>
-                            <h5 class="card-title">Room Table <a class="btn btn-sm btn-success" href="@route('room.create')">
-                                    <i class="ri-add-box-line"></i> </a> </h5>
+                            <h5 class="card-title">Room Table </h5>
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>

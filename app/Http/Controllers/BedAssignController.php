@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bed;
+use App\Models\BedAssign;
+use App\Models\Category;
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BedAssignController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /** bed assing list show */
     public function index()
     {
-        //
+        try {
+            $bedAssigns = BedAssign::all();
+            return view('modules.bedAssign.index', compact('bedAssigns'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -23,7 +29,15 @@ class BedAssignController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $beds = Bed::query()->Active()->get(['bed_id', 'bed_name']);
+            $rooms = Room::query()->Active()->get(['room_id', 'room_name']);
+            $categories = Category::query()->Active()->get(['category_id', 'category_name']);
+            $users = User::query()->Active()->where('role_id', 4)->get(['id', 'name']);
+            return view('modules.bedAssign.createOrUpdate', compact('beds', 'rooms', 'categories', 'users'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

@@ -20,7 +20,7 @@ class BedAssign extends Model
         'room_id',
         'user_id',
         'category_id',
-        'bed_body',
+        'bed_assign_body',
     ];
 
     /**validation */
@@ -34,9 +34,27 @@ class BedAssign extends Model
         ])->validate();
     }
 
+    /**user reletionship */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**category reletionship */
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'category_id');
+    }
+
     /**room reletionship */
     public function room()
     {
         return $this->belongsTo(Room::class, 'room_id', 'room_id');
+    }
+
+    /**bed reletionship */
+    public function bed()
+    {
+        return $this->belongsTo(Bed::class, 'bed_id', 'bed_id');
     }
 }

@@ -19,7 +19,7 @@ class CreateBedAssignsTable extends Migration
             $table->integer('room_id')->require();
             $table->integer('user_id')->require();
             $table->integer('category_id')->require();
-            $table->longText('bed_body')->nullable();
+            $table->longText('bed_assing_body')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

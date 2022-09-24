@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="@route('bed-assign.index')">
                         <i class="bi bi-circle"></i><span>Bed Assign</span>
                     </a>
                 </li>
