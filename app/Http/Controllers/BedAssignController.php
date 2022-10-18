@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class BedAssignController extends Controller
 {
     /** bed assing list show */
@@ -21,6 +22,7 @@ class BedAssignController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+
     }
 
     /**

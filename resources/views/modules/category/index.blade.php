@@ -86,8 +86,13 @@
                 @csrf
                 <div class="col-12">
                     <label for="inputNanme4" class="form-label">Category Name</label>
-                    <input required type="text" placeholder="category name" name="category_name"
+                    <input  type="text" placeholder="category name" name="category_name"
                         value="{{ @$edit->category_name }}" class="form-control" id="inputNanme4">
+                        @if($errors->has('category_name'))
+                        <li style="color: red">
+                            {{$errors->first('category_name')}}
+                        </li>
+                        @endif
                 </div>
 
                 <div class="col-12">

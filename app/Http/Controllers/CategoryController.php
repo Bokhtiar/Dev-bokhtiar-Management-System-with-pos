@@ -2,45 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequestValidation;
 use App\Models\Category;
 use App\Models\Room;
+use App\Traits\Network\CategoryNetwork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+
+
 class CategoryController extends Controller
 {
+    use CategoryNetwork;
     /**category create and category list show same page */
     public function index()
     {
         try {
-            $categories = Category::all();
+            $categories = $this->CategoryList();
             return view('modules.category.index', compact('categories'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('error', 'Something went wrong.');
         }
+            
     }
 
     /**category store */
-    public function store(Request $request)
-    {
-        $validated = Category::query()->Validation($request->all());
-        if ($validated) {
-            try {
-                DB::beginTransaction();
-                $category = Category::create([
-                    'category_name' => $request->category_name,
-                    'category_body' => $request->category_body,
-                ]);
-
-                if (!empty($category)) {
-                    DB::commit();
-                    return redirect()->route('category.index')->with('success', 'Category Created successfully!');
-                }
-                throw new \Exception('Invalid About Information');
-            } catch (\Exception $ex) {
-                DB::rollBack();
-                return back()->with('error', "Something went wrong");
+    public function store(CategoryRequestValidation $request)
+    {   
+        try {
+            DB::beginTransaction();
+            $category = $this->CategoryStoreOrUpdate($request);
+            if (!empty($category)) {
+                DB::commit();
+                return redirect()->route('category.index')->with('success', 'Category Created successfully!');
             }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
         }
     }
 
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     public function show($category_id)
     {
         try {
-            $show = Category::find($category_id);
+            $show = $this->CategoryShowOrEdit($category_id);
             return view('modules.category.show', compact('show'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('error', 'Something went wrong.');
@@ -60,8 +60,8 @@ class CategoryController extends Controller
     public function edit($category_id)
     {
         try {
-            $categories = Category::all();
-            $edit = Category::find($category_id);
+            $categories = $this->CategoryList();
+            $edit =  $this->CategoryShowOrEdit($category_id);
             return view('modules.category.index', compact('categories', 'edit'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('Something went wrong');
