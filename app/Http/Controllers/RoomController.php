@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RoomValidationRequest;
 use App\Models\Bed;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Traits\Network\CategoryNetwork;
 use App\Traits\Network\RoomNetwork;
-
+use App\Traits\Network\CategoryNetwork;
+use App\Http\Requests\RoomValidationRequest;
 
 class RoomController extends Controller
 {
@@ -111,10 +110,17 @@ class RoomController extends Controller
     /**ajax auto suggest room_ways_bed */
     public function room_ways_bed(Request $request)
     {
-        $beds = Bed::query()->Active()->where('room_id', $request->room_id)->get();
-        return response()->json([
-            "status" => true,
-            "data" => $beds
-        ], 200);
+        try {
+            $results = Bed::query()->Active()->where('room_id', $request->room_id)->get();
+            return response()->json([
+                "status" => true,
+                "data" => $results
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage(),
+            ], 200);
+        }
     }
 }

@@ -47,36 +47,36 @@
         <div class="col-12">
             <label for="inputNanme4" class="form-label">Room Select</label>
             @if (@$edit)
-            <select id="room" name="room_id" class="form-control" id="">
-                <option value="">--select room--</option>
-                @foreach ($rooms as $room)
-                    <option value="{{ $room->room_id }}" {{ $room->room_id == @$edit->room_id ? 'selected' : '' }}>
-                        {{ $room->room_name }}
-                    </option>
-                @endforeach
-            </select>
+                <select id="room" name="room_id" class="form-control" id="">
+                    <option value="">--select room--</option>
+                    @foreach ($rooms as $room)
+                        <option value="{{ $room->room_id }}" {{ $room->room_id == @$edit->room_id ? 'selected' : '' }}>
+                            {{ $room->room_name }}
+                        </option>
+                    @endforeach
+                </select>
             @else
-            <select id="room" name="room_id" class="form-control" id="">
-            </select>
+                <select id="room" name="room_id" class="form-control" id="">
+                </select>
             @endif
         </div>
 
 
         <div class="col-12">
             <label for="inputNanme4" class="form-label">Bed Select</label>
-            @if(@$edit)
-            <select id="bed" name="bed_id" class="form-control" id="">
-                <option value="">--select bed--</option>
-                @foreach ($beds as $bed)
-                    <option value="{{ $bed->bed_id }}" {{ $bed->bed_id == @$edit->bed_id ? 'selected' : '' }}>
-                        {{ $bed->bed_name }}
-                    </option>
-                @endforeach
-            </select>
+            @if (@$edit)
+                <select id="bed" name="bed_id" class="form-control" id="">
+                    <option value="">--select bed--</option>
+                    @foreach ($beds as $bed)
+                        <option value="{{ $bed->bed_id }}" {{ $bed->bed_id == @$edit->bed_id ? 'selected' : '' }}>
+                            {{ $bed->bed_name }}
+                        </option>
+                    @endforeach
+                </select>
             @else
-            <select id="bed" name="bed_id" class="form-control" id="">
+                <select id="bed" name="bed_id" class="form-control" id="">
 
-            </select>
+                </select>
             @endif
 
         </div>
@@ -118,28 +118,33 @@
                             $("#room").append('<option value="' + value
                                 .room_id + '">' + value.room_name + '</option>');
                         });
-                        $('#bed').html('<option value="">Select City</option>');
-                    }
-                });
-            });
 
-            // bed
-            $('#room').on('change', function () {
-                var room_id = this.value;
-                $("#bed").html('');
-                $.ajax({
-                    url: "{{url('/api/room-ways-bed')}}",
-                    type: "POST",
-                    data: {
-                        room_id: room_id,
-                    },
-                    dataType: 'json',
-                    success: function (res) {
-                        console.log(res)
-                        $('#bed').html('<option value="">Select City</option>');
-                        $.each(res.data, function (key, value) {
-                            $("#bed").append('<option value="' + value
-                                .bed_id + '">' + value.bed_name + '</option>');
+                        // bed ajax resource
+                        $('#room').on('change', function() {
+                            var room_id = this.value;
+                            $("#bed").html('');
+                            $.ajax({
+                                url: "{{ url('/api/room-ways-bed') }}",
+                                type: "POST",
+                                data: {
+                                    room_id: room_id,
+                                },
+                                dataType: 'json',
+                                success: function(res) {
+                                    console.log("t", res)
+                                    $('#bed').html(
+                                        '<option value="">Select Bed</option>'
+                                        );
+                                    $.each(res.data, function(key, value) {
+                                        $("#bed").append(
+                                            '<option value="' +
+                                            value
+                                            .bed_id + '">' +
+                                            value.bed_name +
+                                            '</option>');
+                                    });
+                                }
+                            });
                         });
                     }
                 });
