@@ -31,36 +31,31 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($beds as $item)
-                                        <tr>
-                                            <th scope="row">{{ $loop->index + 1 }}</th>
-                                            <td>{{ $item->bed_name }}</td>
-                                            <td>{{ $item->room ? $item->room->room_name : '' }}</td>
-                                            <td>
-                                                @if ($item->status == 1)
-                                                    <a class="btn btn-sm btn-success" href="@route('bed.status', $item->bed_id)"><i
-                                                            class="bi bi-check-circle"></i></a>
-                                                @else
-                                                    <a class="btn btn-warning btn-sm" href="@route('bed.status', $item->bed_id)"><i
-                                                            class="bi bi-exclamation-triangle"></i></a>
-                                                @endif
-                                            </td>
-                                            <td class="form-inline">
-                                                <a class="btn btn-sm btn-info text-light" href="@route('bed.show', $item->bed_id)"> <i
-                                                        class="ri-eye-fill"></i></a>
-                                                <a class="btn btn-sm btn-primary" href="@route('bed.edit', $item->bed_id)"> <i
-                                                        class="ri-edit-box-fill"></i></a>
-                                                <form method="POST" action="@route('bed.destroy', $item->bed_id)" class="mt-1">
-                                                    @csrf
-                                                    @method('Delete')
-                                                    <button class="btn btn-sm btn-danger" type="submit"> <i
-                                                            class="ri-delete-bin-6-fill"></i></button>
-                                                </form>
+                                    <tr>
+                                        <th scope="row">{{ $loop->index + 1 }}</th>
+                                        <td>{{ $item->bed_name }}</td>
+                                        <td>{{ $item->room ? $item->room->room_name : '' }}</td>
+                                        <td>
+                                            @if ($item->status == 1)
+                                            <a class="btn btn-sm btn-success" href="@route('bed.status', $item->bed_id)"><i class="bi bi-check-circle"></i></a>
+                                            @else
+                                            <a class="btn btn-warning btn-sm" href="@route('bed.status', $item->bed_id)"><i class="bi bi-exclamation-triangle"></i></a>
+                                            @endif
+                                        </td>
+                                        <td class="form-inline">
+                                            <a class="btn btn-sm btn-info text-light" href="@route('bed.show', $item->bed_id)"> <i class="ri-eye-fill"></i></a>
+                                            <a class="btn btn-sm btn-primary" href="@route('bed.edit', $item->bed_id)"> <i class="ri-edit-box-fill"></i></a>
+                                            <form method="POST" action="@route('bed.destroy', $item->bed_id)" class="mt-1">
+                                                @csrf
+                                                @method('Delete')
+                                                <button class="btn btn-sm btn-danger" type="submit"> <i class="ri-delete-bin-6-fill"></i></button>
+                                            </form>
 
 
-                                            </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
                                     @empty
-                                        <h2 class="bg-danger text-light text-center">Bed Is empty</h2>
+                                    <h2 class="bg-danger text-light text-center">Bed Is empty</h2>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -80,43 +75,42 @@
                 <x-notification />
                 <!-- category Form -->
                 @if (@$edit)
-                    <form class="row g-3" method="POST" action="@route('bed.update', $edit->bed_id)">
-                        @method('put')
+                <form class="row g-3" method="POST" action="@route('bed.update', $edit->bed_id)">
+                    @method('put')
                     @else
-                        <form class="row g-3" method="POST" action="@route('bed.store')">
-                @endif
-                @csrf
+                    <form class="row g-3" method="POST" action="@route('bed.store')">
+                        @endif
+                        @csrf
 
-                <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Room Select</label>
-                    <select name="room_id" class="form-control" id="">
-                        <option value="">--select room--</option>
-                        @foreach ($rooms as $room)
-                            <option value="{{ $room->room_id }}"
-                                {{ $room->room_id == @$edit->room_id ? 'selected' : '' }}>{{ $room->room_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                        <div class="col-12">
+                            <label for="inputNanme4" class="form-label">Room Select</label>
+                            <select name="room_id" class="form-control" id="">
+                                <option value="">--select room--</option>
+                                @foreach ($rooms as $room)
+                                <option value="{{ $room->room_id }}" {{ $room->room_id == @$edit->room_id ? 'selected' : '' }}>{{ $room->room_name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('room_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
 
 
-                <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Bed Name</label>
-                    <input required type="text" placeholder="bed name" name="bed_name" value="{{ @$edit->bed_name }}"
-                        class="form-control" id="inputNanme4">
-                </div>
+                        <div class="col-12">
+                            <label for="inputNanme4" class="form-label">Bed Name</label>
+                            <input required type="text" placeholder="bed name" name="bed_name" value="{{ @$edit->bed_name }}" class="form-control" id="inputNanme4">
+                            @error('bed_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
 
-                <div class="col-12">
-                    <label for="">Bed Description</label>
-                    <textarea placeholder="bed description" name="bed_body" class="form-control" id="" cols="10"
-                        rows="4">{{ @$edit->bed_body }}</textarea>
-                </div>
+                        <div class="col-12">
+                            <label for="">Bed Description</label>
+                            <textarea placeholder="bed description" name="bed_body" class="form-control" id="" cols="10" rows="4">{{ @$edit->bed_body }}</textarea>
+                        </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-                </form><!-- category Form -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form><!-- category Form -->
 
             </div>
         </div>

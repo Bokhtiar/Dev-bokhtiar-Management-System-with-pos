@@ -2,37 +2,41 @@
 namespace App\Traits\Network;
 
 use App\Models\Bed;
-use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 
 trait BedNetwork
-{
+{ 
     /**list resource*/
-    public function resourceList(){
-        return Bed::latest()->get(['category_id', 'category_name', 'status']);
+    public function BedList(){
+        return Bed::all();
+    }
+
+    /**Active resource */
+    public function BedActiveList(){
+        return Bed::latest()->Active()->get();
     }
 
     /**store resource */
-    public function resourceStore($request){
-        return Category::create([
-            'category_name' => $request->category_name,
-            'category_body' => $request->category_body,
+    public function BedStore($request){
+        return Bed::create([
+            'bed_name' => $request->bed_name,
+            'room_id' => $request->room_id,
+            'bed_body' => $request->bed_body,
         ]);
     }
 
     /**single resource show */
-    public function resourceFindById($category_id){
-        return Category::find($category_id);
+    public function BedFindById($bed_id){
+        return Bed::find($bed_id);
     }
 
     /**resource update */
-    public function resourceUpdate($request, $category_id){
-        $category = Category::find($category_id);
-        return $category = $category->update([
-            'category_name' => $request->category_name,
-            'category_body' => $request->category_body,
+    public function BedUpdate($request, $bed_id){
+        $bed = Bed::find($bed_id);
+        return $bed->update([
+            'bed_name' => $request->bed_name,
+            'room_id' => $request->room_id,
+            'bed_body' => $request->bed_body,
         ]);
     }
     
-
 }

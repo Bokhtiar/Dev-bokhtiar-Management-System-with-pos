@@ -11,7 +11,13 @@ trait RoomNetwork
     public function RoomList()
     {
         return Room::get(['room_id', 'room_name', 'room_charge', 'category_id', 'status']);
-    } 
+    }
+
+    /**Active room list */
+    public function RoomActiveList()
+    {
+        return Room::query()->Active()->get(['room_id', 'room_name']);
+    }
 
     /**store resource */
     public function RoomStore($request)
