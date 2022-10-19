@@ -30,35 +30,30 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($categories as $item)
-                                        <tr>
-                                            <th scope="row">{{ $loop->index + 1 }}</th>
-                                            <td>{{ $item->category_name }}</td>
-                                            <td>
-                                                @if ($item->status == 1)
-                                                    <a class="btn btn-sm btn-success" href="@route('category.status', $item->category_id)"><i
-                                                            class="bi bi-check-circle"></i></a>
-                                                @else
-                                                    <a class="btn btn-warning btn-sm" href="@route('category.status', $item->category_id)"><i
-                                                            class="bi bi-exclamation-triangle"></i></a>
-                                                @endif
-                                            </td>
-                                            <td class="form-inline">
-                                                <a class="btn btn-sm btn-info text-light" href="@route('category.show', $item->category_id)"> <i
-                                                        class="ri-eye-fill"></i></a>
-                                                <a class="btn btn-sm btn-primary" href="@route('category.edit', $item->category_id)"> <i
-                                                        class="ri-edit-box-fill"></i></a>
-                                                <form method="POST" action="@route('category.destroy', $item->category_id)" class="mt-1">
-                                                    @csrf
-                                                    @method('Delete')
-                                                    <button class="btn btn-sm btn-danger" type="submit"> <i
-                                                            class="ri-delete-bin-6-fill"></i></button>
-                                                </form>
+                                    <tr>
+                                        <th scope="row">{{ $loop->index + 1 }}</th>
+                                        <td>{{ $item->category_name }}</td>
+                                        <td>
+                                            @if ($item->status == 1)
+                                            <a class="btn btn-sm btn-success" href="@route('category.status', $item->category_id)"><i class="bi bi-check-circle"></i></a>
+                                            @else
+                                            <a class="btn btn-warning btn-sm" href="@route('category.status', $item->category_id)"><i class="bi bi-exclamation-triangle"></i></a>
+                                            @endif
+                                        </td>
+                                        <td class="form-inline">
+                                            <a class="btn btn-sm btn-info text-light" href="@route('category.show', $item->category_id)"> <i class="ri-eye-fill"></i></a>
+                                            <a class="btn btn-sm btn-primary" href="@route('category.edit', $item->category_id)"> <i class="ri-edit-box-fill"></i></a>
+                                            <form method="POST" action="@route('category.destroy', $item->category_id)" class="mt-1">
+                                                @csrf
+                                                @method('Delete')
+                                                <button class="btn btn-sm btn-danger" type="submit"> <i class="ri-delete-bin-6-fill"></i></button>
+                                            </form>
 
 
-                                            </td>
-                                        </tr>
+                                        </td>
+                                    </tr>
                                     @empty
-                                        <h2 class="bg-danger text-light text-center">Banner Is empty</h2>
+                                    <h2 class="bg-danger text-light text-center">Banner Is empty</h2>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -78,34 +73,32 @@
                 <x-notification />
                 <!-- category Form -->
                 @if (@$edit)
-                    <form class="row g-3" method="POST" action="@route('category.update', $edit->category_id)">
-                        @method('put')
+                <form class="row g-3" method="POST" action="@route('category.update', $edit->category_id)">
+                    @method('put')
                     @else
-                        <form class="row g-3" method="POST" action="@route('category.store')">
-                @endif
-                @csrf
-                <div class="col-12">
-                    <label for="inputNanme4" class="form-label">Category Name</label>
-                    <input  type="text" placeholder="category name" name="category_name"
-                        value="{{ @$edit->category_name }}" class="form-control" id="inputNanme4">
-                        @if($errors->has('category_name'))
-                        <li style="color: red">
-                            {{$errors->first('category_name')}}
-                        </li>
+                    <form class="row g-3" method="POST" action="@route('category.store')">
                         @endif
-                </div>
+                        @csrf
+                        <div class="col-12">
+                            <label for="inputNanme4" class="form-label">Category Name</label>
+                            <input type="text" placeholder="category name" name="category_name" value="{{ @$edit->category_name }}" class="form-control" id="inputNanme4">
+                            @if ($errors->has('category_name'))
+                            <li style="color: red">
+                                {{ $errors->first('category_name') }}
+                            </li>
+                            @endif
+                        </div>
 
-                <div class="col-12">
-                    <label for="">Category Description</label>
-                    <textarea placeholder="category description" name="category_body" class="form-control" id="" cols="10"
-                        rows="4">{{ @$edit->category_body }}</textarea>
-                </div>
+                        <div class="col-12">
+                            <label for="">Category Description</label>
+                            <textarea placeholder="category description" name="category_body" class="form-control" id="" cols="10" rows="4">{{ @$edit->category_body }}</textarea>
+                        </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-                </form><!-- category Form -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form><!-- category Form -->
 
             </div>
         </div>

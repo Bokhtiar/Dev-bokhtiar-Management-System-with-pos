@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     use CategoryNetwork;
+
     /**category create and category list show same page */
     public function index()
     {
         try {
-            $categories = $this->CategoryList();
+            $categories = $this->resourceList();
             return view('modules.category.index', compact('categories'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('error', 'Something went wrong.');
@@ -32,7 +33,7 @@ class CategoryController extends Controller
     {   
         try {
             DB::beginTransaction();
-            $category = $this->CategoryStoreOrUpdate($request);
+            $category = $this->resourceStore($request, $id=null);
             if (!empty($category)) {
                 DB::commit();
                 return redirect()->route('category.index')->with('success', 'Category Created successfully!');
@@ -49,7 +50,7 @@ class CategoryController extends Controller
     public function show($category_id)
     {
         try {
-            $show = $this->CategoryShowOrEdit($category_id);
+            $show = $this->resourceFindById($category_id);
             return view('modules.category.show', compact('show'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('error', 'Something went wrong.');
@@ -60,8 +61,8 @@ class CategoryController extends Controller
     public function edit($category_id)
     {
         try {
-            $categories = $this->CategoryList();
-            $edit =  $this->CategoryShowOrEdit($category_id);
+            $categories = $this->resourceList();
+            $edit =  $this->resourceFindById($category_id);
             return view('modules.category.index', compact('categories', 'edit'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('Something went wrong');
@@ -69,27 +70,19 @@ class CategoryController extends Controller
     }
 
     /**category update */
-    public function update(Request $request, $category_id)
+    public function update(CategoryRequestValidation $request, $category_id)
     {
-        $validated = Category::query()->Validation($request->all());
-        if ($validated) {
-            try {
-                $category = Category::find($category_id);
-                DB::beginTransaction();
-                $category = $category->update([
-                    'category_name' => $request->category_name,
-                    'category_body' => $request->category_body,
-                ]);
-
-                if (!empty($category)) {
-                    DB::commit();
-                    return redirect()->route('category.index')->with('success', 'Category Updated successfully!');
-                }
-                throw new \Exception('Invalid About Information');
-            } catch (\Exception $ex) {
-                DB::rollBack();
-                return back()->with('error', "Something went wrong");
+        try {
+            DB::beginTransaction();
+            $category = $this->resourceUpdate($request, $category_id);
+            if (!empty($category)) {
+                DB::commit();
+                return redirect()->route('category.index')->with('success', 'Category Updated successfully!');
             }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
         }
     }
 
@@ -98,10 +91,10 @@ class CategoryController extends Controller
     public function destroy($category_id)
     {
         try {
-            Category::find($category_id)->delete();
-            return redirect()->route('category.index')->with('success', 'Category Deleted successfully!');
+            $this->resourceFindById($category_id)->delete();
+            return redirect()->back()->with('success', 'Category Deleted successfully!');
         } catch (\Throwable $th) {
-            return redirect()->route('category.index')->with('error', 'Something went wrong!');
+            return redirect()->back()->with('error', 'Something went wrong!');
         }
     }
 
