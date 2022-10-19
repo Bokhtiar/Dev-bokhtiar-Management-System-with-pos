@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BedAssignValidationRequest;
 use App\Models\Bed;
 use App\Models\BedAssign;
 use App\Models\Category;
 use App\Models\Room;
 use App\Models\User;
+use App\Traits\Network\BedAssignNetwork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
 class BedAssignController extends Controller
 {
+    use BedAssignNetwork;
+
     /** bed assing list show */
     public function index()
     {
@@ -49,32 +53,20 @@ class BedAssignController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BedAssignValidationRequest $request)
     {
-
-        $validated = BedAssign::query()->Validation($request->all());
-        if ($validated) {
-            try {
-                DB::beginTransaction();
-                $bedAssign = BedAssign::create([
-                    'room_id' => $request->room_id,
-                    'user_id' => $request->user_id,
-                    'bed_id' => $request->bed_id,
-                    'category_id' => $request->category_id,
-                    'bed_assing_body' => $request->bed_assing_body,
-                    'user_id' => $request->user_id,
-                ]);
-
-                if (!empty($bedAssign)) {
-                    DB::commit();
-                    return redirect()->route('bed-assign.index')->with('success', 'Bed Assign Created successfully!');
-                }
-                throw new \Exception('Invalid About Information');
-            } catch (\Exception $ex) {
-                dd($ex->getMessage());
-                DB::rollBack();
-                return back()->with('error', "Something went wrong");
+        try {
+            DB::beginTransaction();
+            $bedAssign = $this->BedAssignStore($request);
+            if (!empty($bedAssign)) {
+                DB::commit();
+                return redirect()->route('bed-assign.index')->with('success', 'Bed Assign Created successfully!');
             }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            dd($ex->getMessage());
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
         }
     }
 

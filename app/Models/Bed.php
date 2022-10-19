@@ -21,15 +21,6 @@ class Bed extends Model
         'bed_body',
     ];
 
-    /**validation */
-    public function scopeValidation($value, $request)
-    {
-        return Validator::make($request, [
-            'bed_name' => 'string | required',
-            'room_id' => 'required',
-        ])->validate();
-    }
-
     /**room reletionship */
     public function room()
     {

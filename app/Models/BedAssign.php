@@ -23,19 +23,6 @@ class BedAssign extends Model
         'bed_assign_body',
     ];
 
-    /**validation */
-    public function scopeValidation($value, $request)
-    {
-        
-        return Validator::make($request, [
-            'bed_id' => 'required',
-            'room_id' => 'required',
-            'user_id' => 'required',
-            'category_id' => 'required'
-        ])->validate();
-
-    }
-
     /**user reletionship */
     public function user()
     {

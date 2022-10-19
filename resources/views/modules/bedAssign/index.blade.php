@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($bedAssigns as $item)
+                            @forelse ($bedAssigns as $item) 
                                 <tr>
                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                     <td>{{ $item->user ? $item->user->name : '' }}</td>

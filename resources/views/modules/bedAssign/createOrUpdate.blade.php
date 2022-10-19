@@ -29,6 +29,7 @@
                     </option>
                 @endforeach
             </select>
+            @error('user_id') <span class="error text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-12">
@@ -42,6 +43,7 @@
                     </option>
                 @endforeach
             </select>
+            @error('category_id') <span class="error text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-12">
@@ -55,9 +57,11 @@
                         </option>
                     @endforeach
                 </select>
+                @error('room_id') <span class="error text-danger">{{ $message }}</span> @enderror
             @else
                 <select id="room" name="room_id" class="form-control" id="">
                 </select>
+                @error('room_id') <span class="error text-danger">{{ $message }}</span> @enderror
             @endif
         </div>
 
@@ -73,10 +77,12 @@
                         </option>
                     @endforeach
                 </select>
+                @error('bed_id') <span class="error text-danger">{{ $message }}</span> @enderror
             @else
                 <select id="bed" name="bed_id" class="form-control" id="">
 
                 </select>
+                @error('bed_id') <span class="error text-danger">{{ $message }}</span> @enderror
             @endif
 
         </div>
