@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoomValidationRequest;
 use App\Models\Bed;
-use App\Models\Category;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Traits\Network\CategoryNetwork;
+use App\Traits\Network\RoomNetwork;
+
 
 class RoomController extends Controller
 {
+    use RoomNetwork, CategoryNetwork;
+
     /**room create and list  */
     public function index()
     {
         try {
-            $categories = Category::get(['category_id', 'category_name']);
-            $rooms = Room::get(['room_id', 'room_name', 'room_charge', 'category_id', 'status']);
+            $categories = $this->CategoryList();
+            $rooms = $this->RoomList();
             return view('modules.room.index', compact('categories', 'rooms'));
         } catch (\Throwable $th) {
             throw $th;
@@ -23,28 +28,19 @@ class RoomController extends Controller
     }
 
     /**room store */
-    public function store(Request $request)
+    public function store(RoomValidationRequest $request)
     {
-        $validated = Room::query()->Validation($request->all());
-        if ($validated) {
-            try {
-                DB::beginTransaction();
-                $room = Room::create([
-                    'room_name' => $request->room_name,
-                    'room_charge' => $request->room_charge,
-                    'category_id' => $request->category_id,
-                    'room_body' => $request->room_body,
-                ]);
-
-                if (!empty($room)) {
-                    DB::commit();
-                    return redirect()->route('room.index')->with('success', 'Room Created successfully!');
-                }
-                throw new \Exception('Invalid About Information');
-            } catch (\Exception $ex) {
-                DB::rollBack();
-                return back()->with('error', "Something went wrong");
+        try {
+            DB::beginTransaction();
+            $room = $this->RoomStore($request);
+            if (!empty($room)) {
+                DB::commit();
+                return redirect()->route('room.index')->with('success', 'Room Created successfully!');
             }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
         }
     }
 
@@ -52,10 +48,10 @@ class RoomController extends Controller
     public function show($room_id)
     {
         try {
-            $show = Room::find($room_id);
+            $show = $this->RoomFindById($room_id);
             return view('modules.room.show', compact('show'));
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
         }
     }
 
@@ -63,40 +59,29 @@ class RoomController extends Controller
     public function edit($room_id)
     {
         try {
-            $edit = Room::find($room_id);
-            $categories = Category::get(['category_id', 'category_name']);
-            $rooms = Room::get(['room_id', 'room_name', 'room_charge', 'category_id', 'status']);
+            $edit = $this->RoomFindById($room_id);
+            $categories = $this->CategoryList();
+            $rooms = $this->RoomList();
             return view('modules.room.index', compact('edit', 'categories', 'rooms'));
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-
     /**room update */
-    public function update(Request $request, $room_id)
+    public function update(RoomValidationRequest $request, $room_id)
     {
-        $validated = Room::query()->Validation($request->all());
-        if ($validated) {
-            try {
-                DB::beginTransaction();
-                $update = Room::find($room_id);
-                $room = $update->update([
-                    'room_name' => $request->room_name,
-                    'room_charge' => $request->room_charge,
-                    'category_id' => $request->category_id,
-                    'room_body' => $request->room_body,
-                ]);
-
-                if (!empty($room)) {
-                    DB::commit();
-                    return redirect()->route('room.index')->with('success', 'Room Updated successfully!');
-                }
-                throw new \Exception('Invalid About Information');
-            } catch (\Exception $ex) {
-                DB::rollBack();
-                return back()->with('error', "Something went wrong");
+        try {
+            DB::beginTransaction();
+            $room = $this->RoomUpdate($request, $room_id);
+            if (!empty($room)) {
+                DB::commit();
+                return redirect()->route('room.index')->with('success', 'Room Updated successfully!');
             }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
         }
     }
 
@@ -104,7 +89,7 @@ class RoomController extends Controller
     public function destroy($room_id)
     {
         try {
-            Room::find($room_id)->delete();
+            $this->RoomFindById($room_id)->delete();
             return redirect()->route('room.index')->with('success', 'Room Deleted successfully!');
         } catch (\Throwable $th) {
             throw $th;
@@ -130,6 +115,6 @@ class RoomController extends Controller
         return response()->json([
             "status" => true,
             "data" => $beds
-        ],200);
+        ], 200);
     }
 }

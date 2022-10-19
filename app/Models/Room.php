@@ -23,16 +23,6 @@ class Room extends Model
         'room_body',
     ];
 
-    /**validation */
-    public function scopeValidation($value, $request)
-    {
-        return Validator::make($request, [
-            'room_name' => 'string | required | min:3',
-            'room_charge' => 'required',
-            'category_id' => 'required',
-        ])->validate();
-    }
-
     /**category reletion */
     public function category()
     {

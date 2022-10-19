@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $categories = $this->resourceList();
+            $categories = $this->CategoryList();
             return view('modules.category.index', compact('categories'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('error', 'Something went wrong.');
@@ -33,7 +33,7 @@ class CategoryController extends Controller
     {   
         try {
             DB::beginTransaction();
-            $category = $this->resourceStore($request, $id=null);
+            $category = $this->CategoryStore($request, $id=null);
             if (!empty($category)) {
                 DB::commit();
                 return redirect()->route('category.index')->with('success', 'Category Created successfully!');
@@ -50,7 +50,7 @@ class CategoryController extends Controller
     public function show($category_id)
     {
         try {
-            $show = $this->resourceFindById($category_id);
+            $show = $this->CategoryFindById($category_id);
             return view('modules.category.show', compact('show'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('error', 'Something went wrong.');
@@ -61,8 +61,8 @@ class CategoryController extends Controller
     public function edit($category_id)
     {
         try {
-            $categories = $this->resourceList();
-            $edit =  $this->resourceFindById($category_id);
+            $categories = $this->CategoryList();
+            $edit =  $this->CategoryFindById($category_id);
             return view('modules.category.index', compact('categories', 'edit'));
         } catch (\Throwable $th) {
             return redirect()->route('category.index')->with('Something went wrong');
@@ -74,7 +74,7 @@ class CategoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $category = $this->resourceUpdate($request, $category_id);
+            $category = $this->CategoryUpdate($request, $category_id);
             if (!empty($category)) {
                 DB::commit();
                 return redirect()->route('category.index')->with('success', 'Category Updated successfully!');
@@ -91,7 +91,7 @@ class CategoryController extends Controller
     public function destroy($category_id)
     {
         try {
-            $this->resourceFindById($category_id)->delete();
+            $this->CategoryFindById($category_id)->delete();
             return redirect()->back()->with('success', 'Category Deleted successfully!');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Something went wrong!');
