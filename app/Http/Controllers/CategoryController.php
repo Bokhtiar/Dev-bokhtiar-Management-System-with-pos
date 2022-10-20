@@ -9,9 +9,6 @@ use App\Traits\Network\CategoryNetwork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-
-
 class CategoryController extends Controller
 {
     use CategoryNetwork;

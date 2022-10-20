@@ -11,57 +11,11 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-
-                    <div class="card">
-
-                        <div class="card-body">
-                            <x-notification></x-notification>
-                            <h5 class="card-title">Category Table</h5>
-
-                            <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Index</th>
-                                        <th scope="col">Category Name</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($categories as $item)
-                                    <tr>
-                                        <th scope="row">{{ $loop->index + 1 }}</th>
-                                        <td>{{ $item->category_name }}</td>
-                                        <td>
-                                            @if ($item->status == 1)
-                                            <a class="btn btn-sm btn-success" href="@route('category.status', $item->category_id)"><i class="bi bi-check-circle"></i></a>
-                                            @else
-                                            <a class="btn btn-warning btn-sm" href="@route('category.status', $item->category_id)"><i class="bi bi-exclamation-triangle"></i></a>
-                                            @endif
-                                        </td>
-                                        <td class="form-inline">
-                                            <a class="btn btn-sm btn-info text-light" href="@route('category.show', $item->category_id)"> <i class="ri-eye-fill"></i></a>
-                                            <a class="btn btn-sm btn-primary" href="@route('category.edit', $item->category_id)"> <i class="ri-edit-box-fill"></i></a>
-                                            <form method="POST" action="@route('category.destroy', $item->category_id)" class="mt-1">
-                                                @csrf
-                                                @method('Delete')
-                                                <button class="btn btn-sm btn-danger" type="submit"> <i class="ri-delete-bin-6-fill"></i></button>
-                                            </form>
-
-
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <h2 class="bg-danger text-light text-center">Banner Is empty</h2>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
-
-                        </div>
-                    </div>
-
+                   @component('components.table.CategoryTable',[
+                       'title' => 'Category table',
+                       'data' => $categories
+                   ])
+                   @endcomponent
                 </div>
             </div>
         </section>
