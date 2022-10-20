@@ -1,6 +1,6 @@
 <div class="form-group{{ $errors->has($name) ? ' has-error' : '' }}">
     @if (isset($label))
-        <label for="{{ $name }}" class="col-md-4 control-label">{{ $label }}</label>
+        <label for="{{ $name }}" class=" control-label">{{ $label }}</label>
     @endif
 
     <div class="col-md-12">

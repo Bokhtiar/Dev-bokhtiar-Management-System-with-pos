@@ -84,14 +84,14 @@
                         @component('components.form.input', [
                         'label' => 'Name',
                         'name' => 'category_name',
-                        'placeholder' => 'categegory name',
+                        'placeholder' => 'Categegory Name',
                         'value' => @$edit ? @$edit->category_name : '',
                         ])@endcomponent
 
                         @component('components.form.textarea', [
                         'label' => 'Body',
                         'name' => 'category_body',
-                        'placeholder' => 'categegory Body',
+                        'placeholder' => 'Categegory Body',
                         'value'=> @$edit ? @$edit->category_body : ''
                         ])@endcomponent
 
