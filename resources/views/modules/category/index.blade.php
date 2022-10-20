@@ -79,20 +79,21 @@
                     <form class="row g-3" method="POST" action="@route('category.store')">
                         @endif
                         @csrf
-                        <div class="col-12">
-                            <label for="inputNanme4" class="form-label">Category Name</label>
-                            <input type="text" placeholder="category name" name="category_name" value="{{ @$edit->category_name }}" class="form-control" id="inputNanme4">
-                            @if ($errors->has('category_name'))
-                            <li style="color: red">
-                                {{ $errors->first('category_name') }}
-                            </li>
-                            @endif
-                        </div>
 
-                        <div class="col-12">
-                            <label for="">Category Description</label>
-                            <textarea placeholder="category description" name="category_body" class="form-control" id="" cols="10" rows="4">{{ @$edit->category_body }}</textarea>
-                        </div>
+
+                        @component('components.form.input', [
+                        'label' => 'Name',
+                        'name' => 'category_name',
+                        'placeholder' => 'categegory name',
+                        'value' => @$edit ? @$edit->category_name : '',
+                        ])@endcomponent
+
+                        @component('components.form.textarea', [
+                        'label' => 'Body',
+                        'name' => 'category_body',
+                        'placeholder' => 'categegory Body',
+                        'value'=> @$edit ? @$edit->category_body : ''
+                        ])@endcomponent
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
