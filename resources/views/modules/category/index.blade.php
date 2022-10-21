@@ -11,11 +11,18 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                   @component('components.table.CategoryTable',[
-                       'title' => 'Category table',
-                       'data' => $categories
-                   ])
-                   @endcomponent
+                    
+                    <!--category table componemts -->
+                    @component('components.table.table',[
+                        'title'=> 'List of category',
+                        'data' => $categories,
+                        'id' => 'category_id',
+                        'route' => 'category',
+                        'th1' => 'Category Name',
+                        'td1' => 'category_name',
+                    ])
+                    @endcomponent
+ 
                 </div>
             </div>
         </section>
@@ -33,7 +40,6 @@
                     <form class="row g-3" method="POST" action="@route('category.store')">
                         @endif
                         @csrf
-
 
                         @component('components.form.input', [
                         'label' => 'Name',
