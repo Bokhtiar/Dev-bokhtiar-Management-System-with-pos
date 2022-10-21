@@ -11,11 +11,21 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
+        
+                    <!-- table resource show componemts -->
+                    @component('components.table.table',[
+                        'title'=> 'List of Bed',
+                        'data' => $beds,
+                        'id' => 'bed_id',
+                        'route' => 'bed',
 
-                    <!--bed table component -->
-                    @component('components.table.BedTable',[
-                        'title' => 'Bed List',
-                        'data' => $beds
+                        'thead1' => 'Room', //if you want reletion another table must be assign in thead 1,2,3 
+                        'reletion1' => 'room', //easir loading reletion name 
+                        'reletion1Field_name' => 'room_name', //this is reletion field thatway i am not use tdata1 
+
+                        'thead3' => 'Bed Name',
+                        'tdata3' => 'bed_name',
+                        
                     ])
                     @endcomponent
                     

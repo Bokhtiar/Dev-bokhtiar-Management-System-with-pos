@@ -12,14 +12,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     
-                    <!--category table componemts -->
+                    <!-- table resource show componemts -->
                     @component('components.table.table',[
                         'title'=> 'List of category',
                         'data' => $categories,
                         'id' => 'category_id',
                         'route' => 'category',
-                        'th1' => 'Category Name',
-                        'td1' => 'category_name',
+                        'thead1' => 'Category Name',
+                        'tdata1' => 'category_name',
                     ])
                     @endcomponent
  

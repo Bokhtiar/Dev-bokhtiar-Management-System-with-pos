@@ -5,9 +5,25 @@
         <!-- Table with stripped rows -->
         <table class="table datatable">
             <thead>
-                <tr> 
+                <tr>
                     <th scope="col">Index</th>
-                    <th scope="col">{{ @$th1 ? $th1 :'' }}</th>
+                    
+                    @isset($thead1)
+                    <th scope="col">{{$thead1}}</th>
+                    @endisset
+
+                    @isset($thead2)
+                    <th scope="col">{{$thead2}}</th>
+                    @endisset
+
+                    @isset($thead3)
+                    <th scope="col">{{$thead3}}</th>
+                    @endisset
+
+                    @isset($thead4)
+                    <th scope="col">{{$thead4}}</th>
+                    @endisset
+
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -15,9 +31,38 @@
             <tbody>
                
                 @forelse ($data as $item)
+                
                 <tr>
                     <th scope="row">{{ $loop->index + 1 }}</th>
-                    <td>{{ @$td1 ? $item->$td1 : '' }}</td>
+                    
+                    @isset($reletion1)
+                    <th scope="col">{{ @$reletion1 ? $item->$reletion1->$reletion1Field_name : '' }}</th>
+                    @endisset
+                   
+                    @isset($reletion2)
+                    <th scope="col">{{ @$reletion2 ? $item->$reletion2->$reletion2Field_name : '' }}</th>
+                    @endisset
+                   
+                    @isset($reletion3)
+                    <th scope="col">{{ @$reletion3 ? $item->$reletion3->$reletion3Field_name : '' }}</th>
+                    @endisset
+                   
+                    @isset($reletion4)
+                    <th scope="col">{{ @$reletion4 ? $item->$reletion4->$reletion4Field_name : '' }}</th>
+                    @endisset
+                    
+                    @isset($tdata1)
+                    <th scope="col">{{$item->$tdata1}}</th>
+                    @endisset
+
+                    @isset($tdata2)
+                    <th scope="col">{{$item->$tdata2}}</th>
+                    @endisset
+
+                    @isset($tdata3)
+                    <th scope="col">{{$item->$tdata3}}</th>
+                    @endisset
+                    
                     <td>
                         @if ($item->status == 1)
                         <a class="btn btn-sm btn-success" href="{{ route($route.'.status', $item->$id) }}"><i class="bi bi-check-circle"></i></a>
@@ -43,4 +88,3 @@
         <!-- End Table with stripped rows -->
     </div>
 </div>
-
