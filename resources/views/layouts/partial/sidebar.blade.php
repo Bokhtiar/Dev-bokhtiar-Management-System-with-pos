@@ -54,6 +54,11 @@
                         <i class="bi bi-circle"></i><span>Bed Assign</span>
                     </a>
                 </li>
+                <li>
+                    <a href="@route('bed-assign.create')">
+                        <i class="bi bi-circle"></i><span>Bed Assign Create</span>
+                    </a>
+                </li>
 
             </ul>
         </li><!-- End Bed-manager Nav -->

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class BedAssignValidationRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +28,8 @@ class BedAssignValidationRequest extends FormRequest
             'bed_id' => 'required',
             'room_id' => 'required',
             'user_id' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
         ];
     }
+
 }

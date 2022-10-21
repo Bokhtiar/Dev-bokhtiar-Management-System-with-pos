@@ -11,6 +11,11 @@ trait CategoryNetwork
         return Category::latest()->get(['category_id', 'category_name', 'status']);
     }
 
+    /**active category */
+    public function CategoryActiveList(){
+        return Category::latest()->Active()->get(['category_id', 'category_name', 'status']);
+    }
+
     /**store Category */
     public function CategoryStore($request){
         return Category::create([

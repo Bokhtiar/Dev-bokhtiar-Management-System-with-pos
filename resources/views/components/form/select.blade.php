@@ -5,12 +5,12 @@
 
     <div class="col-md-12">
        <select
-        id="{{ $name }}" 
         name="{{ $name }}"
+        id={{ @$id ? $id : '' }}
         class="form-control">
         <option value="">{{ $label }}</option>
         @foreach ($resource as $item)
-        <option value="{{ $item->$field_id }}" {{ $item->$field_id == @$edit->$field_id ? 'selected' : '' }}>
+            <option value="{{ $item->$field_id }}" {{ $item->$field_id == @$value ? 'selected' : '' }}>
             {{ $item->$field_name }}</option>
         @endforeach
        </select>

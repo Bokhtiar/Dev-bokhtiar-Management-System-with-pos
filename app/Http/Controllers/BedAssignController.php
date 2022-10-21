@@ -9,19 +9,22 @@ use App\Models\Category;
 use App\Models\Room;
 use App\Models\User;
 use App\Traits\Network\BedAssignNetwork;
+use App\Traits\Network\BedNetwork;
+use App\Traits\Network\CategoryNetwork;
+use App\Traits\Network\RoomNetwork;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
 class BedAssignController extends Controller
 {
-    use BedAssignNetwork;
+    use BedAssignNetwork, CategoryNetwork, RoomNetwork, BedNetwork;
 
     /** bed assing list show */
     public function index()
     {
         try {
-            $bedAssigns = BedAssign::all();
+            $bedAssigns = $this->BedAssignList();
             return view('modules.bedAssign.index', compact('bedAssigns'));
         } catch (\Throwable $th) {
             throw $th;
@@ -37,9 +40,9 @@ class BedAssignController extends Controller
     public function create()
     {
         try {
-            $beds = Bed::query()->Active()->get(['bed_id', 'bed_name']);
-            $rooms = Room::query()->Active()->get(['room_id', 'room_name']);
-            $categories = Category::query()->Active()->get(['category_id', 'category_name']);
+            $beds = $this->BedActiveList();
+            $rooms = $this->RoomActiveList();
+            $categories = $this->CategoryActiveList();
             $users = User::query()->Active()->where('role_id', 4)->get(['id', 'name']);
             return view('modules.bedAssign.createOrUpdate', compact('beds', 'rooms', 'categories', 'users'));
         } catch (\Throwable $th) {
@@ -55,6 +58,7 @@ class BedAssignController extends Controller
      */
     public function store(BedAssignValidationRequest $request)
     {
+        dd($request->all());
         try {
             DB::beginTransaction();
             $bedAssign = $this->BedAssignStore($request);
@@ -76,9 +80,14 @@ class BedAssignController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($bed_assign_id)
     {
-        //
+        try {
+            $show = $this->BedAssignFindById($bed_assign_id);
+            return view('modules.bedAssign.show', compact('show'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -87,9 +96,18 @@ class BedAssignController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($bed_assign_id)
     {
-        //
+        try {
+            $edit = $this->BedAssignFindById($bed_assign_id);
+            $beds = $this->BedActiveList();
+            $rooms = $this->RoomActiveList();
+            $categories = $this->CategoryActiveList();
+            $users = User::query()->Active()->where('role_id', 4)->get(['id', 'name']);
+            return view('modules.bedAssign.createOrUpdate', compact('beds', 'rooms', 'categories', 'users', 'edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

@@ -20,7 +20,7 @@ trait BedAssignNetwork
         return array(
             'room_id' => $request->room_id,
             'user_id' => $request->user_id,
-            'bed_id' => 2,
+            'bed_id' => $request->bed_id,
             'category_id' => $request->category_id,
             'bed_assing_body' => $request->bed_assing_body,
         );

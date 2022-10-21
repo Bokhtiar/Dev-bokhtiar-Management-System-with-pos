@@ -53,7 +53,8 @@
                             'resource' => $categories,
                             'field_id' => 'category_id',
                             'label' => 'Select Category', 
-                            'field_name' =>'category_name'
+                            'field_name' =>'category_name',
+                            'value' => @$edit ? @$edit->category_id : '',
                             ])
                         @endcomponent
 
