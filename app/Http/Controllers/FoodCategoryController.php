@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FoodCategoryValidationRequest;
 use App\Models\FoodCategory;
 use App\Traits\Network\FoodCategoryNetwork;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FoodCategoryController extends Controller
@@ -17,7 +16,8 @@ class FoodCategoryController extends Controller
     {
         try {
             $foodCategories = $this->FoodCategoryList();
-            return view('modules.foodCategory.index', compact('foodCategories'));
+            $foodParentCategories = $this->FoodParentCategoryList();
+            return view('modules.foodCategory.index', compact('foodCategories','foodParentCategories'));
         } catch (\Throwable $th) {
             return redirect()->route('food-category')->with('warning', 'Something went wrong');
         }
@@ -57,7 +57,8 @@ class FoodCategoryController extends Controller
         try {
             $foodCategories = $this->FoodCategoryList();
             $edit = $this->FoodCategoryFindById($food_category_id);
-            return view('modules.foodCategory.show', compact('foodCategories', 'edit'));
+            $foodParentCategories = $this->FoodParentCategoryList();
+            return view('modules.foodCategory.index', compact('foodCategories', 'edit', 'foodParentCategories'));
         } catch (\Throwable $th) {
             return redirect()->route('food-category.index')->with('warning', 'Something went wrong!');
         }

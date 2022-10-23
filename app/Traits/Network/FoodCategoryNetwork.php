@@ -1,8 +1,9 @@
 <?php 
 namespace App\Traits\Network;
 
-use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Models\FoodCategory;
+
 
 trait FoodCategoryNetwork
 {
@@ -25,6 +26,7 @@ trait FoodCategoryNetwork
      public function ResourceStore($request){
         return array(
             'food_category_name' => $request->food_category_name,
+            'food_category_slug' =>  Str::slug($request->food_category_name, '-'),
             'food_category_body' => $request->food_category_body,
             'food_category_parent_id' => $request->food_category_parent_id,
         );

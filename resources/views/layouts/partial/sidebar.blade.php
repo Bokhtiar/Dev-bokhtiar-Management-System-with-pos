@@ -72,8 +72,8 @@
             </a>
             <ul id="food-meal-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="=food-meal-general.html">
-                        <i class="bi bi-circle"></i><span>General food-meal</span>
+                    <a href="@route('food-category.index')">
+                        <i class="bi bi-circle"></i><span>Food Category</span>
                     </a>
                 </li>
                 <li>
