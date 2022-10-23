@@ -58,7 +58,6 @@ class BedAssignController extends Controller
      */
     public function store(BedAssignValidationRequest $request)
     {
-        dd($request->all());
         try {
             DB::beginTransaction();
             $bedAssign = $this->BedAssignStore($request);
@@ -68,7 +67,6 @@ class BedAssignController extends Controller
             }
             throw new \Exception('Invalid About Information');
         } catch (\Exception $ex) {
-            dd($ex->getMessage());
             DB::rollBack();
             return back()->with('error', "Something went wrong");
         }
@@ -117,9 +115,20 @@ class BedAssignController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BedAssignValidationRequest $request, $bed_assign_id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $bedAssign = $this->BedAssignUpdate($request, $bed_assign_id);
+            if (!empty($bedAssign)) {
+                DB::commit();
+                return redirect()->route('bed-assign.index')->with('success', 'Bed Assign Created successfully!');
+            }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
+        }
     }
 
     /**
@@ -128,8 +137,9 @@ class BedAssignController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($bed_assign_id)
     {
-        //
+        $this->BedAssignFindById($bed_assign_id)->delete();
+        return redirect()->back()->with('danger', 'Bed assign deleted successfully');
     }
 }

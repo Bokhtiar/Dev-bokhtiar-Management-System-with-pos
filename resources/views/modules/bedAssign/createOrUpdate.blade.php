@@ -21,6 +21,17 @@
                 
                 {{-- Select category --}}
                 @component('components.form.select', [
+                'id' => 'user_id',
+                'name' =>'user_id',
+                'resource' => $users,
+                'field_id' => 'id',
+                'label' => 'Select user',
+                'field_name' =>'name',
+                'value' => @$edit ? @$edit->user_id : '',
+                ])@endcomponent
+
+                {{-- Select category --}}
+                @component('components.form.select', [
                 'id' => 'category',
                 'name' =>'category_id',
                 'resource' => $categories,
