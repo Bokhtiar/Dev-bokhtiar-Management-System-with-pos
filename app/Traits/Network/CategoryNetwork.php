@@ -2,7 +2,6 @@
 namespace App\Traits\Network;
 
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 
 trait CategoryNetwork
 {

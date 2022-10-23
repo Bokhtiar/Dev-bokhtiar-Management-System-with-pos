@@ -20,12 +20,4 @@ class Category extends Model
         'category_name',
         'category_body',
     ];
-
-    /**validation */
-    public function scopeValidation($value, $request)
-    {
-        return Validator::make($request, [
-            'category_name' => 'string | required | min:3',
-        ])->validate();
-    }
 }
