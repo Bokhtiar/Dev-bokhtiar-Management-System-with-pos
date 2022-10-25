@@ -31,7 +31,6 @@
             <tbody>
                
                 @forelse ($data as $item)
-                
                 <tr>
                     <th scope="row">{{ $loop->index + 1 }}</th>
                     

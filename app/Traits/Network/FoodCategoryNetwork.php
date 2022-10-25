@@ -9,12 +9,7 @@ trait FoodCategoryNetwork
 {
     /**list of resource*/
     public function FoodCategoryList(){
-        return FoodCategory::latest()->get(['food_category_id', 'food_category_name', 'food_category_parent_id', 'status']);
-    }
-
-    /**food parentcategory  */
-    public function FoodParentCategoryList(){
-        return FoodCategory::where('food_category_parent_id', !null)->latest()->get(['food_category_id', 'food_category_name', 'food_category_parent_id', 'status']);
+        return FoodCategory::latest()->get(['food_category_id', 'food_category_name', 'status']);
     }
 
     /**active resource */
@@ -28,7 +23,6 @@ trait FoodCategoryNetwork
             'food_category_name' => $request->food_category_name,
             'food_category_slug' =>  Str::slug($request->food_category_name, '-'),
             'food_category_body' => $request->food_category_body,
-            'food_category_parent_id' => $request->food_category_parent_id,
         );
     }
 

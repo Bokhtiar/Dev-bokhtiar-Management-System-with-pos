@@ -18,6 +18,6 @@ class FoodCategory extends Model
         'food_category_name',
         'food_category_body',
         'food_category_slug',
-        'food_category_parent_id',
     ];
+
 } 

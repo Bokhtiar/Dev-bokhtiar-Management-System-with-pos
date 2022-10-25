@@ -17,9 +17,8 @@ class CreateFoodCategoriesTable extends Migration
             $table->id('food_category_id');
             $table->tinyInteger('status')->default(0);
             $table->string('food_category_slug')->unique();
-            $table->string('food_category_name')->unique();
+            $table->string('food_category_name');
             $table->string('food_category_body')->nullable();
-            $table->unsignedBigInteger('food_category_parent_id')->nullable();
             $table->timestamps();
         });
     }

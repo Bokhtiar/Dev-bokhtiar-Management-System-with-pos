@@ -2,7 +2,7 @@
     @if (isset($label))
         <label for="{{ $label }}" class="control-label">{{ $label }}</label>
     @endif
-
+    
     <div class="col-md-12">
        <select
         name="{{ $name }}"

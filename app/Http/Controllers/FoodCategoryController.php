@@ -14,12 +14,12 @@ class FoodCategoryController extends Controller
     /** list of resource */
     public function index()
     {
+      
         try {
             $foodCategories = $this->FoodCategoryList();
-            $foodParentCategories = $this->FoodParentCategoryList();
-            return view('modules.foodCategory.index', compact('foodCategories','foodParentCategories'));
+            return view('modules.foodCategory.index', compact('foodCategories'));
         } catch (\Throwable $th) {
-            return redirect()->route('food-category')->with('warning', 'Something went wrong');
+            return redirect()->route('food-category.index')->with('warning', 'Something went wrong');
         }
     }
 

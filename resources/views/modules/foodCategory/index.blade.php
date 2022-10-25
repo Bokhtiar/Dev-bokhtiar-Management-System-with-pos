@@ -19,14 +19,11 @@
                         'id' => 'food_category_id',
                         'route' => 'food-category',
 
-                        'thead1' => 'Parent Category',
-                        'tdata1' => 'food_category_parent_id',
-
-                        'thead2' => 'Category',
-                        'tdata2' => 'food_category_name'
+                        'thead1' => 'Category',
+                        'tdata1' => 'food_category_name'
                     ])
                     @endcomponent
- 
+              
                 </div>
             </div>
         </section>
@@ -45,16 +42,6 @@
                         @endif
                         @csrf
 
-                        {{-- Select Bed --}}
-                        @component('components.form.select', [
-                        'label' => 'Food Parent Category',
-                        'id' => 'food_category_parent_id',
-                        'name' =>'food_category_parent_id',
-                        'field_name' =>'food_category_name',
-                        'resource' => $foodParentCategories,
-                        'field_id' => 'food_category_parent_id',
-                        'value' => @$edit ? @$edit->food_category_parent_id : '',
-                        ])@endcomponent
 
                         @component('components.form.input', [
                         'label' => 'Name',
