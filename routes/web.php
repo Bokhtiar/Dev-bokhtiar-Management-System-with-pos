@@ -4,6 +4,7 @@ use App\Http\Controllers\BedAssignController;
 use App\Http\Controllers\BedController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodCategoryController;
+use App\Http\Controllers\FoodSubCategoryController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
@@ -54,6 +55,10 @@ Route::group(["middleware" => ['auth']], function () {
     /** food category */
     Route::resource('food-category', FoodCategoryController::class);
     Route::get('food-category/status/{food_category_id}', [FoodCategoryController::class, 'status'])->name('food-category.status');
+
+    /**food sub category  */
+    Route::resource('food-sub-category', FoodSubCategoryController::class);
+    Route::get('food-sub-category/status/{food_sub_category_id}', [FoodSubCategoryController::class, 'status'])->name('food-sub-category.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

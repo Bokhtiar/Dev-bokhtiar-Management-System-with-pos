@@ -8,16 +8,16 @@ trait FoodSubCategoryNetwork
 {
     /**list of resource*/
     public function FoodSubCategoryList(){
-        return FoodSubCategory::latest()->get(['food_category_id', 'food_category_name', 'status']);
+        return FoodSubCategory::latest()->get(['food_sub_category_id','food_category_id', 'food_sub_category_name', 'status']);
     }
 
     /**active resource */
     public function FoodSubCategoryActiveList(){
-        return FoodSubCategory::latest()->Active()->get(['food_category_id', 'food_category_name', 'food_category_parent_id', 'status']);
+        return FoodSubCategory::latest()->Active()->get(['food_sub_category_id', 'food_category_id', 'food_sub_category_name', 'food_sub_category_parent_id', 'status']);
     }
 
      /**store resource database field*/
-     public function ResourceStore($request){
+     public function ResourceStoreSubCategory($request){
         return array(
             'food_category_id' => $request->food_category_id,
             'food_sub_category_body' => $request->food_sub_category_body,
@@ -28,7 +28,7 @@ trait FoodSubCategoryNetwork
 
     /**store resource */
     public function FoodSubCategoryStore($request){
-        return FoodSubCategory::create($this->ResourceStore($request));
+        return FoodSubCategory::create($this->ResourceStoreSubCategory($request));
     }
 
     /**single resource show */
@@ -39,6 +39,6 @@ trait FoodSubCategoryNetwork
     /**resource update */
     public function FoodSubCategoryUpdate($request, $food_sub_category_id){
         $food_sub_category = FoodSubCategory::find($food_sub_category_id);
-        return $food_sub_category->update($this->ResourceStore($request));
+        return $food_sub_category->update($this->ResourceStoreSubCategory($request));
     }
 }

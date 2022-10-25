@@ -77,8 +77,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="=food-meal-data.html">
-                        <i class="bi bi-circle"></i><span>Data food-meal</span>
+                    <a href="@route('food-sub-category.index')">
+                        <i class="bi bi-circle"></i><span>Food Sub Category</span>
                     </a>
                 </li>
             </ul>

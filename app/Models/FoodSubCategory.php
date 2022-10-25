@@ -20,4 +20,10 @@ class FoodSubCategory extends Model
         'food_sub_category_body',
         'food_sub_category_slug',
     ];
+
+    /**food sub category relestion */
+     public function foodCategory()
+     {
+         return $this->belongsTo(FoodCategory::class, 'food_category_id', 'food_category_id');
+     }
 }
