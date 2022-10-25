@@ -15,6 +15,7 @@ class FoodSubCategory extends Model
     protected $primaryKey = 'food_sub_category_id';
  
     protected $fillable = [
+        'food_category_id',
         'food_sub_category_name',
         'food_sub_category_body',
         'food_sub_category_slug',

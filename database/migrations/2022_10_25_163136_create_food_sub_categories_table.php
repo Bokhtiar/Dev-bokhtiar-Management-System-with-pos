@@ -18,6 +18,7 @@ class CreateFoodSubCategoriesTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->integer('food_category_id')->require();
             $table->string('food_sub_category_name')->require();
+            $table->string('food_sub_category_slug')->require();
             $table->longText('food_sub_category_body')->nullable();
             $table->timestamps();
         });
