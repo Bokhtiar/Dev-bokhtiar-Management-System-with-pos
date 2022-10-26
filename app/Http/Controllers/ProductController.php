@@ -50,7 +50,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductValidationRequest $request)
+    public function store(Request $request)
     {
         try {
             DB::beginTransaction();
@@ -78,7 +78,7 @@ class ProductController extends Controller
             $show = $this->ProductFindById($product_id);
             return view('modules.product.show', compact('show'));
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
         }
     }
 
@@ -107,7 +107,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductValidationRequest $request, $product_id)
+    public function update(Request $request, $product_id)
     {
         try {
             DB::beginTransaction();

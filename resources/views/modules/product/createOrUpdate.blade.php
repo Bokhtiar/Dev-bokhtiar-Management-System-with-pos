@@ -12,10 +12,10 @@
         <x-notification />
         <!-- product Form -->
         @if (@$edit)
-        <form class="row g-3" method="POST" action="@route('product.update', $edit->product_id)">
+        <form class="row g-3" method="POST" action="@route('product.update', $edit->product_id)" enctype="multipart/form-data">
             @method('put')
             @else
-            <form class="row g-3" method="POST" action="@route('product.store')">
+            <form class="row g-3" method="POST" action="@route('product.store')" enctype="multipart/form-data">
                 @endif
                 @csrf               
                 {{-- Select category --}}
@@ -60,6 +60,7 @@
                 @component('components.form.input', [
                 'label' => 'image',
                 'name' => 'image',
+                'type' => 'file',
                 'placeholder' => 'image',
                 'value' => @$edit ? @$edit->image : '',
                 ])@endcomponent

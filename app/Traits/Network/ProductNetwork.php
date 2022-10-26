@@ -2,6 +2,7 @@
 namespace App\Traits\Network;
 
 use App\Models\Product;
+use Intervention\Image\Facades\Image as Image;
 
 trait ProductNetwork
 {
@@ -17,14 +18,29 @@ trait ProductNetwork
 
     /**store resource database field*/
     public function ResourceStoreProduct($request){
-        return array(
+
+        if($request->hasFile('image')) {
+            $image = Image::make($request->file('image'));
+            /**
+             * Main Image Upload on Folder Code
+             */
+            $imageName = time().'-'.$request->file('image')->getClientOriginalName();
+            $destinationPath = public_path('images/products/');
+            $image->save($destinationPath.$imageName);
+
+            $upload = new Images();
+            $upload->file = $imageName;       
+        }
+
+        return $a= array(
             'name' => $request->name,
-            'image' => $request->image,
+            'image' => $upload,
             'price' => $request->price,
             'body' => $request->body,
             'food_category_id' => $request->food_category_id,
             'food_sub_category_id' => $request->food_sub_category_id,
         );
+       
     }
 
 

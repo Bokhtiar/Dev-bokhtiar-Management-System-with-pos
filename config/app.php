@@ -175,6 +175,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * image intervention
+         */
+        App\Providers\RouteServiceProvider::class,
+
+
     ],
 
     /*
@@ -230,6 +236,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /**
+         * image intervention
+         */
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];
