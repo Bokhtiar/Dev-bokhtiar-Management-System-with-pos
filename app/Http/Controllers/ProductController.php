@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductValidationRequest;
+use App\Traits\Network\ProductNetwork;
+use App\Traits\Network\FoodCategoryNetwork;
+use App\Traits\Network\FoodSubCategoryNetwork;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    use FoodCategoryNetwork, FoodSubCategoryNetwork, ProductNetwork; 
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $products = $this->ProductList();
+            return view('modules.product.index', compact('products'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -23,7 +34,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $foodCategories = $this->FoodCategoryActiveList();
+            $foodSubCategories = $this->FoodSubCategoryActiveList();
+            return view('modules.product.createOrUpdate', compact('foodCategories','foodSubCategories'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -32,9 +49,20 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductValidationRequest $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $product = $this->ProductStore($request);
+            if (!empty($product)) {
+                DB::commit();
+                return redirect()->route('product.index')->with('success', 'Product created successfully!');
+            }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
+        }
     }
 
     /**
@@ -66,7 +94,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductValidationRequest $request, $id)
     {
         //
     }

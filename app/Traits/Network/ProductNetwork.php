@@ -7,25 +7,26 @@ trait ProductNetwork
 {
     /**list of resource*/
     public function ProductList(){
-        return Product::latest()->get(['product_id','name','image','price','category_id', 'status']);
+        return Product::latest()->get(['product_id','name','image','price','food_category_id', 'status']);
     }
 
     /**list of active resource */
     public function ProductActiveList(){
-        return Product::latest()->Active()->get(['product_id','name','image','price','category_id', 'sub_category_id', 'status']);
+        return Product::latest()->Active()->get(['product_id','name','image','price','food_category_id', 'food_sub_category_id', 'status']);
     }
 
     /**store resource database field*/
     public function ResourceStoreProduct($request){
         return array(
             'name' => $request->name,
-            'image' => "image",
+            'image' => $request->image,
             'price' => $request->price,
             'body' => $request->body,
-            'category_id' => $request->category_id,
-            'sub_category_id' => $request->sub_category_id,
+            'food_category_id' => $request->food_category_id,
+            'food_sub_category_id' => $request->food_sub_category_id,
         );
     }
+
 
 
     /**store resource */

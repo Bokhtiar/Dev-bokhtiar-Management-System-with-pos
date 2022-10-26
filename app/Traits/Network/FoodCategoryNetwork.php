@@ -14,7 +14,7 @@ trait FoodCategoryNetwork
 
     /**active resource */
     public function FoodCategoryActiveList(){
-        return FoodCategory::latest()->Active()->get(['food_category_id', 'food_category_name', 'food_category_parent_id', 'status']);
+        return FoodCategory::latest()->Active()->get(['food_category_id', 'food_category_name', 'status']);
     }
 
      /**store resource database field*/

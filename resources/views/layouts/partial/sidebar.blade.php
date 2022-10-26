@@ -81,6 +81,16 @@
                         <i class="bi bi-circle"></i><span>Food Sub Category</span>
                     </a>
                 </li>
+                <li>
+                    <a href="@route('product.index')">
+                        <i class="bi bi-circle"></i><span>Product</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@route('product.create')">
+                        <i class="bi bi-circle"></i><span>Product Create</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End food-meal Nav -->
     </ul>

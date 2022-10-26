@@ -19,8 +19,8 @@ class Product extends Model
         'body',
         'price',
         'image',
-        'category_id',
-        'sub_category_id',
+        'food_category_id',
+        'food_sub_category_id',
     ];
 
     /**category reletion */

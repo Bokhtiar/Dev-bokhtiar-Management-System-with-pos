@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->integer('price')->require();
             $table->longText('body')->nullable();
             $table->tinyInteger('status')->default(0);
-            $table->integer('category_id')->require();
-            $table->integer('sub_category_id')->require();
+            $table->integer('food_category_id')->require();
+            $table->integer('food_sub_category_id')->require();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ trait FoodSubCategoryNetwork
 
     /**active resource */
     public function FoodSubCategoryActiveList(){
-        return FoodSubCategory::latest()->Active()->get(['food_sub_category_id', 'food_category_id', 'food_sub_category_name', 'food_sub_category_parent_id', 'status']);
+        return FoodSubCategory::latest()->Active()->get(['food_sub_category_id', 'food_category_id', 'food_sub_category_name', 'status']);
     }
 
      /**store resource database field*/

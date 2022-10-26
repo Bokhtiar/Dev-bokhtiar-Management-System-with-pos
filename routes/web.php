@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\FoodSubCategoryController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,10 @@ Route::group(["middleware" => ['auth']], function () {
     /**food sub category  */
     Route::resource('food-sub-category', FoodSubCategoryController::class);
     Route::get('food-sub-category/status/{food_sub_category_id}', [FoodSubCategoryController::class, 'status'])->name('food-sub-category.status');
+
+    /**product  */
+    Route::resource('product', ProductController::class);
+    Route::get('product/status/{product_id}', [ProductController::class, 'status'])->name('product.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

@@ -26,9 +26,9 @@ class ProductValidationRequest extends FormRequest
         return [
             'image' => "required",
             'name' => 'required | string',
-            'price' => 'required | number',
-            'category_id' => "required | number",
-            'sub_category_id' => "required | number",
+            'price' => 'required',
+            'food_category_id' => "required",
+            'food_sub_category_id' => "required",
         ];
     }
 }

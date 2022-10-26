@@ -61,6 +61,10 @@
                     @isset($tdata3)
                     <th scope="col">{{$item->$tdata3}}</th>
                     @endisset
+
+                    @isset($tdata4)
+                    <th scope="col">{{$item->$tdata4}}</th>
+                    @endisset
                     
                     <td>
                         @if ($item->status == 1)
