@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductValidationRequest;
+use App\Models\Product;
 use App\Traits\Network\ProductNetwork;
 use App\Traits\Network\FoodCategoryNetwork;
 use App\Traits\Network\FoodSubCategoryNetwork;
@@ -71,9 +72,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($product_id)
     {
-        //
+        try {
+            $show = $this->ProductFindById($product_id);
+            return view('modules.product.show', compact('show'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -82,9 +88,16 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($product_id)
     {
-        //
+        try {
+            $edit = $this->ProductFindById($product_id);
+            $foodCategories = $this->FoodCategoryActiveList();
+            $foodSubCategories = $this->FoodSubCategoryActiveList();
+            return view('modules.product.createOrUpdate', compact('foodCategories','foodSubCategories', 'edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -94,9 +107,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductValidationRequest $request, $id)
+    public function update(ProductValidationRequest $request, $product_id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $product = $this->ProductUpdate($request, $product_id);
+            if (!empty($product)) {
+                DB::commit();
+                return redirect()->route('product.index')->with('success', 'Product updated successfully!');
+            }
+            throw new \Exception('Invalid About Information');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return back()->with('error', "Something went wrong");
+        }
     }
 
     /**
@@ -105,8 +129,25 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($product_id)
     {
-        //
+        try {
+            $this->ProductFindById($product_id)->delete();
+            return redirect()->route('product.index')->with('success', 'Product deleted successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
+
+     /**status active or inactive */
+     public function status($product_id)
+     {
+         try {
+             $product = $this->ProductFindById($product_id);
+             Product::query()->Status($product); // crud trait
+             return redirect()->route('product.index')->with('warning', 'Product ctatus change successfully!');
+         } catch (\Throwable $th) {
+             throw $th;
+         }
+     }
 }

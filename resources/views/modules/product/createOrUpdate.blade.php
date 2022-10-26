@@ -31,13 +31,13 @@
 
                 {{-- Select sub category --}}
                 @component('components.form.select', [
-                'id' => 'food_sub_category',
+                'id' => 'food_sub_category_id',
                 'name' =>'food_sub_category_id',
                 'resource' => $foodSubCategories,
                 'field_id' => 'food_sub_category_id',
                 'label' => 'Select Sub Category',
                 'field_name' =>'food_sub_category_name',
-                'value' => @$edit ? @$edit->sub_category_id : '',
+                'value' => @$edit ? @$edit->food_sub_category_id : '',
                 ])@endcomponent
                 
                 {{-- product name --}}
