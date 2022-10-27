@@ -17,24 +17,20 @@ trait ProductNetwork
     }
 
     /**store resource database field*/
-    public function ResourceStoreProduct($request){
-
+    public function ResourceStoreProduct($request, $product=null){
+        
         if($request->hasFile('image')) {
             $image = Image::make($request->file('image'));
-            /**
-             * Main Image Upload on Folder Code
-             */
             $imageName = time().'-'.$request->file('image')->getClientOriginalName();
             $destinationPath = public_path('images/products/');
-            $image->save($destinationPath.$imageName);
-
-            $upload = new Images();
-            $upload->file = $imageName;       
+            $image->save($destinationPath.$imageName);      
+        }else {
+            $imageName= $product->image;
         }
 
         return $a= array(
             'name' => $request->name,
-            'image' => $upload,
+            'image' => $imageName,
             'price' => $request->price,
             'body' => $request->body,
             'food_category_id' => $request->food_category_id,
@@ -58,7 +54,7 @@ trait ProductNetwork
     /**resource update */
     public function ProductUpdate($request, $product_id){
         $product = Product::find($product_id);
-        return $product->update($this->ResourceStoreProduct($request));
+        return $product->update($this->ResourceStoreProduct($request, $product));
     }
     
 

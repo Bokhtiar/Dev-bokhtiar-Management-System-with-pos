@@ -7,7 +7,9 @@
             <thead>
                 <tr>
                     <th scope="col">Index</th>
-                    
+                    @isset($thead0)
+                    <th scope="col">{{$thead0}}</th>
+                    @endisset
                     @isset($thead1)
                     <th scope="col">{{$thead1}}</th>
                     @endisset
@@ -33,7 +35,9 @@
                 @forelse ($data as $item)
                 <tr>
                     <th scope="row">{{ $loop->index + 1 }}</th>
-                    
+                    @isset($image_path)
+                    <th> <img height="100" width="100" src="{{ $image_path }}{{$item->$tdata0}}" alt=""></th>
+                    @endisset
                     @isset($reletion1)
                     <th scope="col">{{ @$reletion1 ? $item->$reletion1->$reletion1Field_name : '' }}</th>
                     @endisset
@@ -63,7 +67,7 @@
                     @endisset
 
                     @isset($tdata4)
-                    <th scope="col">{{$item->$tdata4}}</th>
+                    <th scope="col"> {{ $item->$tdata4 }} </th>
                     @endisset
                     
                     <td>
