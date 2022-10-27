@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\FoodSubCategoryController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
@@ -64,6 +65,9 @@ Route::group(["middleware" => ['auth']], function () {
     /**product  */
     Route::resource('product', ProductController::class);
     Route::get('product/status/{product_id}', [ProductController::class, 'status'])->name('product.status');
+    
+    /**post */
+    Route::get('pos', [PosController::class, 'create'])->name('pos.create');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

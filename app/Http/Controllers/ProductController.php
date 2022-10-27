@@ -52,7 +52,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductValidationRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -109,7 +109,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $product_id)
+    public function update(ProductValidationRequest $request, $product_id)
     {
         try {
             DB::beginTransaction();

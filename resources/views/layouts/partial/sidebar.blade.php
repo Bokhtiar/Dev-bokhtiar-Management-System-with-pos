@@ -91,6 +91,11 @@
                         <i class="bi bi-circle"></i><span>Product Create</span>
                     </a>
                 </li>
+                <li>
+                    <a href="@route('pos.create')">
+                        <i class="bi bi-circle"></i><span>POS</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End food-meal Nav -->
     </ul>
