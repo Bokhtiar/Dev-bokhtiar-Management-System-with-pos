@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductValidationRequest;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File; 
 use App\Traits\Network\ProductNetwork;
 use App\Traits\Network\FoodCategoryNetwork;
 use App\Traits\Network\FoodSubCategoryNetwork;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ProductValidationRequest;
+
 
 class ProductController extends Controller
 {
@@ -132,6 +134,10 @@ class ProductController extends Controller
     public function destroy($product_id)
     {
         try {
+            $product = Product::find($product_id);
+            $path = public_path()."/images/products/".$product->image;
+            unlink($path);
+            
             $this->ProductFindById($product_id)->delete();
             return redirect()->route('product.index')->with('success', 'Product deleted successfully!');
         } catch (\Throwable $th) {

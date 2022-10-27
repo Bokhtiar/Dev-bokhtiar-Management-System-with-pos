@@ -1,6 +1,7 @@
 <?php 
 namespace App\Traits\Network;
 
+
 use App\Models\Product;
 use Intervention\Image\Facades\Image as Image;
 
