@@ -12,6 +12,7 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Whoops\Run;
@@ -28,7 +29,8 @@ use Whoops\Run;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    $users = User::where('role_id', 4)->get();
+    return view('dashboard', compact('users'));
 })->middleware('auth');
 
 Auth::routes();
