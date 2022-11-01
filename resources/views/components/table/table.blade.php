@@ -38,6 +38,7 @@
                     @isset($image_path)
                     <th> <img height="100" width="100" src="{{ $image_path }}{{$item->$tdata0}}" alt=""></th>
                     @endisset
+                   
                     @isset($reletion1)
                     <th scope="col">{{ @$reletion1 ? $item->$reletion1->$reletion1Field_name : '' }}</th>
                     @endisset

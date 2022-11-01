@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BillValidation;
 use App\Models\BedAssign;
 use App\Models\Bill;
+use App\Traits\Network\BedAssignNetwork;
+use App\Traits\Network\BillNetwork;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
+    use BillNetwork;
+    use BedAssignNetwork;
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +20,14 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = Bill::all();
-        $bedAssigns = BedAssign::all();
-        return view('modules.bill.index', compact('bedAssigns', compact('bills')));
-
+        try {
+            $bills = $this->BillList();
+            $bedAssigns = $this->BedAssignActiveList();
+            
+            return view('modules.bill.index', compact('bedAssigns', 'bills'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
  
@@ -29,9 +38,14 @@ class BillController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BillValidation $request)
     {
-        //
+        try {
+            $this->BillStore($request);
+            return redirect()->route('bill.index')->with('success', 'Bill Created Successsfully');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -42,7 +56,12 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = $this->BillFindById($id);
+            return view('modules.bill.show', compact('show'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -53,7 +72,14 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $bills = $this->BillList();
+            $edit = $this->BillFindById($id);
+            $bedAssigns = $this->BedAssignActiveList();
+            return view('modules.bill.index', compact('bedAssigns', 'edit', 'bills'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -63,9 +89,15 @@ class BillController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BillValidation $request, $id)
     {
-        //
+        try {
+            $this->BillUpdate($request, $id);
+            return redirect()->route('bill.index')->with('success', 'Bill Updated Successsfully');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 
     /**
@@ -76,6 +108,23 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->BillFindById($id)->delete();
+            return redirect()->route('bill.index')->with('success', 'Bill Deleted Successsfully');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
+     /**status active or inactive */
+    public function status($id)
+    {
+        try {
+            $bill = Bill::find($id);
+            Bill::query()->Status($bill); // crud trait
+            return redirect()->route('bill.index')->with('warning', 'Bill Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

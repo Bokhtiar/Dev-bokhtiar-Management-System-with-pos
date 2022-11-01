@@ -142,4 +142,17 @@ class BedAssignController extends Controller
         $this->BedAssignFindById($bed_assign_id)->delete();
         return redirect()->back()->with('danger', 'Bed assign deleted successfully');
     }
+
+
+     /**status active or inactive */
+    public function status($id)
+    {
+        try {
+            $bedAssign = BedAssign::find($id);
+            BedAssign::query()->Status($bedAssign); // crud trait
+            return back()->with('warning', 'Bill Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }

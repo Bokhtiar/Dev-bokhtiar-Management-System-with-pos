@@ -12,34 +12,93 @@
             <div class="row">
                 <div class="col-lg-12">
                     
-                    <!-- table resource show componemts -->
-                    @component('components.table.table',[
-                        'title'=> 'List of bill',
-                        'data' => $bills,
-                        'id' => 'bill_id',
-                        'route' => 'bill',
-                        
-                        'thead1' => 'Category', //if you want reletion another table must be assign in thead 1,2,3 
-                        'reletion1' => 'category', //easir loading reletion name 
-                        'reletion1Field_name' => 'category_name', //this is reletion field thatway i am not use tdata1 
 
-                        'thead2' => 'Room', 
-                        'reletion2' => 'room', 
-                        'reletion1Field_name' => 'room_name',
 
-                        'thead3' => 'Bed', 
-                        'reletion3' => 'bed', 
-                        'reletion1Field_name' => 'bed_name',
+                   
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
 
-                        'thead4' => 'User', 
-                        'reletion4' => 'user',
-                        'reletion1Field_name' => 'name',
+<section class="section dashboard">
+    <!-- Recent Sales -->
+                <div class="col-12">
+                    <div class="card recent-sales overflow-auto">
 
-                        'thead5' => 'Month', 
-                        'tdata5' => 'month',
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                    class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
 
-                    ])
-                    @endcomponent
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Bill LIST <span></span></h5>
+
+                            <table class="table table-borderless datatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Month</th>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Category</th>
+                                        {{-- <th scope="col">Room</th>
+                                        <th scope="col">Bed</th> --}}
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($bills as $item)
+                                        <tr>
+                                            <th scope="row">{{$loop->index + 1}}</th>
+                                            <th scope="row">{{$item->month}}</th>
+                                            <td> {{$item->bedAssign ? $item->bedAssign->user->name : ""}}</td>
+                                            <td>{{$item->bedAssign ? $item->bedAssign->category->category_name : ""}}</td>
+                                            {{-- <td>{{$item->bedAssign ? $item->bedAssign->room->room_name : ""}}</td>
+                                            <td>{{$item->bedAssign ? $item->bedAssign->bed->bed_name : ""}}</td> --}}
+                                            <td>
+                                                @if ($item->status == 1)
+                                                <a class="btn btn-sm btn-success" href="@route('bill.status', $item->bill_id)"><i class="bi bi-check-circle"></i></a>
+                                                @else
+                                                <a class="btn btn-warning btn-sm" href="@route('bill.status', $item->bill_id)"><i class="bi bi-exclamation-triangle"></i></a>
+                                                @endif
+                                            </td>
+                                            <td class="form-inline">
+                                                <a class="btn btn-sm btn-info text-light" href="@route('bill.show', $item->bill_id)"> <i class="ri-eye-fill"></i></a>
+                                                <a class="btn btn-sm btn-primary" href="@route('bill.edit', $item->bill_id)"> <i class="ri-edit-box-fill"></i></a>
+                                                <form method="POST" action="@route('bill.destroy', $item->bill_id)" class="mt-1">
+                                                    @csrf
+                                                    @method('Delete')
+                                                    <button class="btn btn-sm btn-danger" type="submit"> <i class="ri-delete-bin-6-fill"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                    
+                                    @endforelse
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div><!-- End Recent Sales -->
+
+</section>
+
  
                 </div>
             </div>
@@ -64,9 +123,9 @@
                         {{-- Select category --}}
                         <div class="form-group">
                             <label for="">Select User</label>
-                            <select name="bill_assign_id" id="" class="form-control">
+                            <select name="bed_assign_id" id="" class="form-control">
                             @foreach ($bedAssigns as $item )
-                                <option value="{{$item->bed_assign_id}}">{{$item->user ? $item->user->name : "no data"}}</option>
+                                <option value="{{$item->bed_assign_id}}" {{$item->bed_assign_id == @$edit->bed_assign_id}}>{{$item->user ? $item->user->name : "no data"}}</option>
                             @endforeach
                         </select>
                         </div>

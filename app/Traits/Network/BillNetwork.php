@@ -1,0 +1,44 @@
+<?php
+namespace App\Traits\Network;
+
+use App\Models\Bill;
+
+trait BillNetwork
+{
+    /**list of resource*/
+    public function BillList()
+    {
+        return Bill::latest()->get(['bill_id', 'bed_assign_id', 'month', 'status']);
+    }
+
+    /**store resource database field*/
+    public function ResourceStoreBill($request, $product = null)
+    {
+        return $a = array(
+            'bed_assign_id' => $request->bed_assign_id,
+            'month' => $request->month,
+            'bill_body' => $request->bill_body,
+        );
+
+    }
+
+    /**store resource */
+    public function BillStore($request)
+    {
+        return Bill::create($this->ResourceStoreBill($request));
+    }
+
+    /**single resource show */
+    public function BillFindById($bill_id)
+    {
+        return Bill::find($bill_id);
+    }
+
+    /**resource update */
+    public function BillUpdate($request, $bill_id)
+    {
+        $bill = Bill::find($bill_id);
+        return $bill->update($this->ResourceStoreBill($request, $bill));
+    }
+
+}

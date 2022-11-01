@@ -96,6 +96,12 @@
                         <i class="bi bi-circle"></i><span>POS</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Order</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End food-meal Nav -->
 
@@ -116,5 +122,11 @@
                 </li>
             </ul>
         </li><!-- End user Nav -->
+         <li class="nav-item">
+            <a class="nav-link " href="@route('logouts')">
+                <i class="bi bi-grid"></i>
+                <span>Logout</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
     </ul>
 </aside>

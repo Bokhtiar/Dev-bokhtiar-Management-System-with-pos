@@ -14,11 +14,15 @@ class CreateBillsTable extends Migration
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
-            $table->id();
+            $table->id('bill_id');
+            $table->string('bed_assign_id')->require();
+            $table->string('month')->require();
+            $table->longText('bill_body');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *
