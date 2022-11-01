@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AleartController;
 use App\Http\Controllers\BedAssignController;
 use App\Http\Controllers\BedController;
 use App\Http\Controllers\BillController;
@@ -73,6 +74,10 @@ Route::group(["middleware" => ['auth']], function () {
     /**bill  */
     Route::resource('bill', BillController::class);
     Route::get('bill/status/{bill_id}', [BillController::class, 'status'])->name('bill.status');
+
+    /**alert  */
+    Route::resource('alert', AleartController::class);
+    Route::get('alert/status/{bill_id}', [AleartController::class, 'status'])->name('alert.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');
