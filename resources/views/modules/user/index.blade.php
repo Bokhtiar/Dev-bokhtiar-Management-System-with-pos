@@ -48,8 +48,8 @@
                                     <td class="form-inline">
                                         <a class="btn btn-sm btn-info text-light" href="@route('user.show', $item->id)"> <i
                                                 class="ri-eye-fill"></i></a>
-                                        <a class="btn btn-sm btn-primary" href="@route('user.edit', $item->id)"> <i
-                                                class="ri-edit-box-fill"></i></a>
+                                        {{-- <a class="btn btn-sm btn-primary" href="@route('user.edit', $item->id)"> <i
+                                                class="ri-edit-box-fill"></i></a> --}}
                                         <form method="POST" action="@route('user.destroy', $item->id)" class="mt-1">
                                             @csrf
                                             @method('Delete')
