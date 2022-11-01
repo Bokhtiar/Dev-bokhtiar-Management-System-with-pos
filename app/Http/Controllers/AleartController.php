@@ -65,7 +65,13 @@ class AleartController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $alearts = $this->AleartList();
+            $edit = $this->AleartFindById($id);
+            return view('modules.aleart.index', compact('alearts', 'edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -77,7 +83,12 @@ class AleartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->AleartUpdate($request, $id);
+            return redirect()->route('alert.index')->with('success', 'Alert Updeted successfully done');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -88,7 +99,12 @@ class AleartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->AleartFindById($id)->delete();
+            return redirect()->back()->with('success', 'Alert Successfully Done.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**status active or inactive */
