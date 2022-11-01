@@ -98,5 +98,23 @@
                 </li>
             </ul>
         </li><!-- End food-meal Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#bill-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Bill</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="bill-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="@route('bill.index')">
+                        <i class="bi bi-circle"></i><span>List of Bill</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@route('bill.create')">
+                        <i class="bi bi-circle"></i><span>Create of Bill</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End user Nav -->
     </ul>
 </aside>

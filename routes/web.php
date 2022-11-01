@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BedAssignController;
 use App\Http\Controllers\BedController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\FoodSubCategoryController;
@@ -68,6 +69,10 @@ Route::group(["middleware" => ['auth']], function () {
     
     /**post */
     Route::get('pos', [PosController::class, 'create'])->name('pos.create');
+
+    /**bill  */
+    Route::resource('bill', BillController::class);
+    Route::get('bill/status/{bill_id}', [BillController::class, 'status'])->name('bill.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');
