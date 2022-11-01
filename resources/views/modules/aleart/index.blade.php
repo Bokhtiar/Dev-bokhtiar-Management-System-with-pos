@@ -20,9 +20,6 @@
                         'route' => 'alert',
                         'thead1' => 'Title',
                         'tdata1' => 'title',
-
-                        'thead2' => 'Body',
-                        'tdata2' => 'body',
                     ])
                     @endcomponent
  

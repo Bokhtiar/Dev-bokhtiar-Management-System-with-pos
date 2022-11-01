@@ -77,7 +77,7 @@ Route::group(["middleware" => ['auth']], function () {
 
     /**alert  */
     Route::resource('alert', AleartController::class);
-    Route::get('alert/status/{bill_id}', [AleartController::class, 'status'])->name('alert.status');
+    Route::get('alert/status/{aleart_id}', [AleartController::class, 'status'])->name('alert.status');
 
     /* web setting route */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');

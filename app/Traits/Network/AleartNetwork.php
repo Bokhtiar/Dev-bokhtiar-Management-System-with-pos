@@ -28,7 +28,7 @@ trait AleartNetwork
     }
 
     /**single resource show */
-    public function FoodCategoryFindById($id)
+    public function AleartFindById($id)
     {
         return Aleart::find($id);
     }

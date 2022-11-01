@@ -122,7 +122,24 @@
                 </li>
             </ul>
         </li><!-- End user Nav -->
-         <li class="nav-item">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#alert-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>alert</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="alert-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="@route('alert.index')">
+                        <i class="bi bi-circle"></i><span>List of alert</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End user Nav -->
+
+        
+       
+
+        <li class="nav-item">
             <a class="nav-link " href="@route('logouts')">
                 <i class="bi bi-grid"></i>
                 <span>Logout</span>

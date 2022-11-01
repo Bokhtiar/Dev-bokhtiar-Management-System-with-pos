@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AleartValidation;
+use App\Models\Aleart;
 use App\Traits\Network\AleartNetwork;
 use Illuminate\Http\Request;
 
@@ -29,9 +31,14 @@ class AleartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AleartValidation $request)
     {
-        //
+        try {
+            $this->AleartStore($request);
+            return redirect()->route('alert.index')->with('success', 'Alert created successfully done');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -42,7 +49,12 @@ class AleartController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = $this->AleartFindById($id);
+            return view('modules.aleart.show', compact('show'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -77,5 +89,17 @@ class AleartController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**status active or inactive */
+    public function status($id)
+    {
+        try {
+            $alert = Aleart::find($id);
+            Aleart::query()->Status($alert); // crud trait
+            return back()->with('warning', 'Aleart Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
