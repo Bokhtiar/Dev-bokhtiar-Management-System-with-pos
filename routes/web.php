@@ -10,6 +10,7 @@ use App\Http\Controllers\FoodSubCategoryController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -82,6 +83,12 @@ Route::group(["middleware" => ['auth']], function () {
     Route::get('alert/status/{aleart_id}', [AleartController::class, 'status'])->name('alert.status');
 
     /* web setting route */
+
+    /**role  */
+    Route::resource('role', RoleController::class);
+    Route::get('role/status/{role_id}', [RoleController::class, 'status'])->name('role.status');
+
+
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');
     Route::post('/account-update', [App\Http\Controllers\SettingController::class, 'account_update'])->name('account-update');
     Route::get('/profile', [App\Http\Controllers\SettingController::class, 'profile'])->name('profile');
