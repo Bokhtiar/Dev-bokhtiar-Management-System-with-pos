@@ -49,7 +49,12 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = $this->RoleFindById($id);
+            return view('modules.role.show', ['show' => $show]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -60,7 +65,13 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $roles = $this->RoleList();
+            $edit = $this->RoleFindById($id);
+            return view('modules.role.index', ['roles' => $roles, 'edit' => $edit]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -72,7 +83,12 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->RoleUpdate($request, $id);
+            return redirect()->route('role.index')->with('success', 'Role updated successfully done');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -83,7 +99,12 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->RoleFindById($id)->delete();
+            return redirect()->route('role.index')->with('success', 'Role deleted');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
