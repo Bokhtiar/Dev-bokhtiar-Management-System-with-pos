@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\FoodSubCategoryController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
@@ -70,7 +71,7 @@ Route::group(["middleware" => ['auth']], function () {
     /**product  */
     Route::resource('product', ProductController::class);
     Route::get('product/status/{product_id}', [ProductController::class, 'status'])->name('product.status');
-    
+
     /**post */
     Route::get('pos', [PosController::class, 'create'])->name('pos.create');
 
@@ -88,7 +89,10 @@ Route::group(["middleware" => ['auth']], function () {
     Route::resource('role', RoleController::class);
     Route::get('role/status/{role_id}', [RoleController::class, 'status'])->name('role.status');
 
+    /**role  */
+    Route::resource('permission', PermissionController::class);
 
+    /**setting */
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');
     Route::post('/account-update', [App\Http\Controllers\SettingController::class, 'account_update'])->name('account-update');
     Route::get('/profile', [App\Http\Controllers\SettingController::class, 'profile'])->name('profile');

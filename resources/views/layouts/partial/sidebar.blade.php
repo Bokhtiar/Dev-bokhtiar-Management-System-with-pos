@@ -148,8 +148,16 @@
                         <i class="bi bi-circle"></i><span>List of Role</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="@route('permission.create')">
+                        <i class="bi bi-circle"></i><span>Permission Create</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End user Nav -->
+
+
 
         <li class="nav-item">
             <a class="nav-link " href="@route('logouts')">

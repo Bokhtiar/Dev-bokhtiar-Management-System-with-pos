@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
+use App\Traits\Network\RoleNetwork;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
+    use RoleNetwork;
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,12 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $permissions = Permission::all();
+            return view('modules.permission.index', compact('permissions'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -23,7 +31,12 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $roles = $this->RoleList();
+            return view('modules.permission.createOrUpdate', compact('roles'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -34,7 +47,12 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            Permission::create($request->all());
+            return redirect()->route('permission.index')->with('success', "Permission created");
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
