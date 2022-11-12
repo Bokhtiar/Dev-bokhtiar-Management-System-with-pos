@@ -43,7 +43,7 @@
                                     <td>{{ $permission->role ? $permission->role->name : 'Data not found' }}</td>
                                     <td>
                                         <a class="btn btn-info"
-                                            href="{{ url('permission/edit/' . $permission->id) }}">Edit</a>
+                                            href="@route('permission.edit', $permission->permission_id)">Edit</a>
                                         <a class="btn btn-danger" href="">Delete</a>
                                     </td>
                                 </tr>

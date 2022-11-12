@@ -56,17 +56,6 @@ class PermissionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -74,7 +63,13 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $roles = $this->RoleList();
+            $permission = Permission::where('permission_id', $id)->first();
+            return view('modules.permission.edit', compact('roles', 'permission'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -86,7 +81,16 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            
+            $permission = Permission::where('permission_id', $id)->first();
+            $permission->role_id = $request->role_id;
+            $permission->permission = $request->permission;
+            $permission->save();
+            return redirect()->route('permission.index')->with('success', "Permission updated");
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
