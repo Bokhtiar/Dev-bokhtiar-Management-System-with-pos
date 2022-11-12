@@ -150,6 +150,11 @@
                 </li>
 
                 <li>
+                    <a href="@route('permission.index')">
+                        <i class="bi bi-circle"></i><span>List of permission</span>
+                    </a>
+                </li>
+                <li>
                     <a href="@route('permission.create')">
                         <i class="bi bi-circle"></i><span>Permission Create</span>
                     </a>

@@ -65,7 +65,7 @@ class PermissionController extends Controller
     {
         try {
             $roles = $this->RoleList();
-            $permission = Permission::where('permission_id', $id)->first();
+            $permission = Permission::where('id', $id)->first();
             return view('modules.permission.edit', compact('roles', 'permission'));
         } catch (\Throwable $th) {
             throw $th;
@@ -83,10 +83,11 @@ class PermissionController extends Controller
     {
         try {
             
-            $permission = Permission::where('permission_id', $id)->first();
-            $permission->role_id = $request->role_id;
-            $permission->permission = $request->permission;
-            $permission->save();
+            $permission = Permission::where('id', $id)->first();
+             $permission->update($request->all());
+            // $permission->role_id = $request->role_id;
+            // $permission->permission = $request->permission;
+            // $permission->save();
             return redirect()->route('permission.index')->with('success', "Permission updated");
         } catch (\Throwable $th) {
             throw $th;

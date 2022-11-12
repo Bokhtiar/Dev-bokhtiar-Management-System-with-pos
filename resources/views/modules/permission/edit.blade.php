@@ -25,7 +25,7 @@
     </div>
     <div class="card-body">
         <div class="container">
-            <form action="@route('permission.update', $permission->permission_id)" method="POST">
+            <form action="@route('permission.update', $permission->id)" method="POST">
                 @method('put')
                 @csrf
 
@@ -45,10 +45,10 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                       
                     </div>
                     <div class="col-md-8">
-                        <table class="responsive-table-input-matrix">
+                        <table class="table responsive-table-input-matrix">
                             <thead>
                                 <tr>
                                     <th>Permission</th>
@@ -218,6 +218,9 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div class="text-center my-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </div>
 

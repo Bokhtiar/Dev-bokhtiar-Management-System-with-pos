@@ -27,7 +27,7 @@
             
         </div>
         <div class="col-md-8">
-            <table class=" table text-center responsive-table-input-matrix">
+            <table class=" table responsive-table-input-matrix">
                 <thead>
                 <tr>
                     <th>Permission</th>
