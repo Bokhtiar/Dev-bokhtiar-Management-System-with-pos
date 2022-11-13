@@ -4,6 +4,7 @@ use App\Http\Controllers\AleartController;
 use App\Http\Controllers\BedAssignController;
 use App\Http\Controllers\BedController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\FoodSubCategoryController;
@@ -74,6 +75,7 @@ Route::group(["middleware" => ['auth']], function () {
 
     /**post */
     Route::get('pos', [PosController::class, 'create'])->name('pos.create');
+    Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
 
     /**bill  */
     Route::resource('bill', BillController::class);

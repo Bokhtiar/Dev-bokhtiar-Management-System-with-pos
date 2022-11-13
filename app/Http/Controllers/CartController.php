@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -32,9 +34,21 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        if(Cart::where('product_id',$id)->where('order_id',null)->where('user_id',Auth::id())->first()){
+            $update = cart::where('product_id',$id)->where('order_id',null)->first();
+            $update['quantity']=$update->quantity + 1;
+            $update->save();
+            return back();
+        }else{
+            cart::create([
+                'user_id'=> Auth::id(),
+                'product_id'=> $id,
+            ]);
+            return redirect()->back()->with('success', 'Product Added.');
+        }
+
     }
 
     /**

@@ -16,10 +16,10 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id('cart_id');
             $table->integer('user_id')->require();
-            $table->integer('order_id')->require();
+            $table->integer('order_id')->nullable();
             $table->integer('product_id')->require();
-            $table->integer('quantity')->default(0);
-            $table->tinyInteger('status')->default(0);
+            $table->integer('quantity')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

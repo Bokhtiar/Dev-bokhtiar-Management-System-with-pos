@@ -72,35 +72,36 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $total_amount = 0;
+                                @endphp
+                                @foreach ($carts as $cart)
                                 <tr>
-                                    <th>Chese Burger extra</th>
-                                    <td> <i class="bx bxs-message-rounded-minus"></i> 3 <i class="bx bxs-message-rounded-add"></i></td>
-                                    <td>300৳</td>
-                                    <td>1999৳</td>
+                                    <th>{{ $cart->product ? $cart->product->name : "Data not found" }}</th>
+                                    <td> <i class="bx bxs-message-rounded-minus"></i> {{ $cart->quantity }} <i class="bx bxs-message-rounded-add"></i></td>
+                                    <td>{{ $cart->product ? $cart->product->price : "Data not found" }}৳</td>
+                                    <td>{{ $cart->product->price * $cart->quantity}}৳</td>
+                                    <?php
+                                    $total_amount +=$cart->product->price*$cart->quantity;
+                                    ?>
                                     <td><i class="bx bxs-comment-x"></i></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
 
-                        <div class="row bg-info mx-0">
-                            <div class="col-md-4 col-lg-4 col-sm-12">
+                        <div class="row bg-info mx-0 text-light">
+                            <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="text-center">
                                     <label for="">Total items</label> <br>
-                                    <span>4 items</span>
+                                    <span>{{ $cart_item_number }} items</span>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-lg-4 col-sm-12">
+                            <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="text-center">
-                                    <label for="">Sub total৳</label> <br>
-                                    <span>4333৳</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-lg-4 col-sm-12">
-                                <div class="text-center">
-                                    <label for="">Total price৳</label> <br>
-                                    <span>4232৳</span>
+                                    <label for="">Total </label> <br>
+                                    <span>{{ $total_amount }}৳</span>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-
+  
 
             </div>
             <div class="col-md-5 col-lg-5 col-sm-12">
@@ -133,7 +134,7 @@
                                         <img width="60px" width="60px" src="/images/products/{{ $product->image }}" alt="">
                                         {{ $product->name }}   <span class="badge bg-danger">{{ $product->quantity }} qty</span>
                                     </td>
-                                    <td> <a class="btn btn-sm btn-info" href=""><i class="bi bi-cart-plus"></i></a></td>
+                                    <td> <a class="btn btn-sm btn-info" href="@route('cart.store', $product->product_id)"><i class="bi bi-cart-plus"></i></a></td>
                                   </tr>
                                   @endforeach
                                 </tbody>
