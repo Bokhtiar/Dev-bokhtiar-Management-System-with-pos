@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name')->require();
             $table->string('image')->require();
             $table->integer('price')->require();
+            $table->integer('quantity')->default(0);
             $table->longText('body')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->integer('food_category_id')->require();

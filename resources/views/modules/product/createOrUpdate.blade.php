@@ -48,6 +48,14 @@
                 'value' => @$edit ? @$edit->name : '',
                 ])@endcomponent
 
+                {{-- product quantity --}}
+                @component('components.form.input', [
+                'label' => 'Quantity',
+                'name' => 'quantity',
+                'placeholder' => 'quantity',
+                'value' => @$edit ? @$edit->quantity : '',
+                ])@endcomponent
+
                 {{-- product price --}}
                 @component('components.form.input', [
                 'label' => 'Price',

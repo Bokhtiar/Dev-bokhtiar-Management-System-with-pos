@@ -114,7 +114,35 @@
             </div>
             <div class="col-md-5 col-lg-5 col-sm-12">
                 <div class="card">
-                    <div class="card-body">asdfasdf</div>
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-body">
+                            
+                              <!-- Table with stripped rows -->
+                              <table class="table datatable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Add</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach ($products as $product)
+                                  <tr>
+                                    <td style="width: 97%">
+                                        <img width="60px" width="60px" src="/images/products/{{ $product->image }}" alt="">
+                                        {{ $product->name }}   <span class="badge bg-danger">{{ $product->quantity }} qty</span>
+                                    </td>
+                                    <td> <a class="btn btn-sm btn-info" href=""><i class="bi bi-cart-plus"></i></a></td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
+                              <!-- End Table with stripped rows -->
+                
+                            </div>
+                          </div>
+                    </div>
                 </div>
             </div>
         </div>

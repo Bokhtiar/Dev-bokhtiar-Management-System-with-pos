@@ -18,6 +18,7 @@ class Product extends Model
         'name',
         'body',
         'price',
+        'quantity',
         'image',
         'food_category_id',
         'food_sub_category_id',

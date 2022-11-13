@@ -9,12 +9,12 @@ trait ProductNetwork
 {
     /**list of resource*/
     public function ProductList(){
-        return Product::latest()->get(['product_id','name','image','price','food_category_id', 'status']);
+        return Product::latest()->get(['product_id','name','image', 'quantity','price','food_category_id', 'status']);
     }
 
     /**list of active resource */
     public function ProductActiveList(){
-        return Product::latest()->Active()->get(['product_id','name','image','price','food_category_id', 'food_sub_category_id', 'status']);
+        return Product::latest()->Active()->get(['product_id','name', 'quantity','image','price','food_category_id', 'food_sub_category_id', 'status']);
     }
 
     /**store resource database field*/
@@ -29,10 +29,11 @@ trait ProductNetwork
             $imageName= $product->image;
         }
 
-        return $a= array(
+        return array(
             'name' => $request->name,
             'image' => $imageName,
             'price' => $request->price,
+            'quantity' => $request->quantity,
             'body' => $request->body,
             'food_category_id' => $request->food_category_id,
             'food_sub_category_id' => $request->food_sub_category_id,
