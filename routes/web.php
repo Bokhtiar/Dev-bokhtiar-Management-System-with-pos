@@ -76,6 +76,8 @@ Route::group(["middleware" => ['auth']], function () {
     /**post */
     Route::get('pos', [PosController::class, 'create'])->name('pos.create');
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
+    Route::get('cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::put('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
     /**bill  */
     Route::resource('bill', BillController::class);
@@ -86,7 +88,6 @@ Route::group(["middleware" => ['auth']], function () {
     Route::get('alert/status/{aleart_id}', [AleartController::class, 'status'])->name('alert.status');
 
     /* web setting route */
-
     /**role  */
     Route::resource('role', RoleController::class);
     Route::get('role/status/{role_id}', [RoleController::class, 'status'])->name('role.status');

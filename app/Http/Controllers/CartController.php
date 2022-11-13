@@ -80,9 +80,16 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        try {
+            $cart = Cart::find($id);
+            $cart->quantity = $request->quantity;
+            $cart->save();
+            return redirect()->back()->with('success', 'Cart updated');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -93,6 +100,11 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Cart::find($id)->delete();
+            return redirect()->back()->with('success', 'Cart item deleted');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

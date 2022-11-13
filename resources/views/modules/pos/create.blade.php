@@ -35,28 +35,10 @@
                         <div class="form-group my-3">
                             <label for="">Select user</label>
                             <select class="myselect form-control">
-                                <option>Laravel</option>
-                                <option>Laravel ACL</option>
-                                <option>Laravel PDF</option>
-                                <option>Laravel Helper</option>
-                                <option>Laravel API</option>
-                                <option>Laravel CRUD</option>
-                                <option>Laravel Angural JS Crud</option>
-                                <option>C++</option>
-                            </select>
-                        </div>
-                        {{-- product list show  --}}
-                        <div class="form-group my-3">
-                            <label for="">Select Product</label>
-                            <select class="myselect form-control">
-                                <option>Laravel</option>
-                                <option>Laravel ACL</option>
-                                <option>Laravel PDF</option>
-                                <option>Laravel Helper</option>
-                                <option>Laravel API</option>
-                                <option>Laravel CRUD</option>
-                                <option>Laravel Angural JS Crud</option>
-                                <option>C++</option>
+                                <option value="disable">Select user</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -75,16 +57,30 @@
                                 @php
                                     $total_amount = 0;
                                 @endphp
+                                <style>
+                                    .qty{
+                                        height: 30px;
+                                        width: 50px;
+                                    }
+                                </style>
                                 @foreach ($carts as $cart)
                                 <tr>
                                     <th>{{ $cart->product ? $cart->product->name : "Data not found" }}</th>
-                                    <td> <i class="bx bxs-message-rounded-minus"></i> {{ $cart->quantity }} <i class="bx bxs-message-rounded-add"></i></td>
-                                    <td>{{ $cart->product ? $cart->product->price : "Data not found" }}৳</td>
-                                    <td>{{ $cart->product->price * $cart->quantity}}৳</td>
+                                    <td>
+                                        <form action="@route('cart.update', $cart->cart_id)" method="POST">
+                                            @csrf
+                                            @method('put')
+                                         <input class="qty" type="number" value="{{ $cart->quantity }}" name="quantity" id=""> 
+                                         <button type="submit" class="btn btn-sm btn-info"><i class="bx bxs-message-rounded-add"></i></button>
+                                        </form>
+                                        </td>
+                                    
+                                         <td>{{ $cart->product ? $cart->product->price : "Data not found" }}৳</td>
+                                    <td>{{ $cart->product->price * $cart->quantity }}৳</td>
                                     <?php
-                                    $total_amount +=$cart->product->price*$cart->quantity;
+                                        $total_amount +=$cart->product->price*$cart->quantity;
                                     ?>
-                                    <td><i class="bx bxs-comment-x"></i></td>
+                                    <td><a class="btn btn-sm btn-danger" href="{{ url('cart/destroy', $cart->cart_id) }}"><i class="bx bxs-comment-x"></i></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
