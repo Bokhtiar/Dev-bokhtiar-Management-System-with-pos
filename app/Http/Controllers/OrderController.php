@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderValidation;
+use App\Models\Cart;
 use App\Traits\Network\OrderNetwork;
 use Illuminate\Http\Request;
 
@@ -48,30 +49,12 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        try {
+            $show = $this->OrderFindById($id);
+            return view('modules.order.show', compact('show'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -82,6 +65,11 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->OrderFindById($id)->delete();
+            return redirect()->back()->with('success', 'Order Deleted.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
