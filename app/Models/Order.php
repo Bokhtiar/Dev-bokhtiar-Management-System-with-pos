@@ -20,4 +20,9 @@ class Order extends Model
         'total_amount',
         'created_by',
     ];
+
+    /**user table */
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

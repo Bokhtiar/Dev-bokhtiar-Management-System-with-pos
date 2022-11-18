@@ -81,7 +81,7 @@ Route::group(["middleware" => ['auth']], function () {
     Route::put('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
     /**order */
-    Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::resource('order', OrderController::class);
 
     /**bill  */
     Route::resource('bill', BillController::class);

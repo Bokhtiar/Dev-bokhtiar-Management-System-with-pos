@@ -98,7 +98,7 @@
                         {{-- use list show  --}}
                         <div class="form-group my-3">
                             <label for="">Select user</label>
-                            <select name="user_id" class="myselect form-control">
+                            <select name="user_id" class="myselect form-control" required>
                                 <option value="disable">Select user</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -109,7 +109,7 @@
 
                         <div class="form-group my-2">
                             <label for="">Select Payment</label>
-                            <select name="payment" class="form-control" id="">
+                            <select name="payment" class="form-control" id="" required>
                                 <option value="Handcash">Handcash</option>
                                 <option value="bkash">Bkash</option>
                                 <option value="rocket">Rocket</option>

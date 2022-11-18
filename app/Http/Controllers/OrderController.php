@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderValidation;
+use App\Traits\Network\OrderNetwork;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    use OrderNetwork;
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +16,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        try {
+            $orders = $this->OrdertList();
+            return view('modules.order.index', compact('orders'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -35,7 +32,12 @@ class OrderController extends Controller
      */
     public function store(OrderValidation $request )
     {   
-        
+        try {
+            $this->OrderStore($request);
+            return redirect()->back()->with('success', 'Order has been completed');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

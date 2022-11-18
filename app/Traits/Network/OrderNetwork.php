@@ -14,7 +14,7 @@ trait OrderNetwork
     }
 
     /**store resource */
-    public function AleartStore($request)
+    public function OrderStore($request)
     {
         $order = new Order();
         $order->user_id = $request->user_id;
@@ -22,8 +22,9 @@ trait OrderNetwork
         $order->total_amount = $request->total_amount;
         $order->created_by = Auth::id();
         $order->save();
+
         foreach (Cart::item_cart() as $cart) {
-            $cart['order_id']=$order->id;
+            $cart->order_id = $order->order_id;
             $cart->save();
         }
     }

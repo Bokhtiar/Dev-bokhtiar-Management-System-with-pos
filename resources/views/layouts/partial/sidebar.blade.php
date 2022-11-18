@@ -98,7 +98,7 @@
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="@route('order.index')">
                         <i class="bi bi-circle"></i><span>Order</span>
                     </a>
                 </li>
