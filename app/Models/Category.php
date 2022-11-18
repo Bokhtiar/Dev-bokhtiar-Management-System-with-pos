@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class Category extends Model
 {
-    use HasFactory;
-    use CrudTrait;
+    use HasFactory,CrudTrait;
 
     /**database table with field */
     protected $table = 'categories';

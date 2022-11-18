@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,21 +32,9 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
-        if(Cart::where('product_id',$id)->where('order_id',null)->where('user_id',Auth::id())->first()){
-            $update = cart::where('product_id',$id)->where('order_id',null)->first();
-            $update['quantity']=$update->quantity + 1;
-            $update->save();
-            return back()->with('success', 'Product quantity updated.');
-        }else{
-            cart::create([
-                'user_id'=> Auth::id(),
-                'product_id'=> $id,
-            ]);
-            return redirect()->back()->with('success', 'Product Added.');
-        }
-
+        //
     }
 
     /**
@@ -80,16 +66,9 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        try {
-            $cart = Cart::find($id);
-            $cart->quantity = $request->quantity;
-            $cart->save();
-            return redirect()->back()->with('success', 'Cart updated');
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        //
     }
 
     /**
@@ -100,11 +79,6 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Cart::find($id)->delete();
-            return redirect()->back()->with('success', 'Cart item deleted');
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        //
     }
 }

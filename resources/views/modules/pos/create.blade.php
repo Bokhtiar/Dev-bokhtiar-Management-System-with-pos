@@ -24,7 +24,7 @@
 
 <div class="card">
     <div class="card-header">
-        
+         <x-notification></x-notification>
     </div>
     <div class="card-body">
         <div class="row">
@@ -34,7 +34,7 @@
                         {{-- use list show  --}}
                         <div class="form-group my-3">
                             <label for="">Select user</label>
-                            <select class="myselect form-control">
+                            <select name="user_id" class="myselect form-control">
                                 <option value="disable">Select user</option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -101,13 +101,27 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+                        <div class="form-group my-2">
+                            <select name="payment" class="form-control" id="">
+                                <option value="Handcash">Handcash</option>
+                                <option value="bkash">Bkash</option>
+                                <option value="rocket">Rocket</option>
+                                <option value="nagud">Nagud</option>
+                            </select>
+                        </div>
+                        
+                        <input type="hidden" name="total" value="{{ $total_amount }}" id="">
+
                         <div class="my-3 form-inline text-center">
                             <button class="btn btn-danger">Cancel</button> <button class="btn btn-info">Payment</button>
                         </div>
                     </div>
                 </div>
-  
-
+                
+               
             </div>
             <div class="col-md-5 col-lg-5 col-sm-12">
                 <div class="card">
