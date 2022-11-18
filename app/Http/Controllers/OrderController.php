@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderValidation;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -32,9 +33,9 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(OrderValidation $request )
+    {   
+        
     }
 
     /**

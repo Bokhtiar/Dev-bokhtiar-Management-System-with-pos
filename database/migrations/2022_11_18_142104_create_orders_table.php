@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->required();
             $table->string('payment')->required();
             $table->integer('created_by');
+            $table->integer('total_amount')->required();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

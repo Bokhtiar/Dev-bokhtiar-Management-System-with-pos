@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\FoodSubCategoryController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
@@ -73,11 +74,14 @@ Route::group(["middleware" => ['auth']], function () {
     Route::resource('product', ProductController::class);
     Route::get('product/status/{product_id}', [ProductController::class, 'status'])->name('product.status');
 
-    /**post */
+    /**pos */
     Route::get('pos', [PosController::class, 'create'])->name('pos.create');
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::get('cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::put('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+    /**order */
+    Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
 
     /**bill  */
     Route::resource('bill', BillController::class);

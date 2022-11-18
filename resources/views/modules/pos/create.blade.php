@@ -31,16 +31,7 @@
             <div class="col-md-7 col-lg-7 col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        {{-- use list show  --}}
-                        <div class="form-group my-3">
-                            <label for="">Select user</label>
-                            <select name="user_id" class="myselect form-control">
-                                <option value="disable">Select user</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        
 
                         {{-- pos table  --}}
                         <table class="table ">
@@ -102,9 +93,22 @@
                             </div>
                         </div>
 
+                        <form method="POST" action="@route('order.store')">
+                            @csrf
+                        {{-- use list show  --}}
+                        <div class="form-group my-3">
+                            <label for="">Select user</label>
+                            <select name="user_id" class="myselect form-control">
+                                <option value="disable">Select user</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
 
                         <div class="form-group my-2">
+                            <label for="">Select Payment</label>
                             <select name="payment" class="form-control" id="">
                                 <option value="Handcash">Handcash</option>
                                 <option value="bkash">Bkash</option>
@@ -113,11 +117,12 @@
                             </select>
                         </div>
                         
-                        <input type="hidden" name="total" value="{{ $total_amount }}" id="">
+                        <input type="hidden" name="total_amount" value="{{ $total_amount }}" id="">
 
                         <div class="my-3 form-inline text-center">
-                            <button class="btn btn-danger">Cancel</button> <button class="btn btn-info">Payment</button>
+                            <button type="submit" class="btn btn-info">Payment</button>
                         </div>
+                    </form>
                     </div>
                 </div>
                 
@@ -156,6 +161,8 @@
                     </div>
                 </div>
             </div>
+
+        
         </div>
     </div>
 </div>
