@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Visitor Create</h5>
+            <h5 class="card-title">Visitor {{ @$edit ? "Update" : "Create" }}</h5>
             <x-notification />
             <!-- visiotor Form -->
             @if (@$edit)
@@ -32,7 +32,7 @@
                     'field_id' => 'id',
                     'label' => 'Select user', 
                     'field_name' =>'name',
-                    'value' => @$edit ? @$edit->id : '',
+                    'value' => @$edit ? @$edit->user_id : '',
                     ])
                     @endcomponent
 

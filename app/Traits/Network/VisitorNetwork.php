@@ -11,7 +11,7 @@ trait VisitorNetwork
     }
 
     /* store resource database field */
-    public function ResourceStoreVisitor($request, $visitor=null){
+    public function ResourceStoreVisitor($request){
         return array(
             'name' => $request->name,
             'user_id' => $request->user_id,
@@ -32,7 +32,10 @@ trait VisitorNetwork
     /* specific update resource */
     public function VisitorUpdate($request, $id){
         $visitor = Visitor::find($id);
-        return $visitor->update($this->ResourceStoreVisitor($request, $visitor));
+        $visitor->name = $request->name;
+        $visitor->user_id = $request->user_id;
+        $visitor->description = $request->description;
+        $visitor->save();
     }
     
 
