@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitorController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,10 @@ Route::group(["middleware" => ['auth']], function () {
     /**bill  */
     Route::resource('bill', BillController::class);
     Route::get('bill/status/{bill_id}', [BillController::class, 'status'])->name('bill.status');
+
+    /* visitor  */
+    Route::resource('visitor', VisitorController::class);
+    Route::get('visitor/status/{visitor_id}', [VisitorController::class, 'status'])->name('visitor.status');
 
     /**alert  */
     Route::resource('alert', AleartController::class);

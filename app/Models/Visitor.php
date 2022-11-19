@@ -20,7 +20,7 @@ class Visitor extends Model
          'status',
      ];
  
-     public function users(){
+     public function user(){
          return $this->hasMany(User::class);
      }
 }

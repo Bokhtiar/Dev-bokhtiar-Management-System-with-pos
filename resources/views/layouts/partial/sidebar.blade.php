@@ -136,6 +136,25 @@
             </ul>
         </li><!-- End user Nav -->
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#visitor-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Visitor</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="visitor-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="@route('visitor.index')">
+                        <i class="bi bi-circle"></i><span>List of visitor</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@route('visitor.create')">
+                        <i class="bi bi-circle"></i><span>List of visitor</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End user Nav -->
+
         
        
         <li class="nav-item">
