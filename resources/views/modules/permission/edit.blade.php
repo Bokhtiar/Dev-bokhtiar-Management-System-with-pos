@@ -404,6 +404,58 @@
                                 </tr>
                                 <!--bill end -->
 
+                                {{-- alert start --}}
+                                <tr>
+                                    <td>Alert</td>
+                                    <td>
+                                        <input type="checkbox" name="permission[alert][add]"
+                                            @isset($permission['permission']['alert']['add']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[alert][edit]"
+                                            @isset($permission['permission']['alert']['edit']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[alert][view]"
+                                            @isset($permission['permission']['alert']['view']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[alert][delete]"
+                                            @isset($permission['permission']['alert']['delete']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[alert][list]"
+                                            @isset($permission['permission']['alert']['list']) checked @endisset value="1">
+                                    </td>
+                                </tr>
+                                <!--alert end -->
+
+                                 {{-- visitor start --}}
+                                 <tr>
+                                    <td>Visitor</td>
+                                    <td>
+                                        <input type="checkbox" name="permission[visitor][add]"
+                                            @isset($permission['permission']['visitor']['add']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[visitor][edit]"
+                                            @isset($permission['permission']['visitor']['edit']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[visitor][view]"
+                                            @isset($permission['permission']['visitor']['view']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[visitor][delete]"
+                                            @isset($permission['permission']['visitor']['delete']) checked @endisset value="1">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="permission[visitor][list]"
+                                            @isset($permission['permission']['visitor']['list']) checked @endisset value="1">
+                                    </td>
+                                </tr>
+                                <!--visitor end -->
+
 
 
                             </tbody>

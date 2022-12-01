@@ -162,39 +162,47 @@
         </li><!-- End user Nav -->
         @endisset
 
-
+        @isset(auth()->user()->role->permission['permission']['alert']['list'])
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#alert-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-journal-text"></i><span>alert</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="alert-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                @isset(auth()->user()->role->permission['permission']['alert']['list'])
                 <li>
                     <a href="@route('alert.index')">
                         <i class="bi bi-circle"></i><span>List of alert</span>
                     </a>
                 </li>
+                @endisset
+            
             </ul>
         </li><!-- End user Nav -->
+        @endisset
 
+        @isset(auth()->user()->role->permission['permission']['visitor']['list'])
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#visitor-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-journal-text"></i><span>Visitor</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="visitor-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                @isset(auth()->user()->role->permission['permission']['visitor']['list'])
                 <li>
                     <a href="@route('visitor.index')">
                         <i class="bi bi-circle"></i><span>List of visitor</span>
                     </a>
                 </li>
-
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['visitor']['list'])
                 <li>
                     <a href="@route('visitor.create')">
                         <i class="bi bi-circle"></i><span>List of visitor</span>
                     </a>
                 </li>
+                @endisset
             </ul>
         </li><!-- End user Nav -->
-
+        @endisset
         
        
         <li class="nav-item">
@@ -202,22 +210,28 @@
                 <i class="bi bi-journal-text"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="setting-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                @isset(auth()->user()->role->permission['permission']['role']['list'])
                 <li>
                     <a href="@route('role.index')">
                         <i class="bi bi-circle"></i><span>List of Role</span>
                     </a>
                 </li>
+                @endisset
 
+                @isset(auth()->user()->role->permission['permission']['permission']['list'])
                 <li>
                     <a href="@route('permission.index')">
                         <i class="bi bi-circle"></i><span>List of permission</span>
                     </a>
                 </li>
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['permission']['add'])
                 <li>
                     <a href="@route('permission.create')">
                         <i class="bi bi-circle"></i><span>Permission Create</span>
                     </a>
                 </li>
+                @endisset
             </ul>
         </li><!-- End user Nav -->
 

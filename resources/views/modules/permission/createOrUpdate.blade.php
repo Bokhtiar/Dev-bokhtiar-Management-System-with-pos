@@ -178,6 +178,28 @@
                 </tr>
                 {{-- pos end  --}}
 
+                {{-- pos start  --}}
+                <tr>
+                    <td>Alert</td>
+                    <td><input type="checkbox" name="permission[alert][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[alert][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[alert][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[alert][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[alert][list]" value="1"></td>
+                </tr>
+                {{-- pos end  --}}
+
+                {{-- pos start  --}}
+                <tr>
+                    <td>Visitor</td>
+                    <td><input type="checkbox" name="permission[visitor][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[visitor][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[visitor][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[visitor][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[visitor][list]" value="1"></td>
+                </tr>
+                {{-- pos end  --}}
+                
                 </tbody>
             </table>
         </div>
