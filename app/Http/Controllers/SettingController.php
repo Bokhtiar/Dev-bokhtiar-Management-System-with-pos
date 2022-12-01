@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SettingController extends Controller
 {
@@ -12,8 +14,9 @@ class SettingController extends Controller
     public function account_setting()
     {
         try {
+            $roles = Role::all();
             $user = Auth::user();
-            return view('setting.account_setting', compact('user'));
+            return view('setting.account_setting', compact('user', 'roles'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -23,19 +26,19 @@ class SettingController extends Controller
     /**account update */
     public function account_update(Request $request)
     {
-        try {
-            $user = User::find(Auth::id());
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->address1 = $request->address1;
-            $user->address2 = $request->address2;
-            $user->save();
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            throw $th;
-
-        }
+        $user = User::find(Auth::id());
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'role_id' => Auth::user()->role_id,
+            'profile_image' => $request->profile_image,
+            'guardian_name' => $request->guardian_name,
+            'guardian_phone' => $request->guardian_phone,
+        ]);
+       return back();
     }
 
     /**account profile */
