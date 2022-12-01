@@ -15,53 +15,74 @@
                 <i class="bi bi-journal-text"></i><span>Members</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="member-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                @isset(auth()->user()->role->permission['permission']['user']['list'])
                 <li>
                     <a href="@route('user.index')">
                         <i class="bi bi-circle"></i><span>List of members</span>
                     </a>
                 </li>
+                @endisset
+
+                @isset(auth()->user()->role->permission['permission']['user']['add'])
                 <li>
                     <a href="@route('user.create')">
                         <i class="bi bi-circle"></i><span>Create of member</span>
                     </a>
                 </li>
+                @endisset
             </ul>
         </li><!-- End user Nav -->
 
-
+        <!--start bed manager -->
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#Bed-manager-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>Bed Manager</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="Bed-manager-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              
+                @isset(auth()->user()->role->permission['permission']['category']['list'])
                 <li>
                     <a href="@route('category.index')">
                         <i class="bi bi-circle"></i><span>Category</span>
                     </a>
                 </li>
+                @endisset
+
+                @isset(auth()->user()->role->permission['permission']['room']['list'])
                 <li>
                     <a href="@route('room.index')">
                         <i class="bi bi-circle"></i><span>Room</span>
                     </a>
                 </li>
+                @endisset
+
+                @isset(auth()->user()->role->permission['permission']['bed']['list'])
                 <li>
                     <a href="@route('bed.index')">
                         <i class="bi bi-circle"></i><span>Bed</span>
                     </a>
                 </li>
+                @endisset
+
+                @isset(auth()->user()->role->permission['permission']['bedAssign']['list'])
                 <li>
                     <a href="@route('bed-assign.index')">
                         <i class="bi bi-circle"></i><span>Bed Assign</span>
                     </a>
                 </li>
+                @endisset
+
+                @isset(auth()->user()->role->permission['permission']['bedAssign']['add'])
                 <li>
                     <a href="@route('bed-assign.create')">
                         <i class="bi bi-circle"></i><span>Bed Assign Create</span>
                     </a>
                 </li>
+                @endisset
 
             </ul>
-        </li><!-- End Bed-manager Nav -->
+        </li>
+        <!-- End Bed-manager Nav -->
 
 
         <!--food meal system -->
@@ -71,57 +92,76 @@
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="food-meal-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                @isset(auth()->user()->role->permission['permission']['foodCategory']['list'])
                 <li>
                     <a href="@route('food-category.index')">
                         <i class="bi bi-circle"></i><span>Food Category</span>
                     </a>
                 </li>
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['foodSubCategory']['list'])
                 <li>
                     <a href="@route('food-sub-category.index')">
                         <i class="bi bi-circle"></i><span>Food Sub Category</span>
                     </a>
                 </li>
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['product']['list'])
                 <li>
                     <a href="@route('product.index')">
                         <i class="bi bi-circle"></i><span>Product</span>
                     </a>
                 </li>
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['product']['add'])
                 <li>
                     <a href="@route('product.create')">
                         <i class="bi bi-circle"></i><span>Product Create</span>
                     </a>
                 </li>
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['pos']['list'])
                 <li>
                     <a href="@route('pos.create')">
                         <i class="bi bi-circle"></i><span>POS</span>
                     </a>
                 </li>
-
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['order']['list'])
                 <li>
                     <a href="@route('order.index')">
                         <i class="bi bi-circle"></i><span>Order</span>
                     </a>
                 </li>
+                @endisset
             </ul>
-        </li><!-- End food-meal Nav -->
+        </li>
+        <!-- End food-meal Nav -->
 
+        @isset(auth()->user()->role->permission['permission']['bill']['list'])
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#bill-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-journal-text"></i><span>Bill</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="bill-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                @isset(auth()->user()->role->permission['permission']['bill']['list'])
                 <li>
                     <a href="@route('bill.index')">
                         <i class="bi bi-circle"></i><span>List of Bill</span>
                     </a>
                 </li>
+                @endisset
+                @isset(auth()->user()->role->permission['permission']['bill']['add'])
                 <li>
                     <a href="@route('bill.create')">
                         <i class="bi bi-circle"></i><span>Create of Bill</span>
                     </a>
                 </li>
+                @endisset
             </ul>
         </li><!-- End user Nav -->
+        @endisset
+
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#alert-nav" data-bs-toggle="collapse" href="#">

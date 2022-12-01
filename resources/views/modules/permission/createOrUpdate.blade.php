@@ -15,7 +15,7 @@
                 <select name="role_id" class="form-control">
                     <option value="">Please select a role</option>
                     @foreach($roles as $role)
-                        <option value="{{$role->role_id}}">{{$role->name}}</option>
+                        <option value="{{$role->id}}">{{$role->name}}</option>
                     @endforeach
                 </select>
                 @error('role_id')
@@ -24,7 +24,7 @@
                       </span>
                 @enderror
             </div>
-            
+          
         </div>
         <div class="col-md-8">
             <table class=" table responsive-table-input-matrix">
@@ -65,6 +65,10 @@
                     <td><input type="checkbox" name="permission[user][delete]" value="1"></td>
                     <td><input type="checkbox" name="permission[user][list]" value="1"></td>
                 </tr>
+
+                {{-- bed manager --}}
+
+                {{-- category start --}}
                 <tr>
                     <td>Category</td>
                     <td><input type="checkbox" name="permission[category][add]" value="1"></td>
@@ -73,7 +77,53 @@
                     <td><input type="checkbox" name="permission[category][delete]" value="1"></td>
                     <td><input type="checkbox" name="permission[category][list]" value="1"></td>
                 </tr>
+                {{-- category end --}}
 
+                {{-- room start --}}
+                <tr>
+                    <td>Room</td>
+                    <td><input type="checkbox" name="permission[room][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[room][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[room][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[room][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[room][list]" value="1"></td>
+                </tr>
+                {{-- room end --}}
+
+                {{-- bed start --}}
+                <tr>
+                    <td>Bed</td>
+                    <td><input type="checkbox" name="permission[bed][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bed][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bed][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bed][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bed][list]" value="1"></td>
+                </tr>
+                {{-- bed start --}}
+
+                {{-- bed assing start --}}
+                <tr>
+                    <td>Bed</td>
+                    <td><input type="checkbox" name="permission[bedAssign][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bedAssign][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bedAssign][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bedAssign][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bedAssign][list]" value="1"></td>
+                </tr>
+                {{-- bed assing start --}}
+
+
+                {{-- food category start --}}
+                <tr>
+                    <td>Food Category</td>
+                    <td><input type="checkbox" name="permission[foodCategory][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[foodCategory][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[foodCategory][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[foodCategory][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[foodCategory][list]" value="1"></td>
+                </tr>
+                {{-- food category end --}}
+                {{-- food sub category start  --}}
                 <tr>
                     <td>Sub-Category</td>
                     <td><input type="checkbox" name="permission[subcategory][add]" value="1"></td>
@@ -82,6 +132,9 @@
                     <td><input type="checkbox" name="permission[subcategory][delete]" value="1"></td>
                     <td><input type="checkbox" name="permission[subcategory][list]" value="1"></td>
                 </tr>
+                {{-- food sub category end  --}}
+
+                {{-- product start  --}}
                 <tr>
                     <td>Product</td>
                     <td><input type="checkbox" name="permission[product][add]" value="1"></td>
@@ -90,6 +143,9 @@
                     <td><input type="checkbox" name="permission[product][delete]" value="1"></td>
                     <td><input type="checkbox" name="permission[product][list]" value="1"></td>
                 </tr>
+                {{-- product end  --}}
+
+                {{-- pos start  --}}
                 <tr>
                     <td>POS</td>
                     <td><input type="checkbox" name="permission[pos][add]" value="1"></td>
@@ -98,6 +154,30 @@
                     <td><input type="checkbox" name="permission[pos][delete]" value="1"></td>
                     <td><input type="checkbox" name="permission[pos][list]" value="1"></td>
                 </tr>
+                {{-- pos end  --}}
+
+                 {{-- pos start  --}}
+                 <tr>
+                    <td>Order</td>
+                    <td><input type="checkbox" name="permission[order][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[order][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[order][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[order][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[order][list]" value="1"></td>
+                </tr>
+                {{-- pos end  --}}
+
+                {{-- pos start  --}}
+                <tr>
+                    <td>Bill</td>
+                    <td><input type="checkbox" name="permission[bill][add]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bill][edit]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bill][view]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bill][delete]" value="1"></td>
+                    <td><input type="checkbox" name="permission[bill][list]" value="1"></td>
+                </tr>
+                {{-- pos end  --}}
+
                 </tbody>
             </table>
         </div>

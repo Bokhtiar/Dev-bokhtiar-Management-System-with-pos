@@ -7,7 +7,7 @@ trait RoleNetwork
 {
     /**list of resource*/
     public function RoleList(){
-        return Role::latest()->get(['role_id','name','status']);
+        return Role::latest()->get(['id','name','status']);
     }
 
     /**store resource database field*/

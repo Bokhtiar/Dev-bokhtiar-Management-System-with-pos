@@ -16,7 +16,7 @@
                     @component('components.table.table',[
                         'title'=> 'List of Role',
                         'data' => $roles,
-                        'id' => 'role_id',
+                        'id' => 'id',
                         'route' => 'role',
                         'thead1' => 'Name',
                         'tdata1' => 'name',
