@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,8 @@ class UserController extends Controller
     public function create()
     {
         try {
-            return view('modules.user.createOrUpdate');
+            $roles = Role::all();
+            return view('modules.user.createOrUpdate', compact('roles'));
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -61,15 +61,14 @@
                 <input type="file" placeholder="profile image" name="profile_image" value=""
                     class="form-control" id="inputNanme4">
             </div>
-
+ 
             <div class="col-3 my-2">
                 <label for="inputNanme4" class="form-label">Select Role<span class="text-darnger">*</span></label>
                 <select name="role_id" class="form-control" id="">
                     <option value="">--select user role--</option>
-                    <option value="1">Super Admin</option>
-                    <option value="2">Admin</option>
-                    <option value="3">Accountent</option>
-                    <option value="4">User</option>
+                    @foreach ($roles as $r)
+                        <option value="{{ $r->role_id }}">{{ $r->name }}</option>
+                    @endforeach
                 </select>
             </div>
 
