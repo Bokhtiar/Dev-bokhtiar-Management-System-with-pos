@@ -34,6 +34,7 @@
         </li><!-- End user Nav -->
 
         <!--start bed manager -->
+         @isset(auth()->user()->role->permission['permission']['category']['list'])
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#Bed-manager-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>Bed Manager</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -82,60 +83,63 @@
 
             </ul>
         </li>
+        @endisset
         <!-- End Bed-manager Nav -->
 
 
         <!--food meal system -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#food-meal-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Food Meal</span><i
-                    class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="food-meal-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                @isset(auth()->user()->role->permission['permission']['foodCategory']['list'])
-                <li>
-                    <a href="@route('food-category.index')">
-                        <i class="bi bi-circle"></i><span>Food Category</span>
-                    </a>
-                </li>
-                @endisset
-                @isset(auth()->user()->role->permission['permission']['foodSubCategory']['list'])
-                <li>
-                    <a href="@route('food-sub-category.index')">
-                        <i class="bi bi-circle"></i><span>Food Sub Category</span>
-                    </a>
-                </li>
-                @endisset
-                @isset(auth()->user()->role->permission['permission']['product']['list'])
-                <li>
-                    <a href="@route('product.index')">
-                        <i class="bi bi-circle"></i><span>Product</span>
-                    </a>
-                </li>
-                @endisset
-                @isset(auth()->user()->role->permission['permission']['product']['add'])
-                <li>
-                    <a href="@route('product.create')">
-                        <i class="bi bi-circle"></i><span>Product Create</span>
-                    </a>
-                </li>
-                @endisset
-                @isset(auth()->user()->role->permission['permission']['pos']['list'])
-                <li>
-                    <a href="@route('pos.create')">
-                        <i class="bi bi-circle"></i><span>POS</span>
-                    </a>
-                </li>
-                @endisset
-                @isset(auth()->user()->role->permission['permission']['order']['list'])
-                <li>
-                    <a href="@route('order.index')">
-                        <i class="bi bi-circle"></i><span>Order</span>
-                    </a>
-                </li>
-                @endisset
-            </ul>
-        </li>
+          @isset(auth()->user()->role->permission['permission']['foodCategory']['list'])
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#food-meal-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Food Meal</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="food-meal-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    @isset(auth()->user()->role->permission['permission']['foodCategory']['list'])
+                    <li>
+                        <a href="@route('food-category.index')">
+                            <i class="bi bi-circle"></i><span>Food Category</span>
+                        </a>
+                    </li>
+                    @endisset
+                    @isset(auth()->user()->role->permission['permission']['foodSubCategory']['list'])
+                    <li>
+                        <a href="@route('food-sub-category.index')">
+                            <i class="bi bi-circle"></i><span>Food Sub Category</span>
+                        </a>
+                    </li>
+                    @endisset
+                    @isset(auth()->user()->role->permission['permission']['product']['list'])
+                    <li>
+                        <a href="@route('product.index')">
+                            <i class="bi bi-circle"></i><span>Product</span>
+                        </a>
+                    </li>
+                    @endisset
+                    @isset(auth()->user()->role->permission['permission']['product']['add'])
+                    <li>
+                        <a href="@route('product.create')">
+                            <i class="bi bi-circle"></i><span>Product Create</span>
+                        </a>
+                    </li>
+                    @endisset
+                    @isset(auth()->user()->role->permission['permission']['pos']['list'])
+                    <li>
+                        <a href="@route('pos.create')">
+                            <i class="bi bi-circle"></i><span>POS</span>
+                        </a>
+                    </li>
+                    @endisset
+                    @isset(auth()->user()->role->permission['permission']['order']['list'])
+                    <li>
+                        <a href="@route('order.index')">
+                            <i class="bi bi-circle"></i><span>Order</span>
+                        </a>
+                    </li>
+                    @endisset
+                </ul>
+            </li>
+          @endisset
         <!-- End food-meal Nav -->
 
         @isset(auth()->user()->role->permission['permission']['bill']['list'])
