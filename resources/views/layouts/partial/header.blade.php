@@ -1,7 +1,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{url('/')}}" class="logo d-flex align-items-center">
+        <a href="{{ url('/') }}" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">Hall</span>
         </a>
@@ -13,13 +13,16 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">
+                        <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-male-avatar-simple-cartoon-design-png-image_1934458.jpg"
+                            alt="avatar" class="rounded-circle img-fluid">
+                    </span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{ Auth::user()->name }}</h6>
-                        <span>Super Admin</span>
+                        <span>{{Auth::user()->role->name}}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

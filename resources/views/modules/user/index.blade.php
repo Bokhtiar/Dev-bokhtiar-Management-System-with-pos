@@ -5,18 +5,67 @@
 
 @section('css')
 @endsection
+ 
+
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">User list</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
 
 
-<section class="section">
+@if (Auth::user()->role_id == 1)
+<!--room -->
+<section class="section dashboard">
     <div class="row">
         <div class="col-lg-12">
-
             <div class="card">
-
+                <div class="card-body">
+                    <x-notification></x-notification>
+                    <h5 class="card-title">Room has assing User Table</h5>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Room</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Bed</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($bedAssigns as $bed)
+                                <tr>
+                                    <td>{{ $bed->room ? $bed->room->room_name: "" }}</td>
+                                    <td>{{ $bed->user ? $bed->user->name : "" }}</td>
+                                    <td>{{ $bed->category ? $bed->category->category_name : "" }}</td>
+                                    <td>{{ $bed->bed ? $bed->bed->bed_name : "" }}</td>
+                                </tr>
+                            @empty
+                                <h2 class="bg-danger text-light text-center">User Is empty</h2>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--room end-->
+@else
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
                 <div class="card-body">
                     <x-notification></x-notification>
                     <h5 class="card-title">User Table</h5>
-
                     <!-- Table with stripped rows -->
                     <table class="table datatable">
                         <thead>
@@ -56,8 +105,6 @@
                                             <button class="btn btn-sm btn-danger" type="submit"> <i
                                                     class="ri-delete-bin-6-fill"></i></button>
                                         </form>
-
-
                                     </td>
                                 </tr>
                             @empty
@@ -66,13 +113,13 @@
                         </tbody>
                     </table>
                     <!-- End Table with stripped rows -->
-
                 </div>
             </div>
-
         </div>
     </div>
 </section>
+@endif
+
 
 
 

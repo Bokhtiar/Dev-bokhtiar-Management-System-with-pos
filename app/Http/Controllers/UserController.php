@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BedAssign;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class UserController extends Controller
     {
         try {
             $users = User::get(['id', 'name', 'email', 'phone', 'status']);
-            return view('modules.user.index', compact('users'));
+            $bedAssigns = BedAssign::orderBy('room_id', 'desc')->get();
+            return view('modules.user.index', compact('users', 'bedAssigns'));
         } catch (\Throwable $th) {
             throw $th;
         }

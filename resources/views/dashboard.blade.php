@@ -183,9 +183,7 @@
                                     <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
                                         eius...</p>
                                 </div>
-
                             </div><!-- End sidebar recent posts-->
-
                         </div>
                     </div><!-- End News & Updates -->
                 </div>
