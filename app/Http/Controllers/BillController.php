@@ -23,7 +23,6 @@ class BillController extends Controller
         try {
             $bills = $this->BillList();
             $bedAssigns = $this->BedAssignActiveList();
-            
             return view('modules.bill.index', compact('bedAssigns', 'bills'));
         } catch (\Throwable $th) {
             throw $th;

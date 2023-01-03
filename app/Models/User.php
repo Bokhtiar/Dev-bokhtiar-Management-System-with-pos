@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -63,6 +64,6 @@ class User extends Authenticatable
     ];
 
     public function role(){
-        return $this->belongsTo(role::class);
+        return $this->belongsTo(Role::class);
     }
 }

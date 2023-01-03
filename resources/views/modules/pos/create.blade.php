@@ -91,8 +91,7 @@
                                     <span>{{ $total_amount }}৳</span>
                                 </div>
                             </div>
-                        </div>
-
+                        </div> 
                         <form method="POST" action="@route('order.store')">
                             @csrf
                         {{-- use list show  --}}

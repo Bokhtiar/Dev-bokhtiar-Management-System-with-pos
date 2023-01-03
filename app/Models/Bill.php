@@ -14,6 +14,7 @@ class Bill extends Model
     protected $primaryKey = 'bill_id';
 
     protected $fillable = [
+        'user_id',
         'bed_assign_id',
         'month',
         'bill_body',

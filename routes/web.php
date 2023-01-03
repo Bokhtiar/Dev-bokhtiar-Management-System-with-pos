@@ -17,6 +17,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitorController;
+use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +35,15 @@ use Whoops\Run;
 */
 
 Route::get('/', function () {
-    $users = User::where('role_id', 4)->get();
-    return view('dashboard', compact('users'));
+    if(Auth::user()->role_id == 1){
+        $user = Auth::user();
+        $bills = Bill::where('user_id', $user->id)->get();
+        return view('dashboard', compact('user',"bills"));
+    }else{
+        $users = User::where('role_id', 1)->get();
+        return view('dashboard', compact('users'));
+    }
+    
 })->middleware('auth');
 
 Auth::routes();

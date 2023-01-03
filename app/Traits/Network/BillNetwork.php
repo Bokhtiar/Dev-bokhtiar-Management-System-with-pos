@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits\Network;
 
+use App\Models\BedAssign;
 use App\Models\Bill;
 
 trait BillNetwork
@@ -14,7 +15,9 @@ trait BillNetwork
     /**store resource database field*/
     public function ResourceStoreBill($request, $product = null)
     {
+        $bed_assign_id = BedAssign::find($request->bed_assign_id);
         return $a = array(
+            'user_id' => $bed_assign_id->user_id,
             'bed_assign_id' => $request->bed_assign_id,
             'month' => $request->month,
             'bill_body' => $request->bill_body,

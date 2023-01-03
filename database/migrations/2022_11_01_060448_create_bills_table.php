@@ -15,6 +15,7 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id('bill_id');
+            $table->integer('user_id')->require();
             $table->string('bed_assign_id')->require();
             $table->string('month')->require();
             $table->longText('bill_body');

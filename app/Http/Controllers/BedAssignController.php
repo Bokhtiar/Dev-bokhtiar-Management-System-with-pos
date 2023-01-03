@@ -43,7 +43,7 @@ class BedAssignController extends Controller
             $beds = $this->BedActiveList();
             $rooms = $this->RoomActiveList();
             $categories = $this->CategoryActiveList();
-            $users = User::query()->Active()->where('role_id', 4)->get(['id', 'name']);
+            $users = User::query()->Active()->where('role_id', 1)->get(['id', 'name']);
             return view('modules.bedAssign.createOrUpdate', compact('beds', 'rooms', 'categories', 'users'));
         } catch (\Throwable $th) {
             throw $th;
