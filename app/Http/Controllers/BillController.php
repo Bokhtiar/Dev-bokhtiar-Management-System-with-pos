@@ -27,7 +27,7 @@ class BillController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.

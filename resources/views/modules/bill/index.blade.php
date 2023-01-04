@@ -10,7 +10,7 @@
     <div class="col-md-8 col-lg-8 col-sm-12">
         <section class="section">
             <div class="row">
-                <div class="col-lg-12"> 
+                <div class="col-lg-12">
                     <div class="pagetitle">
                         <h1>Dashboard</h1>
                         <nav>
@@ -47,7 +47,9 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
+                                                <th scope="col">Date</th>
                                                 <th scope="col">Month</th>
+                                                <th scope="col">Year</th>
                                                 <th scope="col">User</th>
                                                 <th scope="col">Category</th>
                                                 {{-- <th scope="col">Room</th>
@@ -60,7 +62,9 @@
                                             @forelse ($bills as $item)
                                                 <tr>
                                                     <th scope="row">{{ $loop->index + 1 }}</th>
+                                                    <th scope="row">{{ $item->day }}</th>
                                                     <th scope="row">{{ $item->month }}</th>
+                                                    <th scope="row">{{ $item->year }}</th>
                                                     <td> {{ $item->bedAssign ? $item->bedAssign->user->name : '' }}</td>
                                                     <td>{{ $item->bedAssign ? $item->bedAssign->category->category_name : '' }}
                                                     </td>
@@ -116,36 +120,47 @@
                 @endif
                 @csrf
 
-                {{-- Select category --}} 
+                {{-- Select category --}}
                 <div class="form-group">
                     <label for="">Select User</label>
                     <select name="bed_assign_id" id="" class="form-control">
                         @foreach ($bedAssigns as $item)
                             <option value="{{ $item->bed_assign_id }}"
                                 {{ $item->bed_assign_id == @$edit->bed_assign_id }}>
-                                {{ $item->bed ? $item->bed->price : "" }}</option>
+                                {{ $item->user ? $item->user->name : '' }}</option>
                         @endforeach
-                    </select> 
-                </div>
-
-                <div class="form-group">
-                    <label for="">Select Month</label>
-                    <select name="month" id="" class="form-control">
-                        <option name="January" value="Jan">January</option>
-                        <option name="February" value="Feb">February</option>
-                        <option name="March" value="Mar">March</option>
-                        <option name="April" value="Apr">April</option>
-                        <option name="May" value="May">May</option>
-                        <option name="June" value="Jun">June</option>
-                        <option name="July" value="Jul">July</option>
-                        <option name="August" value="Aug">August</option>
-                        <option name="September" value="Sep">September</option>
-                        <option name="October" value="Oct">October</option>
-                        <option name="November" value="Nov">November</option>
-                        <option name="December" value="Dec">December</option>
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <select name="day" required class="form-control">
+                        @foreach (range(1, 31) as $day)
+                            <option value="{{ strlen($day) == 1 ? '0' . $day : $day }}">
+                                {{ strlen($day) == 1 ? '0' . $day : $day }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select name="month" class="form-control">
+                        @foreach (range(1, 12) as $month)
+                            <option value="{{ $month }}">
+                                {{ date('M', strtotime('2016-' . $month)) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select name="year" required class="form-control">
+                        @for ($year = date('Y'); $year > date('Y') - 100; $year--)
+                            <option value="{{ $year }}">
+                                {{ $year }}
+                            </option>
+                        @endfor
+                    </select>
+                </div>
 
                 @component('components.form.textarea',
                     [
