@@ -85,6 +85,8 @@ Route::group(["middleware" => ['auth']], function () {
 
     /**pos */
     Route::get('pos', [PosController::class, 'create'])->name('pos.create');
+    Route::get('increment/{id}', [CartController::class, 'increment']);
+    Route::get('decrement/{id}', [CartController::class, 'decrement']);
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::get('cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::put('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');

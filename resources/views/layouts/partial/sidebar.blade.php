@@ -88,7 +88,7 @@
 
 
         <!--food meal system -->
-          @isset(auth()->user()->role->permission['permission']['foodCategory']['list'])
+          @isset(auth()->user()->role->permission['permission']['pos']['list'])
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#food-meal-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Food Meal</span><i

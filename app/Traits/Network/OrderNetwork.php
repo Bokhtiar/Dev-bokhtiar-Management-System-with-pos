@@ -17,15 +17,18 @@ trait OrderNetwork
     public function OrderStore($request)
     {
         $order = new Order();
-        $order->user_id = $request->user_id;
-        $order->payment = $request->payment;
+        $order->user_id = Auth::user()->id;
+        $order->time = $request->time;
         $order->total_amount = $request->total_amount;
         $order->created_by = Auth::id();
         $order->save();
 
+
+
         foreach (Cart::item_cart() as $cart) {
             $cart->order_id = $order->order_id;
             $cart->save();
+            
         }
     }
 

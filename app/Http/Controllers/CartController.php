@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,7 @@ class CartController extends Controller
     {
         //
     }
-
+ 
     /**
      * Store a newly created resource in storage.
      *
@@ -40,12 +41,26 @@ class CartController extends Controller
             $update = cart::where('product_id',$id)->where('order_id',null)->first();
             $update['quantity']=$update->quantity + 1;
             $update->save();
+
+
+            /* product dicrement */
+            $product = Product::find($id);
+            $product->quantity = $product->quantity - 1;
+            $product->save();
+
+
             return back()->with('success', 'Product quantity updated.');
         }else{
             cart::create([
                 'user_id'=> Auth::id(),
                 'product_id'=> $id,
             ]);
+
+            /* product dicrement */
+            $product = Product::find($id);
+            $product->quantity = $product->quantity - 1;
+            $product->save();
+            
             return redirect()->back()->with('success', 'Product Added.');
         }
 
@@ -80,13 +95,58 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update($id)
     {
         try {
             $cart = Cart::find($id);
-            $cart->quantity = $request->quantity;
+            $cart->quantity = $cart->quantity + 1;
             $cart->save();
+
+            /* product dicrement */
+            $product = Product::find($cart->product_id);
+            $product->quantity = $product->quantity - 1;
+            $product->save();
+
+
             return redirect()->back()->with('success', 'Cart updated');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+
+    public function increment($id){
+        try {
+            $cart = Cart::find($id);
+            $cart->quantity = $cart->quantity + 1;
+            $cart->save();
+
+            /* product dicrement */
+            $product = Product::find($cart->product_id);
+            $product->quantity = $product->quantity - 1;
+            $product->save();
+
+
+            return redirect()->back()->with('success', 'Cart quantity updated');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function decrement($id)
+    {
+        try {
+            $cart = Cart::find($id);
+            $cart->quantity = $cart->quantity - 1;
+            $cart->save();
+
+            /* product dicrement */
+            $product = Product::find($cart->product_id);
+            $product->quantity = $product->quantity + 1;
+            $product->save();
+
+
+            return redirect()->back()->with('success', 'Cart quantity updated');
         } catch (\Throwable $th) {
             throw $th;
         }

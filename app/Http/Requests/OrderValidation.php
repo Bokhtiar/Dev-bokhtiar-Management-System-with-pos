@@ -24,8 +24,7 @@ class OrderValidation extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => "required",
-            'payment' => "required",
+            'time' => "required",
             "total_amount" => "required"
         ];
     }
