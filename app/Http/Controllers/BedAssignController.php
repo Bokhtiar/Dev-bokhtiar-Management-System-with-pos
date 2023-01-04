@@ -25,6 +25,7 @@ class BedAssignController extends Controller
     {
         try {
             $bedAssigns = $this->BedAssignList();
+     
             return view('modules.bedAssign.index', compact('bedAssigns'));
         } catch (\Throwable $th) {
             throw $th;
@@ -59,8 +60,36 @@ class BedAssignController extends Controller
     public function store(BedAssignValidationRequest $request)
     {
         try {
-            DB::beginTransaction();
-            $bedAssign = $this->BedAssignStore($request);
+
+            $bed = BedAssign::where('user_id', $request->user_id)->first();
+            if($bed){
+                return redirect()->route('bed-assign.index')->with('success', 'Already Bed Assign ');
+            }else{
+
+               // dd($request->all());
+
+                $room_id = $request->room_id;
+                $room = Room::find($room_id);
+                $category = $room->category->category_name;
+
+                /* check available seat */
+                if ($category == "Single seat") {
+                    $bed = BedAssign::where('room_id', $request->room_id)->where('bed_id', $request->bed_id)->get();
+                    if (count($bed) == 2) {
+                        return redirect()->route('bed-assign.index')->with('warning', 'Single already has assign 2 student!');
+                    }
+                    $bedAssign = $this->BedAssignStore($request);
+                } else {
+                    if (BedAssign::where('room_id', $request->room_id)->where('bed_id', $request->bed_id)->first()) {
+                        return redirect()->route('bed-assign.index')->with('warning', 'Full room already has assign!');
+                    }
+                    $bedAssign = $this->BedAssignStore($request);
+                }
+
+
+                
+            }
+            
             if (!empty($bedAssign)) {
                 DB::commit();
                 return redirect()->route('bed-assign.index')->with('success', 'Bed Assign Created successfully!');
@@ -101,7 +130,7 @@ class BedAssignController extends Controller
             $beds = $this->BedActiveList();
             $rooms = $this->RoomActiveList();
             $categories = $this->CategoryActiveList();
-            $users = User::query()->Active()->where('role_id', 4)->get(['id', 'name']);
+            $users = User::query()->Active()->where('role_id', 1)->get(['id', 'name']);
             return view('modules.bedAssign.createOrUpdate', compact('beds', 'rooms', 'categories', 'users', 'edit'));
         } catch (\Throwable $th) {
             throw $th;

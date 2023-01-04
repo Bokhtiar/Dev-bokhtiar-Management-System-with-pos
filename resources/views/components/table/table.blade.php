@@ -40,19 +40,19 @@
                     @endisset
                    
                     @isset($reletion1)
-                    <th scope="col">{{ @$reletion1 ? $item->$reletion1->$reletion1Field_name : '' }}</th>
+                    <th scope="col">{{ @$reletion1 ? $item->$reletion1 ? $item->$reletion1->$reletion1Field_name: "data not found" : '' }}</th>
                     @endisset
                    
                     @isset($reletion2)
-                    <th scope="col">{{ @$reletion2 ? $item->$reletion2->$reletion2Field_name : '' }}</th>
+                    <th scope="col">{{ @$reletion2 ? $item->$reletion2 ? $item->$reletion2->$reletion2Field_name : 'data not found' : '' }}</th>
                     @endisset
                    
                     @isset($reletion3)
-                    <th scope="col">{{ @$reletion3 ? $item->$reletion3->$reletion3Field_name : '' }}</th>
+                    <th scope="col">{{ @$reletion3 ? $item->$reletion3 ?$item->$reletion3->$reletion3Field_name : 'data not found' : '' }}</th>
                     @endisset
                    
                     @isset($reletion4)
-                    <th scope="col">{{ @$reletion4 ? $item->$reletion4->$reletion4Field_name : '' }}</th>
+                    <th scope="col">{{ @$reletion4 ? $item->$reletion4 ? $item->$reletion4->$reletion4Field_name :'data not found'  : '' }}</th>
                     @endisset
                     
                     @isset($tdata1)
