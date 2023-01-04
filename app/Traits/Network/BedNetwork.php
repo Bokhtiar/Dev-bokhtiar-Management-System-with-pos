@@ -18,9 +18,10 @@ trait BedNetwork
     /**store resource */
     public function BedStore($request){
         return Bed::create([
-            'bed_name' => $request->bed_name,
             'room_id' => $request->room_id,
+            'bed_name' => $request->bed_name,
             'bed_body' => $request->bed_body,
+            'bed_charge' => $request->bed_charge,
         ]);
     }
 
@@ -33,9 +34,10 @@ trait BedNetwork
     public function BedUpdate($request, $bed_id){
         $bed = Bed::find($bed_id);
         return $bed->update([
-            'bed_name' => $request->bed_name,
             'room_id' => $request->room_id,
+            'bed_name' => $request->bed_name,
             'bed_body' => $request->bed_body,
+            'bed_charge' => $request->bed_charge,
         ]);
     }
     

@@ -15,8 +15,9 @@ class CreateBedsTable extends Migration
     {
         Schema::create('beds', function (Blueprint $table) {
             $table->id('bed_id');
-            $table->string('bed_name')->require()->unique();
             $table->integer('room_id')->require();
+            $table->string('bed_name')->require()->unique();
+            $table->integer('bed_charge')->require();
             $table->longText('bed_body')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

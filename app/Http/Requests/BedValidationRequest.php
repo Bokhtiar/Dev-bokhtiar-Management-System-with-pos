@@ -24,8 +24,9 @@ class BedValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'bed_name' => 'string | required',
             'room_id' => 'required',
+            'bed_name' => 'string | required',
+            'bed_charge' => "required"
         ];
     }
 
@@ -33,8 +34,9 @@ class BedValidationRequest extends FormRequest
     public function messages()
     {
         return [
+            'room_id.required' => 'Select room is required',
             'bed_name.required' => 'Bed name is required',
-            'room_id.required' => 'Select Room is required',
+            'bed_charge.required' => 'Select bed charge is required',
         ];
     }
 }

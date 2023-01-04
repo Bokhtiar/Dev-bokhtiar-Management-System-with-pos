@@ -67,14 +67,6 @@
                             ])
                         @endcomponent
 
-                        {{-- room charge --}}
-                        @component('components.form.input', [
-                            'name' => 'room_charge',
-                            'label' => 'Room Charge',
-                            'placeholder' => 'Room charge',
-                            'value' => @$edit ? @$edit->room_charge : '',
-                        ])@endcomponent
-
                         {{-- room body --}}
                         @component('components.form.textarea', [
                             'name' => 'room_body',

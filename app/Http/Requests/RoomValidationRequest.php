@@ -25,7 +25,6 @@ class RoomValidationRequest extends FormRequest
     {
         return [
             'room_name' => 'string | required | min:3',
-            'room_charge' => 'required',
             'category_id' => 'required',
         ];
     }

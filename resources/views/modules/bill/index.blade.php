@@ -10,7 +10,7 @@
     <div class="col-md-8 col-lg-8 col-sm-12">
         <section class="section">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12"> 
                     <div class="pagetitle">
                         <h1>Dashboard</h1>
                         <nav>
@@ -123,7 +123,7 @@
                         @foreach ($bedAssigns as $item)
                             <option value="{{ $item->bed_assign_id }}"
                                 {{ $item->bed_assign_id == @$edit->bed_assign_id }}>
-                                {{ $item->user ? $item->user->name : 'no data' }}</option>
+                                {{ $item->bed ? $item->bed->price : "" }}</option>
                         @endforeach
                     </select> 
                 </div>

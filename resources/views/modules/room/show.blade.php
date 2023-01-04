@@ -24,7 +24,6 @@
     </div>
     <div class="card-body">
         <span><strong>Room Name:</strong> {!! $show->room_name !!} </span> <br>
-        <span><strong>Room Charge:</strong> {!! $show->room_charge !!} </span> <br>
         <span><strong>Category Name:</strong> {!! $show->category ? $show->category->category_name : "" !!} </span> <br>
         @isset($show->room_body)
             <span> <strong>Room Description:</strong> {!! $show->room_body !!} </span> <br>

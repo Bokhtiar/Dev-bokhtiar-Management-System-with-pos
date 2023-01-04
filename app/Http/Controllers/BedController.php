@@ -31,7 +31,25 @@ class BedController extends Controller
     {
         try {
             DB::beginTransaction();
-            $bed = $this->BedStore($request);
+
+            $room_id = $request->room_id;
+            $room = Room::find($room_id);
+            $category = $room->category->category_name;
+
+            /* check available seat */
+            if ($category == "Single seat") {
+                $bed = Bed::where('room_id', $request->room_id)->get();
+                if (count($bed) == 2) {
+                    return redirect()->route('bed.index')->with('warning', 'Single already has assign 2 student!');
+                }
+                $bed = $this->BedStore($request);
+            } else {
+                if (Bed::where('room_id', $request->room_id)->first()) {
+                    return redirect()->route('bed.index')->with('warning', 'Full room already has assign!');
+                }
+                $bed = $this->BedStore($request);
+            }
+            
             if (!empty($bed)) {
                 DB::commit();
                 return redirect()->route('bed.index')->with('success', 'Bed Created successfully!');
@@ -41,7 +59,7 @@ class BedController extends Controller
             DB::rollBack();
             return back()->with('error', "Something went wrong");
         }
-        
+
     }
 
     /**bed details  */
@@ -85,7 +103,7 @@ class BedController extends Controller
             DB::rollBack();
             return back()->with('error', "Something went wrong");
         }
-        
+
     }
 
     /**bed delete */

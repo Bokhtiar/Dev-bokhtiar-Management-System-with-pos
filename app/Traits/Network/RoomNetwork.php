@@ -10,13 +10,13 @@ trait RoomNetwork
     /**list of Room*/
     public function RoomList()
     {
-        return Room::get(['room_id', 'room_name', 'room_charge', 'category_id', 'status']);
+        return Room::get(['room_id', 'room_name', 'category_id', 'status']);
     }
 
     /**Active room list */
     public function RoomActiveList()
     {
-        return Room::query()->Active()->get(['room_id', 'room_name']);
+        return Room::query()->Active()->get(['room_id', 'room_name', 'category_id']);
     }
 
     /**store resource */
@@ -24,7 +24,6 @@ trait RoomNetwork
     {
         return Room::create([
             'room_name' => $request->room_name,
-            'room_charge' => $request->room_charge,
             'category_id' => $request->category_id,
             'room_body' => $request->room_body,
         ]);
@@ -42,7 +41,6 @@ trait RoomNetwork
         $update = Room::find($room_id);
         return  $update->update([
                     'room_name' => $request->room_name,
-                    'room_charge' => $request->room_charge,
                     'category_id' => $request->category_id,
                     'room_body' => $request->room_body,
                 ]);

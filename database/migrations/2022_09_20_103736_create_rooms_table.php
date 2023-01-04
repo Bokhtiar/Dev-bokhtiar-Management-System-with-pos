@@ -17,7 +17,6 @@ class CreateRoomsTable extends Migration
             $table->id('room_id');
             $table->string('room_name')->require();
             $table->integer('category_id')->require();
-            $table->integer('room_charge')->require();
             $table->longText('room_body')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

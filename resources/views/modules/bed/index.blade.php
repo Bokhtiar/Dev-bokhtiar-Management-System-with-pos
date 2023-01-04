@@ -25,6 +25,9 @@
 
                         'thead3' => 'Bed Name',
                         'tdata3' => 'bed_name',
+
+                        'thead4' => 'Bed Charge',
+                        'tdata4' => 'bed_charge',
                         
                     ])
                     @endcomponent
@@ -46,13 +49,12 @@
                     <form class="row g-3" method="POST" action="@route('bed.store')">
                         @endif
                         @csrf
-
                         <div class="col-12">
                             <label for="inputNanme4" class="form-label">Room Select</label>
                             <select name="room_id" class="form-control" id="">
                                 <option value="">--select room--</option>
                                 @foreach ($rooms as $room)
-                                <option value="{{ $room->room_id }}" {{ $room->room_id == @$edit->room_id ? 'selected' : '' }}>{{ $room->room_name }}
+                                <option value="{{ $room->room_id }}" {{ $room->room_id == @$edit->room_id ? 'selected' : '' }}>{{ $room->room_name .' '. $room->category->category_name  }}
                                 </option>
                                 @endforeach
                             </select>
@@ -64,6 +66,12 @@
                             <label for="inputNanme4" class="form-label">Bed Name</label>
                             <input required type="text" placeholder="bed name" name="bed_name" value="{{ @$edit->bed_name }}" class="form-control" id="inputNanme4">
                             @error('bed_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="col-12">
+                            <label for="inputNanme4" class="form-label">Bed Charge</label>
+                            <input required type="number" placeholder="bed charge" name="bed_charge" value="{{ @$edit->bed_charge }}" class="form-control" id="inputNanme4">
+                            @error('bed_charge') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="col-12">
