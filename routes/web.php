@@ -69,6 +69,7 @@ Route::group(["middleware" => ['auth']], function () {
 
     /**bed assign */
     Route::resource('bed-assign', BedAssignController::class);
+    Route::get('bed-assing/user/info/{bed_id}', [BedAssignController::class, 'bed_assing_user_inof']);
     Route::get('bed-assign/status/{bed_assign_id}', [BedAssignController::class, 'status'])->name('bed-assign.status');
 
     /** food category */

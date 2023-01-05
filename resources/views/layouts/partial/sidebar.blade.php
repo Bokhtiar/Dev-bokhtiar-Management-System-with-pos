@@ -155,13 +155,6 @@
                     </a>
                 </li>
                 @endisset
-                @isset(auth()->user()->role->permission['permission']['bill']['add'])
-                <li>
-                    <a href="@route('bill.create')">
-                        <i class="bi bi-circle"></i><span>Create of Bill</span>
-                    </a>
-                </li>
-                @endisset
             </ul>
         </li><!-- End user Nav -->
         @endisset

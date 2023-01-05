@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <textarea
         rows="4" 
-        cols="10"
+        cols="10" 
         id="{{ $name }}" 
         name="{{ $name }}" 
         class="form-control"

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BedValidationRequest;
 use App\Models\Bed;
+use App\Models\BedAssign;
 use App\Models\Room;
 use App\Traits\Network\BedNetwork;
 use App\Traits\Network\RoomNetwork;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -128,4 +130,6 @@ class BedController extends Controller
             throw $th;
         }
     }
+
+    
 }

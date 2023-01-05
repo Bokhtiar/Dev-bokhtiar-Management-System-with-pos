@@ -47,10 +47,10 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
+                                                <th scope="col">User</th>
                                                 <th scope="col">Date</th>
                                                 <th scope="col">Month</th>
                                                 <th scope="col">Year</th>
-                                                <th scope="col">User</th>
                                                 <th scope="col">Category</th>
                                                 {{-- <th scope="col">Room</th>
                                         <th scope="col">Bed</th> --}}
@@ -62,10 +62,10 @@
                                             @forelse ($bills as $item)
                                                 <tr>
                                                     <th scope="row">{{ $loop->index + 1 }}</th>
+                                                    <td> {{ $item->bedAssign ? $item->bedAssign->user->name : '' }}</td>
                                                     <th scope="row">{{ $item->day }}</th>
                                                     <th scope="row">{{ $item->month }}</th>
                                                     <th scope="row">{{ $item->year }}</th>
-                                                    <td> {{ $item->bedAssign ? $item->bedAssign->user->name : '' }}</td>
                                                     <td>{{ $item->bedAssign ? $item->bedAssign->category->category_name : '' }}
                                                     </td>
                                                     {{-- <td>{{$item->bedAssign ? $item->bedAssign->room->room_name : ""}}</td>
@@ -123,7 +123,7 @@
                 {{-- Select category --}}
                 <div class="form-group">
                     <label for="">Select User</label>
-                    <select name="bed_assign_id" id="" class="form-control">
+                    <select id="user_id" name="bed_assign_id" id="" class="form-control">
                         @foreach ($bedAssigns as $item)
                             <option value="{{ $item->bed_assign_id }}"
                                 {{ $item->bed_assign_id == @$edit->bed_assign_id }}>
@@ -131,6 +131,8 @@
                         @endforeach
                     </select>
                 </div>
+
+                 <div class="card text-center" id="user_info"></div>
 
                 <div class="form-group">
                     <select name="day" required class="form-control">
@@ -149,7 +151,7 @@
                                 {{ date('M', strtotime('2016-' . $month)) }}
                             </option>
                         @endforeach
-                    </select>
+                    </select> 
                 </div>
 
                 <div class="form-group">
@@ -181,7 +183,40 @@
         </div>
     </div>
 </div>
-
+ 
 @section('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });//end of ajax heaer setup
+
+       
+        $(document).ready(function() {
+            $('#user_id').on('change', function(e){
+            var id = e.target.value
+            if(id){
+                $.ajax({
+                    url : '/bed-assing/user/info/'+id,
+                    dataType : 'Json',
+                    type : 'GET',
+                    success:function(data){
+                        console.log(data);
+                        $('#user_info').append('<p>Name: '+data.user.name+'</p> <p>Phone: '+data.user.phone+'</p>  <p>Email: '+data.user.email+'</p> <p>Room name: '+data.room.room_name+'</p> <p>Bed name: '+data.bed.bed_name+'</p>   ')
+                    }//data return end
+                })//ajax end
+            }
+        });//customer end
+
+
+
+   
+
+    })//main document end
+
+    </script>
 @endsection
 @endsection

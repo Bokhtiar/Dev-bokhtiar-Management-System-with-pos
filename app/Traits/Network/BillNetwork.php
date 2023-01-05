@@ -16,6 +16,7 @@ trait BillNetwork
     public function ResourceStoreBill($request, $product = null)
     {
         $bed_assign_id = BedAssign::find($request->bed_assign_id);
+
         return $a = array(
             'user_id' => $bed_assign_id->user_id,
             'bed_assign_id' => $request->bed_assign_id,

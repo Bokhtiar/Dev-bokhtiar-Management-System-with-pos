@@ -184,4 +184,11 @@ class BedAssignController extends Controller
             throw $th;
         }
     }
+  
+    /** user information */
+    public function bed_assing_user_inof($id)
+    {
+        $user = BedAssign::with('user')->with('room')->with('bed')->find($id);
+        return response()->json($user, 200);
+    }
 }

@@ -20,7 +20,7 @@ class CreateBillsTable extends Migration
             $table->string('year')->require();
             $table->string('month')->require();
             $table->string('day')->require();
-            $table->longText('bill_body');
+            $table->longText('bill_body')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

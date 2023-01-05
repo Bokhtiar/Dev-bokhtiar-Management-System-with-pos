@@ -38,6 +38,14 @@ class BillController extends Controller
     public function store(BillValidation $request)
     {
         try {
+
+            
+            $bed_assign = BedAssign::find($request->bed_assign_id);
+            
+            $bills = Bill::where('user_id', $bed_assign->user_id)->where('month', $request->month)->where('year', $request->year)->first();
+            if($bills){
+                return redirect()->route('bill.index')->with('warning', 'This month bill already done');
+            }
             $this->BillStore($request);
             return redirect()->route('bill.index')->with('success', 'Bill Created Successsfully');
         } catch (\Throwable $th) {
@@ -125,3 +133,4 @@ class BillController extends Controller
         }
     }
 }
+ 
