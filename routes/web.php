@@ -17,6 +17,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitorController;
+use App\Models\Aleart;
+use App\Models\BedAssign;
 use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +40,8 @@ Route::get('/', function () {
     if(Auth::user()->role_id == 1){
         $user = Auth::user();
         $bills = Bill::where('user_id', $user->id)->get();
-        return view('dashboard', compact('user',"bills"));
+        $news = Aleart::all();
+        return view('dashboard', compact('user',"bills", "news"));
     }else{
         $users = User::where('role_id', 1)->get();
         return view('dashboard', compact('users'));

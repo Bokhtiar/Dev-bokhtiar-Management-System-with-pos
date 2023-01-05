@@ -20,8 +20,6 @@
 
 
 @if (Auth::user()->role_id == 1)
-
-
     <section class="section dashboard">
         <!-- profile show start -->
         <div class="row">
@@ -156,33 +154,16 @@
                             <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
 
                             <div class="news">
-                                <div class="post-item clearfix">
-                                    <img src="assets/img/news-2.jpg" alt="">
-                                    <h4><a href="#">Quidem autem et impedit</a></h4>
-                                    <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...
-                                    </p>
-                                </div>
-
-                                <div class="post-item clearfix">
-                                    <img src="assets/img/news-3.jpg" alt="">
-                                    <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                    <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...
-                                    </p>
-                                </div>
-
-                                <div class="post-item clearfix">
-                                    <img src="assets/img/news-4.jpg" alt="">
-                                    <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                                    <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...
-                                    </p>
-                                </div>
-
-                                <div class="post-item clearfix">
-                                    <img src="assets/img/news-5.jpg" alt="">
-                                    <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                                    <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
-                                        eius...</p>
-                                </div>
+                                @forelse ($news as $item)
+                                    <div class="post-item clearfix">
+                                        <img src="assets/img/news-2.jpg" alt="">
+                                        <h4><a href="#">{{$item->title}}</a></h4>
+                                        <p>{{$item->body}}
+                                        </p>
+                                    </div>
+                                @empty
+                                    <h2>news not available</h2>
+                                @endforelse
                             </div><!-- End sidebar recent posts-->
                         </div>
                     </div><!-- End News & Updates -->
