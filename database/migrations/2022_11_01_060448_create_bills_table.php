@@ -19,7 +19,6 @@ class CreateBillsTable extends Migration
             $table->string('bed_assign_id')->require();
             $table->string('year')->require();
             $table->string('month')->require();
-            $table->string('day')->require();
             $table->string('bill_charge')->require();
             $table->longText('bill_body')->nullable();
             $table->tinyInteger('status')->default(0);

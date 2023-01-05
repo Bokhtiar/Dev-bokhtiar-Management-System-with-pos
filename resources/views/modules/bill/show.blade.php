@@ -30,7 +30,9 @@
         @isset($show->bill_body)
             <span> <strong>Bill Description:</strong> {!! $show->bill_body !!} </span> <br>
         @endisset
+         @isset(auth()->user()->role->permission['permission']['bill']['list'])
         <a href="{{url('print', $show->bill_id)}}">print</a>
+        @endisset
     </div>
 </div>
 

@@ -32,12 +32,13 @@ class BedController extends Controller
     public function store(BedValidationRequest $request)
     {
         try {
+            
             DB::beginTransaction();
 
             $room_id = $request->room_id;
             $room = Room::find($room_id);
             $category = $room->category->category_name;
-
+            
             /* check available seat */
             if ($category == "Single seat") {
                 $bed = Bed::where('room_id', $request->room_id)->get();

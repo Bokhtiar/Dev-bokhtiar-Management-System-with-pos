@@ -90,9 +90,10 @@
         </table> --}}
         <div>
             <span class="">Name:</span> <span>{{$show->bedAssign ? $show->bedAssign->user->name : ""}}</span> <br>
-            <span class="">Email:</span> <span>{{$show->bedAssign ? $show->bedAssign->user->email : ""}}</span> <br>
-            <span class="">Phone:</span> <span>{{$show->bedAssign ? $show->bedAssign->user->phone : ""}}</span> <br>
-            <span class="">Bill submit:</span> <span>{{$show->day .'-'. $show->month .'-'. $show->year}}</span> 
+            <span class="">Room No:</span> <span>{{$show->bedAssign ? $show->bedAssign->room->room_name : ""}}</span> <br>
+            <span class="">Amount:</span> <span>{{$show->bill_charge}} Tk</span> <br>
+            <span class="">Month of:</span> <span>{{ $show->month .'-'. $show->year}}</span><br>
+            <span class="">Date:</span> <span>{{ $show->created_at }}</span> 
         </div>
         <p class="centered">Thanks for your purchase!
             <br>GrapTown.com

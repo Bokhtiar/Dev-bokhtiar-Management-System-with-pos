@@ -26,17 +26,31 @@ class SettingController extends Controller
     /**account update */
     public function account_update(Request $request)
     {
+
+
+        
         $user = User::find(Auth::id());
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'nick_name' => $request->nick_name,
             'phone' => $request->phone,
+            'email' => $request->email,
+            'dob' => $request->dob,
+            'father_name' => $request->father_name,
+            'father_contact_number' => $request->father_contact_number,
+            'mother_name' => $request->mother_name,
+            'mother_contact_number' => $request->mother_contact_number,
+            'local_guardian_name' => $request->local_guardian_name,
+            'local_guardian_number' => $request->local_guardian_number,
             'address' => $request->address,
+            'national_id' => $request->national_id,
+            'blood_group' => $request->blood_group,
+            'varsity_name' => $request->varsity_name,
+            'student_id' => $request->student_id,
+            'department' => $request->department,
+            'section' => $request->section,
+            'password' => Hash::make($request->password),
             'role_id' => Auth::user()->role_id,
-            'profile_image' => $request->profile_image,
-            'guardian_name' => $request->guardian_name,
-            'guardian_phone' => $request->guardian_phone,
         ]);
        return back();
     }

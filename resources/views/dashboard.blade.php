@@ -22,16 +22,15 @@
 @if (Auth::user()->role_id == 1)
     <section class="section dashboard">
         <!-- profile show start -->
-        <div class="row">
+        <div class="row"> 
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                             alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                         <h5 class="my-3">{{ $user->name }}</h5>
-                        <p class="text-muted mb-1">{{ $user->phone }}</p>
-                        <p class="text-muted mb-1">{{ $user->email }}</p>
-                        <p class="text-muted mb-4">{{ $user->address }}</p>
+                        <p class="text-muted mb-1">{{ @$bedAssing ? GrapTown- $bedAssing->room->room_name  : "not assing" }}</p>
+                        
                     </div>
                 </div>
             </div>
@@ -157,8 +156,8 @@
                                 @forelse ($news as $item)
                                     <div class="post-item clearfix">
                                         <img src="assets/img/news-2.jpg" alt="">
-                                        <h4><a href="#">{{$item->title}}</a></h4>
-                                        <p>{{$item->body}}
+                                        <h4><a href="#">{{ $item->title }}</a></h4>
+                                        <p>{{ $item->body }}
                                         </p>
                                     </div>
                                 @empty

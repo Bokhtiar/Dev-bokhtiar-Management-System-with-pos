@@ -31,6 +31,9 @@ class RoomController extends Controller
     {
         try {
             DB::beginTransaction();
+            if(Room::where('room_name', $request->room_name)->first()){
+                return redirect()->route('room.index')->with('warning', 'Room already exist!');
+            }
             $room = $this->RoomStore($request);
             if (!empty($room)) {
                 DB::commit();

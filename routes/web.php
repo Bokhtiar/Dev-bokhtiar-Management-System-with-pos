@@ -40,8 +40,9 @@ Route::get('/', function () {
     if(Auth::user()->role_id == 1){
         $user = Auth::user();
         $bills = Bill::where('user_id', $user->id)->get();
+        $bedAssing = BedAssign::where('user_id', Auth::user()->id)->first();
         $news = Aleart::all();
-        return view('dashboard', compact('user',"bills", "news"));
+        return view('dashboard', compact('user',"bills", "news", "bedAssing"));
     }else{
         $users = User::where('role_id', 1)->get();
         return view('dashboard', compact('users'));

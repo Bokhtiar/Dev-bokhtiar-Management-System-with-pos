@@ -48,7 +48,6 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">User</th>
-                                                <th scope="col">Date</th>
                                                 <th scope="col">Month</th>
                                                 <th scope="col">Year</th>
                                                 <th scope="col">Category</th>
@@ -63,7 +62,6 @@
                                                 <tr>
                                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                                     <td> {{ $item->bedAssign ? $item->bedAssign->user->name : '' }}</td>
-                                                    <th scope="row">{{ $item->day }}</th>
                                                     <th scope="row">{{ $item->month }}</th>
                                                     <th scope="row">{{ $item->year }}</th>
                                                     <td>{{ $item->bedAssign ? $item->bedAssign->category->category_name : '' }}
@@ -86,14 +84,16 @@
                                                             href="@route('bill.show', $item->bill_id)"> <i class="ri-eye-fill"></i></a>
                                                         <a class="btn btn-sm btn-primary" href="@route('bill.edit', $item->bill_id)"> <i
                                                                 class="ri-edit-box-fill"></i></a>
-                                                                <a href="{{url('print', $item->bill_id)}}" class="btn btn-sm btn-info text-white"><i class="bi bi-printer-fill"></i></a>
+                                                        <a href="{{ url('print', $item->bill_id) }}"
+                                                            class="btn btn-sm btn-info text-white"><i
+                                                                class="bi bi-printer-fill"></i></a>
                                                         <form method="POST" action="@route('bill.destroy', $item->bill_id)" class="mt-1">
                                                             @csrf
                                                             @method('Delete')
                                                             <button class="btn btn-sm btn-danger" type="submit"> <i
                                                                     class="ri-delete-bin-6-fill"></i></button>
                                                         </form>
-                                                        
+
                                                     </td>
                                                 </tr>
                                             @empty
@@ -126,6 +126,7 @@
                 <div class="form-group">
                     <label for="">Select User</label>
                     <select id="user_id" name="bed_assign_id" id="" class="form-control">
+                        <option value="">Select users</option>
                         @foreach ($bedAssigns as $item)
                             <option value="{{ $item->bed_assign_id }}"
                                 {{ $item->bed_assign_id == @$edit->bed_assign_id }}>
@@ -134,31 +135,31 @@
                     </select>
                 </div>
 
-                 <div class="card text-center" id="user_info"></div>
+                <div class="card text-center" id="user_info"></div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="bill_charge" placeholder="bill charge" required id="">
+                    <input type="text" class="form-control" name="bill_charge" placeholder="bill charge" value="{{@$edit->bill_charge}}" required
+                        id="">
                 </div>
 
-                <div class="form-group">
-                    <select name="day" required class="form-control">
-                        @foreach (range(1, 31) as $day)
-                            <option value="{{ strlen($day) == 1 ? '0' . $day : $day }}">
-                                {{ strlen($day) == 1 ? '0' . $day : $day }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
 
-                <div class="form-group">
-                    <select name="month" class="form-control">
-                        @foreach (range(1, 12) as $month)
-                            <option value="{{ $month }}">
-                                {{ date('M', strtotime('2016-' . $month)) }}
-                            </option>
-                        @endforeach
-                    </select> 
-                </div>
+               <div class="form-group">
+                 <select class="form-control" id='month' name="month">
+                    <option value=''>--Select Month--</option>
+                    <option selected value='Janaury'>Janaury</option>
+                    <option value='February'>February</option>
+                    <option value='March'>March</option>
+                    <option value='April'>April</option>
+                    <option value='May'>May</option>
+                    <option value='June'>June</option>
+                    <option value='July'>July</option>
+                    <option value='August'>August</option>
+                    <option value='September'>September</option>
+                    <option value='October'>October</option>
+                    <option value='November'>November</option>
+                    <option value='December'>December</option>
+                </select>
+               </div>
 
                 <div class="form-group">
                     <select name="year" required class="form-control">
@@ -189,7 +190,7 @@
         </div>
     </div>
 </div>
- 
+
 @section('js')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -198,31 +199,34 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        });//end of ajax heaer setup
+        }); //end of ajax heaer setup
 
-       
+
         $(document).ready(function() {
-            $('#user_id').on('change', function(e){
-            var id = e.target.value
-            if(id){
-                $.ajax({
-                    url : '/bed-assing/user/info/'+id,
-                    dataType : 'Json',
-                    type : 'GET',
-                    success:function(data){
-                        console.log(data);
-                        $('#user_info').append('<p>Name: '+data.user.name+'</p> <p>Phone: '+data.user.phone+'</p>  <p>Email: '+data.user.email+'</p> <p>Room name: '+data.room.room_name+'</p> <p>Bed name: '+data.bed.bed_name+'</p>   ')
-                    }//data return end
-                })//ajax end
-            }
-        });//customer end
+            $('#user_id').on('change', function(e) {
+                var id = e.target.value
+                if (id) {
+                    $.ajax({
+                        url: '/bed-assing/user/info/' + id,
+                        dataType: 'Json',
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(data);
+                            $('#user_info').append('<p>Name: ' + data.user.name +
+                                '</p> <p>Phone: ' + data.user.phone + '</p>  <p>Email: ' +
+                                data.user.email + '</p> <p>Room name: ' + data.room
+                                .room_name + '</p> <p>Bed name: ' + data.bed.bed_name +
+                                '</p>   ')
+                        } //data return end
+                    }) //ajax end
+                }
+            }); //customer end
 
 
 
-   
 
-    })//main document end
 
+        }) //main document end
     </script>
 @endsection
 @endsection
