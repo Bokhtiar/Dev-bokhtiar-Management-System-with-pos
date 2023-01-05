@@ -30,6 +30,7 @@
         @isset($show->bill_body)
             <span> <strong>Bill Description:</strong> {!! $show->bill_body !!} </span> <br>
         @endisset
+        <a href="{{url('print', $show->bill_id)}}">print</a>
     </div>
 </div>
 

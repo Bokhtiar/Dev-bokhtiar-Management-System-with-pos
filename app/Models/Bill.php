@@ -19,6 +19,7 @@ class Bill extends Model
         'month',
         'year',
         'day',
+        'bill_charge',
         'bill_body',
     ];
 

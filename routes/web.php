@@ -98,6 +98,7 @@ Route::group(["middleware" => ['auth']], function () {
     /**bill  */
     Route::resource('bill', BillController::class);
     Route::get('bill/status/{bill_id}', [BillController::class, 'status'])->name('bill.status');
+    Route::get('print/{show}', [BillController::class, 'print']);
 
     /* visitor  */
     Route::resource('visitor', VisitorController::class);

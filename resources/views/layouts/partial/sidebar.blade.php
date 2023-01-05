@@ -201,7 +201,7 @@
         </li><!-- End user Nav -->
         @endisset
         
-       
+       @isset(auth()->user()->role->permission['permission']['permission']['list'])
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#setting-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-journal-text"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -231,7 +231,7 @@
                 @endisset
             </ul>
         </li><!-- End user Nav -->
-
+        @endisset
 
 
         <li class="nav-item">

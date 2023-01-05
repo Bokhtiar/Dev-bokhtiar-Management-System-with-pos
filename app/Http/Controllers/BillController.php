@@ -132,5 +132,10 @@ class BillController extends Controller
             throw $th;
         }
     }
+
+    public function print($id){
+        $show = $this->BillFindById($id);
+        return view('modules.bill.print', compact('show'));
+    }
 }
  

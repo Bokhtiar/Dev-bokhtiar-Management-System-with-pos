@@ -23,6 +23,7 @@ trait BillNetwork
             'year' => $request->year,
             'month' => $request->month,
             'day' => $request->day,
+            'bill_charge' => $request->bill_charge,
             'bill_body' => $request->bill_body,
         );
 

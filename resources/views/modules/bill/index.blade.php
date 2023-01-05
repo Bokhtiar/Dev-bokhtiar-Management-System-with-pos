@@ -86,12 +86,14 @@
                                                             href="@route('bill.show', $item->bill_id)"> <i class="ri-eye-fill"></i></a>
                                                         <a class="btn btn-sm btn-primary" href="@route('bill.edit', $item->bill_id)"> <i
                                                                 class="ri-edit-box-fill"></i></a>
+                                                                <a href="{{url('print', $item->bill_id)}}" class="btn btn-sm btn-info text-white"><i class="bi bi-printer-fill"></i></a>
                                                         <form method="POST" action="@route('bill.destroy', $item->bill_id)" class="mt-1">
                                                             @csrf
                                                             @method('Delete')
                                                             <button class="btn btn-sm btn-danger" type="submit"> <i
                                                                     class="ri-delete-bin-6-fill"></i></button>
                                                         </form>
+                                                        
                                                     </td>
                                                 </tr>
                                             @empty
@@ -133,6 +135,10 @@
                 </div>
 
                  <div class="card text-center" id="user_info"></div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="bill_charge" placeholder="bill charge" required id="">
+                </div>
 
                 <div class="form-group">
                     <select name="day" required class="form-control">
