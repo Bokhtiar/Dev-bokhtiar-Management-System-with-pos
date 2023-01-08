@@ -34,8 +34,7 @@ class OrderController extends Controller
     public function store(OrderValidation $request )
     {   
         try {
-            $this->OrderStore($request);
-            return redirect()->back()->with('success', 'Order has been completed');
+           return $this->OrderStore($request);
         } catch (\Throwable $th) {
             throw $th;
         }

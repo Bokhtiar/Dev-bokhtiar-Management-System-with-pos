@@ -41,26 +41,12 @@ class CartController extends Controller
             $update = cart::where('product_id',$id)->where('order_id',null)->first();
             $update['quantity']=$update->quantity + 1;
             $update->save();
-
-
-            /* product dicrement */
-            $product = Product::find($id);
-            $product->quantity = $product->quantity - 1;
-            $product->save();
-
-
             return back()->with('success', 'Product quantity updated.');
         }else{
             cart::create([
                 'user_id'=> Auth::id(),
                 'product_id'=> $id,
             ]);
-
-            /* product dicrement */
-            $product = Product::find($id);
-            $product->quantity = $product->quantity - 1;
-            $product->save();
-            
             return redirect()->back()->with('success', 'Product Added.');
         }
 
@@ -121,30 +107,27 @@ class CartController extends Controller
             $cart->quantity = $cart->quantity + 1;
             $cart->save();
 
-            /* product dicrement */
-            $product = Product::find($cart->product_id);
-            $product->quantity = $product->quantity - 1;
-            $product->save();
+            /* product increment */
+            // $product = Product::find($cart->product_id);
+            // $product->quantity = $product->quantity - 1;
+            // $product->save();
 
 
             return redirect()->back()->with('success', 'Cart quantity updated');
         } catch (\Throwable $th) {
             throw $th;
-        }
+        } 
     }
 
     public function decrement($id)
     {
         try {
             $cart = Cart::find($id);
+            if($cart->quantity == 0) {
+                return redirect()->back()->with('warning', 'Cart quantity already 0');
+            }
             $cart->quantity = $cart->quantity - 1;
             $cart->save();
-
-            /* product dicrement */
-            $product = Product::find($cart->product_id);
-            $product->quantity = $product->quantity + 1;
-            $product->save();
-
 
             return redirect()->back()->with('success', 'Cart quantity updated');
         } catch (\Throwable $th) {

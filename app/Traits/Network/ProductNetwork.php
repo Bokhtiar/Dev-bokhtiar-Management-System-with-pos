@@ -14,7 +14,7 @@ trait ProductNetwork
 
     /**list of active resource */
     public function ProductActiveList(){
-        return Product::latest()->Active()->get(['product_id','name', 'quantity','image','price','food_category_id', 'food_sub_category_id', 'status']);
+        return Product::latest()->where('quantity','>', 0)->Active()->get(['product_id','name', 'quantity','image','price','food_category_id', 'food_sub_category_id', 'status']);
     }
 
     /**store resource database field*/

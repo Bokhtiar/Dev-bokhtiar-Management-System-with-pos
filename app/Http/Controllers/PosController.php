@@ -12,7 +12,7 @@ class PosController extends Controller
     use ProductNetwork;
     /**
      * post create
-     */
+     */ 
     public function create(){
         $carts = Cart::item_cart();
         $users = User::where('role_id', 1)->get();
