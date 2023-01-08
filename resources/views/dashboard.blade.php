@@ -24,12 +24,12 @@
         <!-- profile show start -->
         <div class="row"> 
             <div class="col-lg-4">
-                <div class="card mb-4">
+                <div class="card mb-4" style="height: 290px">
                     <div class="card-body text-center">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                             alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-                        <h5 class="my-3">{{ $user->name }}</h5>
-                        <p class="text-muted mb-1">{{ @$bedAssing ? "GrapTown".'-'. $bedAssing->room->room_name  : "not assing" }}</p>
+                        <h3 class="my-3 ">{{ $user->name }}</h3>
+                        <p class="text-muted mb-1 h5">{{ @$bedAssing ? "GrapTown".'-'. $bedAssing->room->room_name  : "not assing" }}</p>
                         
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                                 <p class="mb-0">Full Name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">Johnatan Smith</p>
+                                <p class="text-muted mb-0">{{$user->name }}</p>
                             </div>
                         </div>
                         <hr>
@@ -51,7 +51,7 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">example@example.com</p>
+                                <p class="text-muted mb-0">{{$user->email}}</p>
                             </div>
                         </div>
                         <hr>
@@ -60,25 +60,25 @@
                                 <p class="mb-0">Phone</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">(097) 234-5678</p>
+                                <p class="text-muted mb-0">{{$user->phone}}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Mobile</p>
+                                <p class="mb-0">University name</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">(098) 765-4321</p>
+                                <p class="text-muted mb-0">{{$user->varsity_name}}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <p class="mb-0">Address</p>
+                                <p class="mb-0">Student ID</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                <p class="text-muted mb-0">{{$user->student_id}}</p>
                             </div>
                         </div>
                     </div>
@@ -150,17 +150,21 @@
 
 
                         <div class="card-body pb-0">
-                            <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
+                            <h5 class="card-title">News &amp; Updates <span></span></h5>
 
                             <div class="news">
                                 @forelse ($news as $item)
-                                    <div class="post-item clearfix">
-                                        <img src="assets/img/news-2.jpg" alt="">
-                                        <h4><a href="#">{{ $item->title }}</a></h4>
+                                    <a href="@route('alert.show',$item->aleart_id)">
+                                        <div class="post-item clearfix">
+                                        <img src="images/products/{{ $item->image}}" alt="">
+                                        <h4>{{ $item->title }}</h4>
                                         <p>{{ $item->body }}
-                                        </p>
-                                    </div>
-                                @empty
+                                        </p> 
+                                        </div>
+                                    </a>
+                                    <br>
+                                    @empty 
+                                
                                     <h2>news not available</h2>
                                 @endforelse
                             </div><!-- End sidebar recent posts-->

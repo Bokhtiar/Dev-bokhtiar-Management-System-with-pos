@@ -35,7 +35,7 @@
 
                         {{-- pos table  --}}
                         <table class="table ">
-                            <thead class="bg-info text-white ">
+                            <thead class="text-dark rounded" style="background-color:#aed6f1; ">
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Qty</th>
@@ -81,7 +81,7 @@
                             </tbody>
                         </table>
 
-                        <div class="row bg-info mx-0 text-light">
+                        <div class="row mx-0 text-dark py-2 rounded" style="background-color:#aed6f1; ">
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="text-center">
                                     <label for="">Total items</label> <br>

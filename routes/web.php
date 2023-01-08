@@ -95,7 +95,7 @@ Route::group(["middleware" => ['auth']], function () {
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::get('cart/destroy/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::put('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
-
+ 
     /**order */
     Route::resource('order', OrderController::class);
 

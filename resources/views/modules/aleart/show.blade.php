@@ -22,7 +22,9 @@
     <div class="card-header">
         <span class="font-weight-bold">Title :</span> {{ $show->title }}
     </div>
-    <div class="card-body">
+    <div class="card-body"> 
+        
+       <img src="images/products/{{$show->image}}" alt="image not found"> <br>
         <span><strong>Title:</strong> {!! $show->title !!} </span> <br>
         @isset($show->body)
             <span> <strong>Body:</strong> {!! $show->body !!} </span> <br>

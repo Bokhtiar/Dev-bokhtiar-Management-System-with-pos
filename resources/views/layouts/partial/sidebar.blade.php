@@ -176,7 +176,7 @@
             </ul>
         </li><!-- End user Nav -->
         @endisset
-
+ 
         @isset(auth()->user()->role->permission['permission']['visitor']['list'])
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#visitor-nav" data-bs-toggle="collapse" href="#">

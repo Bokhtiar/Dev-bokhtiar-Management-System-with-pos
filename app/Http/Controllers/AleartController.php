@@ -16,7 +16,7 @@ class AleartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         try {
             $alearts = $this->AleartList();
             return view('modules.aleart.index', compact('alearts'));

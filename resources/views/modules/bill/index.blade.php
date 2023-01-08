@@ -146,6 +146,7 @@
                <div class="form-group">
                  <select class="form-control" id='month' name="month">
                     <option value=''>--Select Month--</option>
+                    <option selected value='advence'>Advence</option>
                     <option selected value='Janaury'>Janaury</option>
                     <option value='February'>February</option>
                     <option value='March'>March</option>
@@ -171,6 +172,7 @@
                     </select>
                 </div>
 
+
                 @component('components.form.textarea',
                     [
                         'label' => 'Body',
@@ -179,7 +181,7 @@
                         'value' => @$edit ? @$edit->bill_body : '',
                     ])
                 @endcomponent
-
+                
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>

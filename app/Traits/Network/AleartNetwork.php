@@ -2,20 +2,32 @@
 namespace App\Traits\Network;
 
 use App\Models\Aleart;
-use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image as Image;
 
 trait AleartNetwork
 {
     /**list of resource*/
     public function AleartList()
     {
-        return Aleart::latest()->get(['aleart_id', 'title', 'body', 'status']);
+        return Aleart::latest()->get(['aleart_id', 'title', 'body', 'image', 'status']);
     }
 
     /**store resource database field*/
-    public function ResourceAleartStore($request)
+    public function ResourceAleartStore($request, $alert = null)
     {
+
+        if ($request->hasFile('image')) {
+            $image = Image::make($request->file('image'));
+            $imageName = time() . '-' . $request->file('image')->getClientOriginalName();
+            $destinationPath = public_path('images/products/');
+            $image->save($destinationPath . $imageName);
+
+        } else {
+            $imageName = $alert->image;
+        }
+
         return array(
+            'image' => $imageName,
             'title' => $request->title,
             'body' => $request->body,
         );
@@ -36,8 +48,9 @@ trait AleartNetwork
     /**resource update */
     public function AleartUpdate($request, $id)
     {
+
         $aleart = Aleart::find($id);
-        return $aleart->update($this->ResourceAleartStore($request));
+        return $aleart->update($this->ResourceAleartStore($request, $aleart));
     }
 
 }

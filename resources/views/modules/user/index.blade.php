@@ -10,7 +10,7 @@
 <div class="pagetitle">
     <h1>Dashboard</h1>
     <nav>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb"> 
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
             <li class="breadcrumb-item active">User list</li>
         </ol>
@@ -28,23 +28,27 @@
                     <x-notification></x-notification>
                     <h5 class="card-title">Room has assing User Table</h5>
                     <!-- Table with stripped rows -->
-                    <table class="table datatable">
+                    <table class="table datatable"> 
                         <thead>
                             <tr>
-                                <th scope="col">Room</th>
+                               
                                 <th scope="col">Name</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Bed</th>
+                                <th scope="col">Blood group</th>
+                                <th scope="col">Room</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Student ID</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($bedAssigns as $bed)
                                 <tr>
-                                    <td>{{ $bed->room ? $bed->room->room_name: "" }}</td>
+                                    
                                     <td>{{ $bed->user ? $bed->user->name : "" }}</td>
-                                    <td>{{ $bed->category ? $bed->category->category_name : "" }}</td>
-                                    <td>{{ $bed->bed ? $bed->bed->bed_name : "" }}</td>
+                                    <td>{{ $bed->user ? $bed->user->blood_group : "" }}</td>
+                                    <td>{{ $bed->room ? $bed->room->room_name: "" }}</td>
+                                    <td>{{ $bed->user ? $bed->user->department : "" }}</td>
+                                    <td>{{ $bed->user ? $bed->user->student_id : "" }}</td>
                                 </tr>
                             @empty
                                 <h2 class="bg-danger text-light text-center">User Is empty</h2>
