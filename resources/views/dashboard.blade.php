@@ -158,7 +158,7 @@
                                         <div class="post-item clearfix">
                                         <img src="images/products/{{ $item->image}}" alt="">
                                         <h4>{{ $item->title }}</h4>
-                                        <p>{{ $item->body }}
+                                        <p>{{ $item->short_des }}
                                         </p> 
                                         </div>
                                     </a>

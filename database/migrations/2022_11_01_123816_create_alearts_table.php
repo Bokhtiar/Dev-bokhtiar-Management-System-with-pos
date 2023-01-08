@@ -17,6 +17,7 @@ class CreateAleartsTable extends Migration
             $table->id('aleart_id');
             $table->string('title')->require();
             $table->longText('body')->nullable();
+            $table->longText('short_des')->nullable();
             $table->string('image')->require();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

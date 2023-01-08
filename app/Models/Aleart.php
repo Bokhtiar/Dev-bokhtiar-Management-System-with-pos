@@ -17,6 +17,7 @@ class Aleart extends Model
     protected $fillable = [
         'title',
         'body',
+        'short_des',
         'image',
     ];
 

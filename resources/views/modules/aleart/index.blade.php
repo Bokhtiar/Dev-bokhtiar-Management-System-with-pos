@@ -4,7 +4,7 @@
 @section('title', 'Aleart')
 
 @section('css')
-@endsection
+@endsection 
 
 <div class="row">
     @if (Auth::user()->role_id == 1)
@@ -13,23 +13,35 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <!-- table resource show componemts -->
-                    @component('components.table.table',
-                        [
-                            'title' => 'List of category',
-                            'data' => $alearts,
-                            'id' => 'aleart_id',
-                            'route' => 'alert',
-                            'thead1' => 'Title',
-                            'tdata1' => 'title',
-                            'title' => 'List of Product',
-                            
-                            'thead0' => 'Image', //if you can image show must be thead0 inside image show
-                            'image_path' => '/images/products/', //image path
-                            'tdata0' => 'image',
-                        ])
-                    @endcomponent
-
+                    <div class="card">
+                <div class="card-body">
+                    <x-notification></x-notification>
+                    <h5 class="card-title">Aleart List</h5>
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable"> 
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">image</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($alearts as $item)
+                                <tr>
+                                    <td> <span style="font-weight: bold; font-size: 20px">{{ $item->title }}</span> </td>
+                                    <td><img src="/images/products/{{$item->image}}" height="80" width="150" alt=""></td>
+                                    <td><a href="@route('alert.show',$item->aleart_id)" class="bg-info text-light btn btn-sm"><i class="ri-eye-fill"></i></a></td>
+                                    
+                                </tr>
+                            @empty
+                                <h2 class="bg-danger text-light text-center">User Is empty</h2>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+                </div> 
+            </div>
                 </div>
             </div>
         </section>
@@ -50,6 +62,7 @@
                             'route' => 'alert',
                             'thead1' => 'Title',
                             'tdata1' => 'title',
+
                             'title' => 'List of Product',
                             
                             'thead0' => 'Image', //if you can image show must be thead0 inside image show
@@ -82,6 +95,15 @@
                         'name' => 'title',
                         'placeholder' => 'Title',
                         'value' => @$edit ? @$edit->title : '',
+                    ])
+                @endcomponent
+
+                @component('components.form.input',
+                    [
+                        'label' => 'Short Description',
+                        'name' => 'short_des',
+                        'placeholder' => 'Aleart Short Description',
+                        'value' => @$edit ? @$edit->short_description : '',
                     ])
                 @endcomponent
 

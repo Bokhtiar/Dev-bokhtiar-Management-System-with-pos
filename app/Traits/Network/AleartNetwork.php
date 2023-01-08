@@ -28,6 +28,7 @@ trait AleartNetwork
 
         return array(
             'image' => $imageName,
+            'short_des' => $request->short_des,
             'title' => $request->title,
             'body' => $request->body,
         );

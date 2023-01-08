@@ -24,8 +24,9 @@
     </div>
     <div class="card-body"> 
         
-       <img src="images/products/{{$show->image}}" alt="image not found"> <br>
+       <img src="/images/products/{{$show->image}}" alt="image not found"> <br>
         <span><strong>Title:</strong> {!! $show->title !!} </span> <br>
+        <span><strong>Short Description:</strong> {!! $show->short_des !!} </span> <br>
         @isset($show->body)
             <span> <strong>Body:</strong> {!! $show->body !!} </span> <br>
         @endisset
