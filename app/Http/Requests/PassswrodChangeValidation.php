@@ -13,18 +13,21 @@ class PassswrodChangeValidation extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
-     */ 
+     */
     public function rules()
     {
         return [
-            //
+            'user_id' => "required",
+            "old_password" => "required",
+            'password' => "required",
+            "password_confirmation" => "required",
         ];
     }
 }

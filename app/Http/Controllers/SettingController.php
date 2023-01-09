@@ -18,10 +18,10 @@ class SettingController extends Controller
             $roles = Role::all();
             $user = Auth::user();
             return view('setting.account_setting', compact('user', 'roles'));
-        } catch (\Throwable $th) {
+        } catch (\Throwable$th) {
             throw $th;
         }
-    } 
+    }
 
     /**account update */
     public function account_update(Request $request)
@@ -49,7 +49,7 @@ class SettingController extends Controller
             'password' => Hash::make($request->password),
             'role_id' => Auth::user()->role_id,
         ]);
-       return back();
+        return back();
     }
 
     /**account profile */
@@ -58,20 +58,35 @@ class SettingController extends Controller
         try {
             $user = User::find(Auth::id());
             return view('setting.profile', compact('user'));
-        } catch (\Throwable $th) {
+        } catch (\Throwable$th) {
             throw $th;
         }
     }
 
     /* change password */
-    public function change_password(){
+    public function change_password()
+    {
         $users = User::where('role_id', 1)->get();
         return view('modules.change_password.create', compact('users'));
     }
 
     /* change password update */
-    public function change_password_update(PassswrodChangeValidation $request) {
-        
+    public function change_password_update(PassswrodChangeValidation $request)
+    {
+        $user = User::find($request->user_id);
+        $hashedpassword = $user->password;
+        if (Hash::check($request->old_password, $hashedpassword)) {
+            if (!Hash::check($request->password, $hashedpassword)) {
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return redirect()->route('login');
+            } else {
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
+
     }
 
     /**logouts */
