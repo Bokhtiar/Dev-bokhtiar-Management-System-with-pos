@@ -230,13 +230,13 @@
                 </li>
                 @endisset
 
-             {{-- @isset(auth()->user()->role->permission['permission']['password_change']['list']) --}}
+             @isset(auth()->user()->role->permission['permission']['change_password']['list'])
                 <li>
                     <a href="@route('change-password.create')">
                         <i class="bi bi-circle"></i><span>Change Password</span>
                     </a>
                 </li>
-                {{-- @endisset --}}
+                @endisset
             </ul>
         </li><!-- End user Nav -->
         @endisset

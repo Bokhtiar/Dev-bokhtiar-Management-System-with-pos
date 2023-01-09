@@ -58,6 +58,11 @@
                     <td><input type="checkbox" name="permission[permission][list]" value="1"></td>
                 </tr>
                 <tr>
+                    <td>Change password</td>
+                    <td><input type="checkbox" name="permission[change_password][list]" value="1"></td>
+                </tr>
+
+                <tr>
                     <td>Users</td>
                     <td><input type="checkbox" name="permission[user][add]" value="1"></td>
                     <td><input type="checkbox" name="permission[user][edit]" value="1"></td>

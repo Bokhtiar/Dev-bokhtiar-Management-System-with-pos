@@ -117,6 +117,16 @@
 
                                 {{-- user start --}}
                                 <tr>
+                                    <td>CHnage password</td>
+                                    <td>
+                                        <input type="checkbox" name="permission[change_password][list]"
+                                            @isset($permission['permission']['change_password']['list']) checked @endisset value="1">
+                                    </td>
+                                </tr>
+                                {{-- user end  --}}
+
+                                {{-- user start --}}
+                                <tr>
                                     <td>Users</td>
                                     <td>
                                         <input type="checkbox" name="permission[user][add]"
