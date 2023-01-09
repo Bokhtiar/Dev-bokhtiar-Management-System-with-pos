@@ -124,5 +124,8 @@ Route::group(["middleware" => ['auth']], function () {
     Route::get('/account-setting', [App\Http\Controllers\SettingController::class, 'account_setting'])->name('account-setting');
     Route::post('/account-update', [App\Http\Controllers\SettingController::class, 'account_update'])->name('account-update');
     Route::get('/profile', [App\Http\Controllers\SettingController::class, 'profile'])->name('profile');
+    Route::get('/change-password/create', [App\Http\Controllers\SettingController::class, 'change_password'])->name('change-password.create');
+    Route::put('/change-password/update', [App\Http\Controllers\SettingController::class, 'change_password_update'])->name('change-password.update');
     Route::get('/logouts', [App\Http\Controllers\SettingController::class, 'logouts'])->name('logouts');
+
 });

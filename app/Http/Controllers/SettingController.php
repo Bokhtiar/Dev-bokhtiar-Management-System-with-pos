@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PassswrodChangeValidation;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,15 +21,11 @@ class SettingController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
-
-    }
+    } 
 
     /**account update */
     public function account_update(Request $request)
     {
-
-
-        
         $user = User::find(Auth::id());
         $user->update([
             'name' => $request->name,
@@ -64,6 +61,17 @@ class SettingController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    /* change password */
+    public function change_password(){
+        $users = User::where('role_id', 1)->get();
+        return view('modules.change_password.create', compact('users'));
+    }
+
+    /* change password update */
+    public function change_password_update(PassswrodChangeValidation $request) {
+        
     }
 
     /**logouts */

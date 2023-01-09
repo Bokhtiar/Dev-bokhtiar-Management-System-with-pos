@@ -58,14 +58,15 @@
                                     <tr>
                                         <th>{{ $cart->product ? $cart->product->name : 'Data not found' }}</th>
                                         <td>
-                                           
-    
-                                                {{-- <button type="submit" class="btn btn-sm btn-info"><i
+                                            {{-- <button type="submit" class="btn btn-sm btn-info"><i
                                                         class="bx bxs-message-rounded-add"></i></button>
                                               
                                                 <button type="submit" class="btn btn-sm btn-info"><i
                                                         class="bx bxs-message-rounded-add"></i></button> --}}
-                                            <a href="{{url('decrement', $cart->cart_id)}}" class="btn btn-sm btn-danger">-</a> {{$cart->quantity}} <a class="btn btn-sm btn-info text-light" href="{{url('increment', $cart->cart_id)}}">+</a>
+                                            <a href="{{ url('decrement', $cart->cart_id) }}"
+                                                class="btn btn-sm btn-danger">-</a> {{ $cart->quantity }} <a
+                                                class="btn btn-sm btn-info text-light"
+                                                href="{{ url('increment', $cart->cart_id) }}">+</a>
                                         </td>
 
                                         <td>{{ $cart->product ? $cart->product->price : 'Data not found' }}৳</td>
@@ -135,7 +136,6 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($products as $product)
-                                            
                                             <tr>
                                                 <td style="width: 97%">
                                                     <img width="60px" width="60px"

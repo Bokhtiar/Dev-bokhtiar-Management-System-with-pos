@@ -229,6 +229,14 @@
                     </a>
                 </li>
                 @endisset
+
+             {{-- @isset(auth()->user()->role->permission['permission']['password_change']['list']) --}}
+                <li>
+                    <a href="@route('change-password.create')">
+                        <i class="bi bi-circle"></i><span>Change Password</span>
+                    </a>
+                </li>
+                {{-- @endisset --}}
             </ul>
         </li><!-- End user Nav -->
         @endisset
