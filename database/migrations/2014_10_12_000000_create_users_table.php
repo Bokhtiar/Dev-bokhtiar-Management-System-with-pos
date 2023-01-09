@@ -20,19 +20,19 @@ class CreateUsersTable extends Migration
             $table->string('phone')->require();
             $table->string('email')->unique()->require();
             $table->string('dob')->nullable();
-            $table->string('father_name')->require();
-            $table->string('father_contact_number')->require();
-            $table->string('mother_name')->require();
+            $table->string('father_name')->nullable();
+            $table->string('father_contact_number')->nullable();
+            $table->string('mother_name')->nullable();
             $table->string('mother_contact_number')->nullable();
-            $table->string('local_guardian_name')->require();
+            $table->string('local_guardian_name')->nullable();
             $table->string('local_guardian_number')->nullable();
-            $table->string('address')->require();
-            $table->string('national_id')->require();
-            $table->string('blood_group')->require();
+            $table->string('address')->nullable();
+            $table->string('national_id')->nullable();
+            $table->string('blood_group')->nullable();
 
-            $table->string('varsity_name')->require();
-            $table->string('student_id')->require();
-            $table->string('department')->require();
+            $table->string('varsity_name')->nullable();
+            $table->string('student_id')->nullable();
+            $table->string('department')->nullable();
             $table->string('section')->nullable();
 
             $table->string('role_id')->default(4);
