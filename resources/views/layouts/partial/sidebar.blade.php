@@ -229,19 +229,19 @@
                     </a>
                 </li>
                 @endisset
-
-             @isset(auth()->user()->role->permission['permission']['change_password']['list'])
-                <li>
-                    <a href="@route('change-password.create')">
-                        <i class="bi bi-circle"></i><span>Change Password</span>
-                    </a>
-                </li>
-                @endisset
             </ul>
         </li><!-- End user Nav -->
+         @endisset
+
+        @isset(auth()->user()->role->permission['permission']['change_password']['list'])
+        <li class="nav-item">
+            <a class="nav-link " href="@route('change-password.create')">
+                <i class="bi bi-grid"></i>
+               <span>Change Password</span>
+            </a>
+        </li><!-- End chnage password-->
         @endisset
-
-
+        
         <li class="nav-item">
             <a class="nav-link " href="@route('logouts')">
                 <i class="bi bi-grid"></i>
