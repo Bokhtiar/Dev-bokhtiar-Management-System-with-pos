@@ -131,7 +131,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Product</th>
-                                            <th scope="col">Add</th>
+                                            <th scope="col">Cart</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -143,7 +143,7 @@
                                                     {{ $product->name }} <span
                                                         class="badge bg-danger">{{ $product->quantity }} qty</span>
                                                 </td>
-                                                <td> <a class="btn btn-sm btn-info" href="@route('cart.store', $product->product_id)"><i
+                                                <td> <a class="btn btn-sm btn-success text-light" href="@route('cart.store', $product->product_id)"><i
                                                             class="bi bi-cart-plus"></i></a></td>
                                             </tr>
                                         @endforeach

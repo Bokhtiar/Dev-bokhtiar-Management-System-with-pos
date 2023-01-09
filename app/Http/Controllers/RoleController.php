@@ -99,12 +99,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $this->RoleFindById($id)->delete();
-            return redirect()->route('role.index')->with('success', 'Role deleted');
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        return redirect()->route('role.index')->with('warning', 'Cant delete this you can edit your roles');
     }
 
     /**

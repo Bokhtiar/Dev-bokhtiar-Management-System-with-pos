@@ -16,21 +16,22 @@
             <div class="card-body">
                 <form method="POST" action="@route('change-password.update')">
                     @csrf
-                    @method('PUT')
+                    @method('PUT') 
 
-                    <div class="form-group row my-3">
-                        <label for="password"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Select users') }}</label>
-
-                        <div class="col-md-6">
-                            <select name="user_id" class="form-control" id="">
-                                <option value="">select user</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                    @if (Auth::user()->role_id == 2)
+                        <div class="form-group row my-3">
+                            <label for="users"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Select users') }}</label>
+                            <div class="col-md-6">
+                                <select name="user_id" class="form-control" id="">
+                                    <option value="">select user</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="form-group row my-3">
                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

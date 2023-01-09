@@ -1,6 +1,6 @@
 <div>
     @if (Session::has('success'))
-        <div class="bg-success text-light alert alert-success">
+        <div class="alert alert-success mt-2">
             <i class="fa fa-check" aria-hidden="true"></i> {{ Session::get('success') }}
             @php
                 Session::forget('success');
@@ -9,7 +9,7 @@
     @endif
 
     @if (Session::has('warning'))
-        <div class="bg-warning text-light alert alert-success">
+        <div class="alert alert-danger mt-2">
             <i class="fa fa-spin fa-refresh"></i> {{ Session::get('warning') }}
             @php
                 Session::forget('warning');
@@ -19,7 +19,7 @@
 
 
     @if (Session::has('info'))
-        <div class="bg-info text-light alert alert-success">
+        <div class="alert alert-warning mt-2">
             <i class="fa fa-check" aria-hidden="true"></i> {{ Session::get('info') }}
             @php
                 Session::forget('info');

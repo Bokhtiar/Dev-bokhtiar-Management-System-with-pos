@@ -24,7 +24,6 @@ class PassswrodChangeValidation extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => "required",
             "old_password" => "required",
             'password' => "required",
             "password_confirmation" => "required",

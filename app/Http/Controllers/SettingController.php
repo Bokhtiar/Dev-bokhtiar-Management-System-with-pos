@@ -73,6 +73,23 @@ class SettingController extends Controller
     /* change password update */
     public function change_password_update(PassswrodChangeValidation $request)
     {
+        if (Auth::user()->role_id == 1) {
+            $hashedpassword = Auth::user()->password;
+            if (Hash::check($request->old_password, $hashedpassword)) {
+                if (!Hash::check($request->password, $hashedpassword)) {
+                    $user = User::find(Auth::id());
+                    $user->password = Hash::make($request->password);
+                    $user->save();
+                    Auth::logout();
+                    return redirect()->route('login');
+                } else {
+                    return redirect()->route('/');
+                }
+            } else {
+
+                return redirect()->route('/');
+            }
+        }
         $user = User::find($request->user_id);
         $hashedpassword = $user->password;
         if (Hash::check($request->old_password, $hashedpassword)) {
