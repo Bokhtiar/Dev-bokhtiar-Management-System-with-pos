@@ -50,7 +50,7 @@ class UserController extends Controller
                     'father_name' => $request->father_name,
                     'father_contact_number' => $request->father_contact_number,
                     'mother_name' => $request->mother_name,
-                    'monther_contact_name' => $request->monther_contact_name,
+                    'mother_contact_number' => $request->mother_contact_number,
                     'local_guardian_name' => $request->local_guardian_name,
                     'local_guardian_number' => $request->local_guardian_number,
                     'address' => $request->address,
