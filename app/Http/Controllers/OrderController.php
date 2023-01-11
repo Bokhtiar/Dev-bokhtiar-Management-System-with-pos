@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderValidation;
+use App\Models\BedAssign;
 use App\Models\Cart;
 use App\Traits\Network\OrderNetwork;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -20,7 +22,7 @@ class OrderController extends Controller
         try {
             $orders = $this->OrdertList();
             return view('modules.order.index', compact('orders'));
-        } catch (\Throwable $th) {
+        } catch (\Throwable$th) {
             throw $th;
         }
     }
@@ -31,11 +33,11 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrderValidation $request )
-    {   
+    public function store(OrderValidation $request)
+    {
         try {
-           return $this->OrderStore($request);
-        } catch (\Throwable $th) {
+            return $this->OrderStore($request);
+        } catch (\Throwable$th) {
             throw $th;
         }
     }
@@ -50,8 +52,10 @@ class OrderController extends Controller
     {
         try {
             $show = $this->OrderFindById($id);
-            return view('modules.order.show', compact('show'));
-        } catch (\Throwable $th) {
+            $room = BedAssign::where('user_id', Auth::user()->id)->first();
+            $carts = Cart::where('order_id', $id)->where('user_id', Auth::user()->id)->get();
+            return view('modules.order.show', compact('show', 'room', 'carts'));
+        } catch (\Throwable$th) {
             //throw $th;
         }
     }
@@ -67,7 +71,7 @@ class OrderController extends Controller
         try {
             $this->OrderFindById($id)->delete();
             return redirect()->back()->with('success', 'Order Deleted.');
-        } catch (\Throwable $th) {
+        } catch (\Throwable$th) {
             throw $th;
         }
     }

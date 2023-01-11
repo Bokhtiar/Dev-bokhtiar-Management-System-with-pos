@@ -14,38 +14,46 @@
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                        
-                          <!-- Table with stripped rows -->
-                          <table class="table datatable">
-                            <thead>
-                              <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Payment</th>
-                                <th scope="col">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              @foreach ($orders as $order)
-                              <tr>
-                                <td>{{ $order->user ? $order->user->name : "Data not found" }}</td>
-                                <td>{{ $order->user ? $order->user->email : "Data not found" }}</td>
-                                <td>{{ $order->payment }}</td>
-                                <td> 
-                                    <a href="@route('order.show', $order->order_id)" class="btn btn-sm btn-info">Show</a>
-                                    <a href="@route('order.destroy', $order->order_id)" class="btn btn-sm btn-danger">Delete</a>
-                                </td>
-                              </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
-                          <!-- End Table with stripped rows -->
-            
+
+                            <!-- Table with stripped rows -->
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($orders as $order)
+                                        <tr>
+                                            <td>{{ $order->user ? $order->user->name : 'Data not found' }}</td>
+                                            <td>{{ $order->user ? $order->user->phone : 'Data not found' }}</td>
+                                            <td>{{ $order->time}}</td>
+                                            <td>{{ $order->created_at->diffForHumans() }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info text-light" href="@route('order.show', $order->order_id)"> <i
+                                                        class="ri-eye-fill"></i></a>
+                                                <form method="POST" action="@route('order.destroy', $order->order_id)" class="mt-1">
+                                                    @csrf
+                                                    @method('Delete')
+                                                    <button class="btn btn-sm btn-danger" type="submit"> <i
+                                                            class="ri-delete-bin-6-fill"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
-                
+
         </div>
     </div>
 </section>
