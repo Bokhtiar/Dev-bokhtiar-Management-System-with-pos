@@ -4,6 +4,7 @@
 @section('title', 'Bill')
 
 @section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 <div class="row">
@@ -124,13 +125,16 @@
 
                 {{-- Select category --}}
                 <div class="form-group">
-                    <select class="form-control" class="js-example-basic-single" name="state">
-                        <option value="AL">Alabama</option>
-
-                        <option value="WY">Wyoming</option>
+                    <label for="">Select User</label>
+                    <select id="single" class="js-states form-control">
+                        @foreach ($bedAssigns as $item)
+                            <option value="{{ $item->bed_assign_id }}"
+                                {{ $item->bed_assign_id == @$edit->bed_assign_id }}>
+                                {{ $item->user ? $item->user->name : '' }}</option>
+                        @endforeach
                     </select>
 
-                    <label for="">Select User</label>
+                    {{-- <label for="">Select User</label>
                     <select id="user_id" name="bed_assign_id" id="" class="form-control">
                         <option value="">Select users</option>
                         @foreach ($bedAssigns as $item)
@@ -138,7 +142,7 @@
                                 {{ $item->bed_assign_id == @$edit->bed_assign_id }}>
                                 {{ $item->user ? $item->user->name : '' }}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
                 </div>
 
                 <div class="card text-center" id="user_info"></div>
@@ -200,7 +204,10 @@
 </div>
 
 @section('js')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
         $.ajaxSetup({
@@ -211,7 +218,8 @@
 
 
         $(document).ready(function() {
-            $('#user_id').on('change', function(e) {
+
+            $('#single').on('change', function(e) {
                 var id = e.target.value
                 if (id) {
                     $.ajax({
@@ -219,7 +227,7 @@
                         dataType: 'Json',
                         type: 'GET',
                         success: function(data) {
-                            console.log(data);
+                            $("#user_info").text("");
                             $('#user_info').append('<p>Name: ' + data.user.name +
                                 '</p> <p>Phone: ' + data.user.phone + '</p>  <p>Email: ' +
                                 data.user.email + '</p> <p>Room name: ' + data.room
@@ -231,12 +239,16 @@
             }); //customer end
 
 
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-            });
+
 
         }) //main document end
-        
+
+
+        // <!--select -->
+        $("#single").select2({
+            placeholder: "select student",
+            allowClear: true
+        });
     </script>
 @endsection
 @endsection
