@@ -7,7 +7,7 @@
 @endsection
 
 <section class="section">
-    <div class="row">
+    <div class="row"><br>
         <div class="col-lg-12">
             <x-notification></x-notification>
             <div class="card">
@@ -21,16 +21,18 @@
                                     <tr>
                                         <th scope="col">Name</th>
                                         <th scope="col">Phone</th>
+                                        <th scope="col">Payment</th>
                                         <th scope="col">Time</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Action</th>
-                                    </tr>
+                                    </tr> 
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
                                         <tr>
                                             <td>{{ $order->user ? $order->user->name : 'Data not found' }}</td>
                                             <td>{{ $order->user ? $order->user->phone : 'Data not found' }}</td>
+                                            <td>{{ App\Models\Order::orderPayment($order->order_id) }}</td>
                                             <td>{{ $order->time}}</td>
                                             <td>{{ $order->created_at->diffForHumans() }}</td>
                                             <td>
