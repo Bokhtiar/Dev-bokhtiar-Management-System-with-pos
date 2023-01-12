@@ -18,6 +18,7 @@ class Bill extends Model
         'bed_assign_id',
         'month',
         'year',
+        'advence_charge', 
         'bill_charge',
         'bill_body',
     ];

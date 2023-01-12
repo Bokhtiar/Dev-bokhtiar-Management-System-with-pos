@@ -9,7 +9,7 @@ trait BillNetwork
     /**list of resource*/
     public function BillList()
     {
-        return Bill::latest()->get(['bill_id', 'bed_assign_id', 'month', 'year', 'status']);
+        return Bill::latest()->get(['bill_id', 'bed_assign_id', 'month', 'advence_charge', 'year', 'status']);
     }
 
     /**store resource database field*/
@@ -22,6 +22,7 @@ trait BillNetwork
             'bed_assign_id' => $request->bed_assign_id,
             'year' => $request->year,
             'month' => $request->month,
+            'advence_charge' => $request->advence_charge,
             'bill_charge' => $request->bill_charge,
             'bill_body' => $request->bill_body,
         );

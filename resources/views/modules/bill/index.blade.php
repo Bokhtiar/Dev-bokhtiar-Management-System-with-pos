@@ -52,8 +52,8 @@
                                                 <th scope="col">Month</th>
                                                 <th scope="col">Year</th>
                                                 <th scope="col">Category</th>
-                                                {{-- <th scope="col">Room</th>
-                                        <th scope="col">Bed</th> --}}
+                                                <th scope="col">Room</th>
+                                        <th scope="col">Bed</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Action</th>
                                             </tr>
@@ -63,12 +63,12 @@
                                                 <tr>
                                                     <th scope="row">{{ $loop->index + 1 }}</th>
                                                     <td> {{ $item->bedAssign ? $item->bedAssign->user->name : '' }}</td>
-                                                    <th scope="row">{{ $item->month }}</th>
+                                                    <th scope="row">{{ $item->advence_charge > 0 ? $item->month .' advance '. $item->advence_charge .' TK' : $item->month }}</th>
                                                     <th scope="row">{{ $item->year }}</th>
                                                     <td>{{ $item->bedAssign ? $item->bedAssign->category->category_name : '' }}
                                                     </td>
-                                                    {{-- <td>{{$item->bedAssign ? $item->bedAssign->room->room_name : ""}}</td>
-                                            <td>{{$item->bedAssign ? $item->bedAssign->bed->bed_name : ""}}</td> --}}
+                                                    <td>{{$item->bedAssign ? $item->bedAssign->room->room_name : ""}}</td>
+                                            <td>{{$item->bedAssign ? $item->bedAssign->bed->bed_name : ""}}</td>
                                                     <td>
                                                         @if ($item->status == 1)
                                                             <a class="btn btn-sm btn-success"
@@ -126,7 +126,7 @@
                 {{-- Select category --}}
                 <div class="form-group">
                     <label for="">Select User</label>
-                    <select id="single" class="js-states form-control">
+                    <select id="single" name="bed_assign_id" class="js-states form-control">
                         @foreach ($bedAssigns as $item)
                             <option value="{{ $item->bed_assign_id }}"
                                 {{ $item->bed_assign_id == @$edit->bed_assign_id }}>
@@ -152,11 +152,9 @@
                         value="{{ @$edit->bill_charge }}" required id="">
                 </div>
 
-
                 <div class="form-group">
                     <select class="form-control" id='month' name="month">
                         <option value=''>--Select Month--</option>
-                        <option selected value='advence'>Advence</option>
                         <option selected value='Janaury'>Janaury</option>
                         <option value='February'>February</option>
                         <option value='March'>March</option>
@@ -191,6 +189,12 @@
                         'value' => @$edit ? @$edit->bill_body : '',
                     ])
                 @endcomponent
+
+                <div class="form-group" id="advence">
+                    <label for="Advence">Advence charge</label>
+                    <input type="number" class="form-control" name="advence_charge" placeholder="Advence payment"
+                        value="{{ @$edit->advence_charge }}" id="">
+                </div>
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -237,6 +241,12 @@
                     }) //ajax end
                 }
             }); //customer end
+
+
+            //advence fild hide show
+            $("#togglebtn").click(function() {
+                $("#advence").toggle();
+            });
 
 
 

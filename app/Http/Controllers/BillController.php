@@ -18,7 +18,7 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
         try { 
             $bills = $this->BillList();
@@ -38,7 +38,6 @@ class BillController extends Controller
     public function store(BillValidation $request)
     {
         try {
-
             
             $bed_assign = BedAssign::find($request->bed_assign_id);
             

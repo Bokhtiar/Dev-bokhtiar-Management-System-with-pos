@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+ 
 class CreateBillsTable extends Migration
 {
     /**
@@ -19,6 +19,7 @@ class CreateBillsTable extends Migration
             $table->string('bed_assign_id')->require();
             $table->string('year')->require();
             $table->string('month')->require();
+            $table->string('advence_charge')->default(0);
             $table->string('bill_charge')->require();
             $table->longText('bill_body')->nullable();
             $table->tinyInteger('status')->default(0);
