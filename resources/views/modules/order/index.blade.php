@@ -5,8 +5,8 @@
 
 @section('css')
 @endsection
-
-<section class="section">
+ 
+<section class="">
     <div class="row"><br>
         <div class="col-lg-12">
             <x-notification></x-notification>
@@ -50,7 +50,6 @@
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
-
                         </div>
                     </div>
                 </div>

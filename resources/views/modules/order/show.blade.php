@@ -66,9 +66,9 @@
                 @foreach ($carts as $cart)
                     <tr>
                         <td>{{ $cart->product ? $cart->product->name : 'Data not found' }}</td>
-                        <td>{{ $cart->quantity}}</td>
-                        <td>{{ $cart->product ? $cart->product->price : "Data not found" }}</td>
-                       <td>{{ $cart->quantity * $cart->product->price }}</td>
+                        <td>{{ $cart->quantity}} Qty</td>
+                        <td>{{ $cart->product ? $cart->product->price : "Data not found" }} Tk</td>
+                       <td>{{ $cart->quantity * $cart->product->price }} Tk</td>
                        @php
                            $total_price +=  $cart->quantity * $cart->product->price;
                        @endphp
@@ -77,7 +77,7 @@
             </tbody>
         </table>
         <div class="float-right">
-            <h5 class="">Total Price : {{$total_price}}</h5>
+            <h5 class="">Total Price : {{$total_price}} Tk</h5>
         </div>
     </div>
 </div>
