@@ -124,6 +124,12 @@
 
                 {{-- Select category --}}
                 <div class="form-group">
+                    <select class="form-control" class="js-example-basic-single" name="state">
+                        <option value="AL">Alabama</option>
+
+                        <option value="WY">Wyoming</option>
+                    </select>
+
                     <label for="">Select User</label>
                     <select id="user_id" name="bed_assign_id" id="" class="form-control">
                         <option value="">Select users</option>
@@ -138,29 +144,29 @@
                 <div class="card text-center" id="user_info"></div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="bill_charge" placeholder="bill charge" value="{{@$edit->bill_charge}}" required
-                        id="">
+                    <input type="text" class="form-control" name="bill_charge" placeholder="bill charge"
+                        value="{{ @$edit->bill_charge }}" required id="">
                 </div>
 
 
-               <div class="form-group">
-                 <select class="form-control" id='month' name="month">
-                    <option value=''>--Select Month--</option>
-                    <option selected value='advence'>Advence</option>
-                    <option selected value='Janaury'>Janaury</option>
-                    <option value='February'>February</option>
-                    <option value='March'>March</option>
-                    <option value='April'>April</option>
-                    <option value='May'>May</option>
-                    <option value='June'>June</option>
-                    <option value='July'>July</option>
-                    <option value='August'>August</option>
-                    <option value='September'>September</option>
-                    <option value='October'>October</option>
-                    <option value='November'>November</option>
-                    <option value='December'>December</option>
-                </select>
-               </div>
+                <div class="form-group">
+                    <select class="form-control" id='month' name="month">
+                        <option value=''>--Select Month--</option>
+                        <option selected value='advence'>Advence</option>
+                        <option selected value='Janaury'>Janaury</option>
+                        <option value='February'>February</option>
+                        <option value='March'>March</option>
+                        <option value='April'>April</option>
+                        <option value='May'>May</option>
+                        <option value='June'>June</option>
+                        <option value='July'>July</option>
+                        <option value='August'>August</option>
+                        <option value='September'>September</option>
+                        <option value='October'>October</option>
+                        <option value='November'>November</option>
+                        <option value='December'>December</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <select name="year" required class="form-control">
@@ -181,7 +187,7 @@
                         'value' => @$edit ? @$edit->bill_body : '',
                     ])
                 @endcomponent
-                
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
@@ -225,10 +231,12 @@
             }); //customer end
 
 
-
-
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
 
         }) //main document end
+        
     </script>
 @endsection
 @endsection

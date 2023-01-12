@@ -20,7 +20,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        try {
+        try { 
             $bills = $this->BillList();
             $bedAssigns = $this->BedAssignActiveList();
             return view('modules.bill.index', compact('bedAssigns', 'bills'));
